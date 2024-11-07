@@ -1,6 +1,6 @@
 # Getting Started
 
-Here is a simple guide to add files and also preview your document.
+Here is a simple guide to add files and also test preview your document.
 
 ## Step 1 : Modify or replace the intro.md and getting-started.md files
 
