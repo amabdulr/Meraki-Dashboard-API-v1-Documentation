@@ -1,6 +1,6 @@
 ## Authorization
 
-The Meraki Dashboard API uses Bearer authentication, requiring an API key to be included in the header of each request.
+The Meraki Dashboard API uses Bearer authentication, requiring an API key to be included in the header of each request. 
  
 ```json
 {
