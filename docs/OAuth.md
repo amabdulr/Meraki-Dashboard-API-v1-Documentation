@@ -2,11 +2,12 @@
 
 ## OAuth 2.0 Overview
 
-Meraki APIs are RESTful APIs customers and partners can use to programmatically manage and monitor Meraki environments. Until now, API access was only possible via user-scoped API keys, and today Meraki is introducing a new application-scoped auth method based on OAuth 2.0. In most cases, this new OAuth method can replace an application’s reliance on the user-scoped API keys, which have driven application integrations so far, to realize many benefits not available to user-scoped API keys.
+Meraki APIs are RESTful APIs that customers and partners can use to programmatically manage and monitor Meraki environments. Previously, API access was only possible through user-scoped API keys. From this release, Meraki introduces a new application-scoped authentication method based on OAuth 2.0. The OAuth 2.0 method replaces the application's reliance on user-scoped API keys and offers several benefits not available with user-scoped API keys.
+
 
 ## What is OAuth 2.0?
 
-OAuth 2.0 is a standard authorization framework that enables integrations to access Meraki data without users revealing their credentials/API keys. OAuth 2.0 is widely used for delegated access, particularly in the context of APIs and web applications, providing a secure and standardized way for users to authorize third-party access to their resources while maintaining control over their data.
+OAuth 2.0 is a standard authorization framework that enables integrations to access Meraki data without users revealing their credentials or API keys. OAuth 2.0  is widely used for delegated access, particularly in the context of APIs and web applications. OAuth 2.0   provides a secure and standardized way for users to authorize third-party access to their resources while maintaining control over their data.
 
 Learn more about the OAuth framework and definitions: [https://oauth.net/2/](https://oauth.net/2/)
 
@@ -14,14 +15,17 @@ Learn more about the OAuth framework and definitions: [https://oauth.net/2/](htt
 
 OAuth 2.0 offers several benefits over traditional API keys:
 
-1. **Flexible and least-privilege access compared to user-scoped API keys**: With OAuth 2.0, developers may request permission to a limited set of OAuth scopes, instead of an all-or-nothing access level.
-2. **No more copying and pasting API keys**: OAuth 2.0 introduces a secure and seamless grant flow for Meraki and the integration to exchange credentials.
-3. **No more API key rotations**: OAuth 2.0 introduces short-lived access tokens that will automatically be replaced in a matter of minutes, not months or years.
-4. **Simplifying auditing**: With OAuth 2.0, every integration has its own identity - each API call can be easily traced back to the integration invoking it.
+1. **Flexible and least-privilege access**: Developers can request permission for a limited set of OAuth scopes, rather than having an all-or-nothing access.
+2. **No more copying and pasting API keys**: OAuth 2.0 introduces a secure and seamless grant flow for exchanging credentials
+3. **No more API key rotations**: OAuth 2.0 uses short-lived access tokens that are automatically replaced in minutes.
+4. **Simplified auditing**: Each integration has its own identity, making it easy to trace API calls back to the integration invoking the API call. 
+
+
 
 ## Building an OAuth 2.0 integration
 
-To build an OAuth 2.0 integration, follow these steps:
+Building an OAuth 2.0 integration is simple and easy. Follow these steps:
+
 1. Register your integration with Meraki.
 2. Request permission using an OAuth Grant Flow from an organization admin for the organization you’d like to manage.
 3. Use the Access Token to make API calls.
@@ -29,30 +33,28 @@ To build an OAuth 2.0 integration, follow these steps:
 
 
 ### 1. Register your integration with Meraki
+1. Access the application registry at [integrate.cisco.com](https://integrate.cisco.com) using your Cisco.com credentials. 
+2. Create a new app. Provide the name, redirect URIs, select the relevant scopes, and so forth.
 
-1. Access the application registry: [integrate.cisco.com](https://integrate.cisco.com), using your cisco.com credentials to log in. 
-2. Create a new app, provide the name, redirect URIs, select the relevant scopes, etc. 
-
-Note that the `client_secret` will be shown only once. **Make sure you save the `client_secret` securely**. Scopes and redirect URIs can be edited later.
+Note: client_secret is shown only once. **Ensure that you save the client_secret securely.** Scopes and redirect URIs can be edited later.
 
 ### 2. Request permission using an OAuth grant flow
 
 #### Obtaining an access_token and refresh_token:
 
-1. Create a “Connect to Meraki” button or link in your application that will initiate the OAuth process.
-
-- The Meraki admin should be redirected to [https://as.meraki.com/oauth/authorize](https://as.meraki.com/oauth/authorize), with the following required query parameters:
-
+1. Create a trigger point in your application to initiate the OAuth process, such as a “Connect to Meraki” button or a link.
+2. When the Meraki admin interacts with this trigger, redirect the admin to [https://as.meraki.com/oauth/authorize](https://as.meraki.com/oauth/authorize) with the following mandatory query parameters:
   - `response_type`: Must be set as `code`
   - `client_id`: Issued when creating your app
   - `redirect_uri`: Must match one of the URIs provided during integration registration
   - `scope`: A space-separated list of scopes being requested by your integration (see scopes)
-  - `state`: A unique string that will be passed back to your integration upon completion.
+  - `state`: A unique string passed back to your integration upon completion.
   - `nonce` (optional)
 
-The link should have the following format:
+Example link format:
+   ```
 https://as.meraki.com/oauth/authorize?response_type=code&client_id={client_id}&redirect_uri={redirect_url}&scope={scopes}
-
+   ```
 2. Implement a callback receiver on your application that will respond when a request gets back to the redirection URL. You should expect to receive a `code` attribute as one of the request parameters - that is the access grant, and it has a lifetime of 10 minutes.
 
 3. Use the access grant to request a refresh token and an access token.
