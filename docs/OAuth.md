@@ -139,11 +139,11 @@ For a user to find an organization in the dropdown menu, do the following:
 
 
 ### Errors Returned to the Redirect URI
-**Issue**: An invalid scope error is returned to the redirect URI. For example, 
+**Issue**: An invalid scope error is returned to the redirect URI. Here is an example of this error: 
 ```
 https://localhost?error=invalid_scope&error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed.
 ```
-In the above example, the redirect URI is https://localhost/.
+In the above example, the redirect URI is `https://localhost/`.
 
 **Solution**: 
 - Verify if there is a mistake in the scopes included in the request. 
