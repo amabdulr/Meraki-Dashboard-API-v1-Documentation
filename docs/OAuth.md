@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/62008f36-4d8f-46f2-a44d-ccca9237948c)![image](https://github.com/user-attachments/assets/87533944-5a4e-4766-ba3e-fac196b187ff)# OAuth 2.0
+![image](https://github.com/user-attachments/assets/9dca93f5-c361-415f-8ded-1bf5a77d6f00)![image](https://github.com/user-attachments/assets/10fb9fb3-93dd-4c2e-885e-ac2973ba808b)![image](https://github.com/user-attachments/assets/62008f36-4d8f-46f2-a44d-ccca9237948c)![image](https://github.com/user-attachments/assets/87533944-5a4e-4766-ba3e-fac196b187ff)# OAuth 2.0
 
 ## OAuth 2.0 Overview
 
@@ -34,14 +34,17 @@ Building an OAuth 2.0 integration is simple and easy. Follow these steps:
 
 1. Access the application registry at [integrate.cisco.com](https://integrate.cisco.com) using your Cisco.com credential
 2. Create a new app. Provide the name, redirect URIs, select the relevant scopes, and so forth.
-Note: client_secret is shown only once. **Ensure that you save the client_secret securely.** Scopes and redirect URIs can be edited later.
+
+**Note: `client_secret` is shown only once. Store the `client_secret` securely.** 
+Scopes and redirect URIs can be edited later.
 
 ### 2. Request permission using an OAuth grant flow
 
-#### Obtaining an access_token and refresh_token:
+#### Obtaining an Access token and Refresh token:
 
 1. Create a trigger point in your application to initiate the OAuth process, such as a “Connect to Meraki” button or a link.
-2. When the Meraki admin interacts with this trigger, redirect the admin to [https://as.meraki.com/oauth/authorize](https://as.meraki.com/oauth/authorize) with the following mandatory query parameters:
+
+   When the Meraki admin interacts with this trigger, redirect the admin to [https://as.meraki.com/oauth/authorize](https://as.meraki.com/oauth/authorize) with the following mandatory query parameters:
   - `response_type`: Must be set as `code`
   - `client_id`: Issued when creating your app
   - `redirect_uri`: Must match one of the URIs provided when you registered your integration.
@@ -55,87 +58,100 @@ https://as.meraki.com/oauth/authorize?response_type=code&client_id={client_id}&r
 
 ```
 
-2. Implement a callback receiver on your application that will respond when a request gets back to the redirection URL. You should expect to receive a `code` attribute as one of the request parameters - that is the access grant, and it has a lifetime of 10 minutes.
+2. Implement a callback receiver in your application to respond when a request returns the redirection URL. You should expect to receive a `code` attribute as one of the request parameters. This is the **access grant**, and it has a lifetime of 10 minutes.
+3. Use the access grant to request a refresh token and an access token. Send a POST request to [https://as.meraki.com/oauth/token](https://as.meraki.com/oauth/token) with the following:
+   - Headers: `Content-Type: application/x-www-form-urlencoded`
+   - Authentication: Basic authentication using the `client_id` and `client_secret`
+   - Payload must include:
+     ```json
+     {
+       "grant_type": "authorization_code",
+       "code": "{access_code}",
+       "redirect_uri": "{redirect_url}",
+       "scope": "{scopes}"
+     }
+     ```
 
-3. Use the access grant to request a refresh token and an access token.
+- The response includes the `access_token` (valid for 60 minutes) and the `refresh_token` (used to generate new `access_token`s).
 
-- You will need to send a POST request to [https://as.meraki.com/oauth/token](https://as.meraki.com/oauth/token)
-- The headers will include “application/x-www-form-urlencoded” as the “Content-Type”.
-- Authentication should be set for basic authentication, using the `client_id` and `client_secret`
-- The payload will include:
-    ```json
-    {
-    'grant_type': 'authorization_code',
-    'code': {the access code received in the callback},
-    'redirect_uri': {redirect_url},
-    'scope': {scopes}
-    }
-    ```
-- The response will include the `access_token` (available for 60 minutes) and the `refresh_token` which will be used to generate new `access_token`s.
-- You are **REQUIRED** to securely store the refresh token.
+**Note: Store the `Refresh token` securely.**
 
 ### 3. Use the OAuth access token to make your API calls
-Congratulations! You can now make API calls to api.meraki.com using the `access_token`. The API calls will use the `Authorization` header with `Bearer + access_token` similar to how API calls were made with API keys. If you were previously using an API key for your application, then for most, if not all operations, you can simply swap in your OAuth access token in place of the API key.
+Congratulations! You can now make API calls to api.meraki.com using the `access_token` (just as you did earlier with your API keys). The API calls can now use the `Authorization` header with `Bearer + access_token`.
+
+```json
+{
+	"Authorization": Bearer <access_token>
+}
+```
 
 ### 4. Refresh your OAuth access token using your OAuth refresh token
-Based on: https://datatracker.ietf.org/doc/html/rfc6749#section-6 
 
-1. While an access_token will expire 60 minutes after being generated, the refresh_token is long-lived and will be used to obtain a new access_tokens.
-Send a POST request to https://as.meraki.com/oauth/token
-The client MUST authenticate according to https://datatracker.ietf.org/doc/html/rfc6749#section-2.3.1. **It is STRONGLY RECOMMENDED using HTTP Basic authentication**.
+This procedure is based on [RFC 6749: Refreshing an Access Token](https://datatracker.ietf.org/doc/html/rfc6749#section-6)
 
-2. The headers must include:
-`Content-Type: application/x-www-form-urlencoded`
-3. The payload must include: 
-`grant_type=refresh_token&refresh_token={refresh_token}`
-4. The response will include a new `refresh_token` and a new `access_token` (available for 60 minutes).
-5. Once the new `refresh_token` or `access_token` are used, the previous `refresh_token` will be revoked for security hygiene. Ensure you securely store the new tokens.
+While an access_token expires 60 minutes after being generated, the refresh_token is long-lived and can be used to obtain new access_tokens. Send a POST request to `https://as.meraki.com/oauth/token` with the following:
+- Headers: `Content-Type: application/x-www-form-urlencoded`
+- Payload: `grant_type=refresh_token&refresh_token={refresh_token}`
 
-**Note: The refresh_token will be revoked automatically after 90 days of inactivity**.
+The response includes a new refresh_token and a new access_token (valid for 60 minutes). Securely store the new tokens, as the previous refresh token will be revoked for security reasons.
+
+**Note:** 
+- **The refresh_token is automatically revoked after 90 days of inactivity**.
+- **It is strongly recommended that you use HTTP basic authentication.**
+
+To know more about OAuth client authentication, see the [Client Password](https://datatracker.ietf.org/doc/html/rfc6749#section-2.3.1.) section of RFC 6749.
 
 ### 5. Revoking OAuth refresh tokens
-A refresh token can be revoked by the Dashboard admin (resource owner) or by the 3rd party application (client application).
-1. Dashboard admin revocation:
-The Dashboard admin can browse to “organization” > “integrations” > “my integrations”, select the relevant integration, and choose “remove”.
-Currently, the client application will not be notified when its token has been revoked - API calls using the access token and refresh token will fail.
-
-2. Client application revocation:
-You can revoke the refresh token from the client application, per https://datatracker.ietf.org/doc/html/rfc7009.
-- You will need to send a POST request to https://as.meraki.com/oauth/revoke
-- The headers will include `application/x-www-form-urlencoded` as the `Content-Type`.
-- `Authentication` should be set for basic authentication, using the `client_id` and `client_secret`
-- The payload will include: 
+A refresh token can be revoked by the Dashboard admin (resource owner) or by the 3rd party application (client application):
+- **Dashboard admin revocation**: Navigate to **organization** > **integrations** > **my integrations**, and choose the relevant integration, and click **remove**.
+Currently, the client application is not notified when its token is revoked. However, once the refresh token is revoked, all API calls using the access token and the refresh token will fail.
+- **Client application revocation**: You can revoke the refresh token from the client application by sending a POST request to `https://as.meraki.com/oauth/revoke` with the following:
+  - Headers: `Content-Type: application/x-www-form-urlencoded`
+  - Authentication: Basic Authentication using the `client_id` and `client_secret`
+  - Payload: 
 ```
 {'token': <the refresh token to be revoked>,
   'token_type_hint': ‘refresh_token}
 ```
-Expect a `200 OK` response.
-
+If successfully revoked, you will receive a 200 OK response. 
 **Note: It may take up to 10 minutes for the revoked access token to stop working**.
+The Client application revocation is based on [RFC 7009]( https://datatracker.ietf.org/doc/html/rfc7009.).
 
 ## Troubleshooting
 
 ### Supported clusters
-OAuth is currently supported only on Meraki.com. Support for FedRAMP, China, Canada, and India will be added in a future phase.
+OAuth is currently supported only on Meraki.com. Support for FedRAMP, China, Canada, and India will be added in the future.
 
 ### Initial grant flow
-1. The user can’t find the relevant organization in the dropdown menu.
-For an organization to appear in the dropdown menu, the following conditions must be met:
-- The user has full organization admin rights - read-only and/or network admins will not see their organization.
-- The app hasn’t been integrated already - if it has, the user must revoke its access under “organization” > “integrations” > “my integrations” and try again.
+**Issue 1:** The user can’t find the relevant organization in the dropdown menu.
+**Solutions:**
+For an organization to appear in the dropdown menu, do the following:
+- Ensure that the user has full organization admin rights. Read-only and/or network admins cannot see their organization.
+- Ensure that the app has been integrated. If the app has been integrated, navigate to **organization** > **integrations** > **my integrations**. Revoke access to the app and try integrating the app once again. .  
 
-2. "An error has occurred: The requested redirect uri is malformed or doesn't match the client redirect URI".
-- The redirect URI in the request is different from the redirect URIs registered in the app registry.
-3. "An error has occurred: Client authentication failed due to unknown client, no client authentication included, or unsupported authentication method.."
-- The client ID in the request is wrong.
+**Issue 2**: "An error has occurred: The requested redirect URI is malformed or doesn't match the client redirect URI.
+**Solution**: Verify if the redirect URI in the request is different from the redirect URIs registered in the app registry.
+
+**Issue 3**: Client authentication failed error. "An error has occurred: Client authentication failed due to unknown client, no client authentication included, or unsupported authentication method.."
+**Solution**: Verify if the client ID in the request is correct.
+
 
 ### Errors returned to the redirect URI
-(redirect URI being https://localhost/ for the following examples):
-1. https://localhost?error=invalid_scope&error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed.
-- There is either a mistake in one of the scopes, or the request includes scopes that are not included in the app registration.
+**Issue**: An invalid scope error is returned to the redirect URI. For example, 
+```
+https://localhost?error=invalid_scope&error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed.
+```
+In the above example, the redirect URI is https://localhost/.
+**Solution**: 
+- Verify if there is a mistake in the scopes included in the request. 
+- Verify if the request includes scopes that were not included during app registrations.
 
-2. https://localhost?error=access_denied&error_description=The+resource+owner+or+authorization+server+denied+the+request.
-- The user denied access.
+**Issue**: An access denied error is returned to the redirect URI. For example, 
+```
+https://localhost?error=access_denied&error_description=The+resource+owner+or+authorization+server+denied+the+request.
+```
+**Solution**: 
+- Verify if the user has the required access rights. 
 
 ### Errors exchanging tokens
 1. The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client.
