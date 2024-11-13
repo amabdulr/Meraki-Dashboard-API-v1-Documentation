@@ -20,7 +20,7 @@ OAuth 2.0 offers several advantages over traditional API keys:
 - **No more API key rotations**: OAuth 2.0 uses short-lived access tokens that are automatically replaced in minutes.
 - **Simplified auditing**: Each integration has its own identity, making it easy to trace API calls back to the integration invoking the API call. 
 
-## Building an OAuth 2.0 integration
+## Building an OAuth 2.0 Integration
 
 Building an OAuth 2.0 integration is simple and easy. Follow these steps:
 
@@ -29,7 +29,7 @@ Building an OAuth 2.0 integration is simple and easy. Follow these steps:
 3. Use the Access Token to make API calls.
 4. Refresh your Access Token using your Refresh Token as necessary.
 
-### 1. Register your integration with Meraki
+### 1. Register your Integration with Meraki
 
 1. Access the application registry at [integrate.cisco.com](https://integrate.cisco.com) using your Cisco.com credential
 2. Create a new app. Provide the name, redirect URIs, select the relevant scopes, and so forth.
@@ -37,9 +37,9 @@ Building an OAuth 2.0 integration is simple and easy. Follow these steps:
 **Note: `client_secret` is shown only once. Store the `client_secret` securely.** 
 Scopes and redirect URIs can be edited later.
 
-### 2. Request permission using an OAuth grant flow
+### 2. Request Permission Using an OAuth Grant Flow
 
-#### Obtaining an Access token and Refresh token:
+#### Obtaining an Access Token and Refresh Token:
 
 1. Create a trigger point in your application to initiate the OAuth process, such as a “Connect to Meraki” button or a link.
 
@@ -73,9 +73,9 @@ https://as.meraki.com/oauth/authorize?response_type=code&client_id={client_id}&r
 
 - The response includes the `access_token` (valid for 60 minutes) and the `refresh_token` (used to generate new `access_token`s).
 
-**Note: Store the `Refresh token` securely.**
+**Note: Store this `refresh token` securely.**
 
-### 3. Use the OAuth access token to make your API calls
+### 3. Use the OAuth Access Token to Make your API Calls
 Congratulations! You can now make API calls to api.meraki.com using the `access_token` (just as you did earlier with your API keys). The API calls can now use the `Authorization` header with `Bearer + access_token`.
 
 ```json
@@ -84,7 +84,7 @@ Congratulations! You can now make API calls to api.meraki.com using the `access_
 }
 ```
 
-### 4. Refresh your OAuth access token using your OAuth refresh token
+### 4. Refresh your OAuth Access Token Using Your OAuth Refresh Token
 
 This procedure is based on [RFC 6749: Refreshing an Access Token](https://datatracker.ietf.org/doc/html/rfc6749#section-6)
 
@@ -100,7 +100,7 @@ The response includes a new refresh_token and a new access_token (valid for 60 m
 
 To know more about OAuth client authentication, see the [Client Password](https://datatracker.ietf.org/doc/html/rfc6749#section-2.3.1.) section of RFC 6749.
 
-### 5. Revoking OAuth refresh tokens
+### 5. Revoking OAuth Refresh Tokens
 A refresh token can be revoked by the Dashboard admin (resource owner) or by the 3rd party application (client application):
 - **Dashboard admin revocation**: Navigate to **organization** > **integrations** > **my integrations**, and choose the relevant integration, and click **remove**.
 Currently, the client application is not notified when its token is revoked. However, once the refresh token is revoked, all API calls using the access token and the refresh token will fail.
@@ -118,10 +118,10 @@ The Client application revocation is based on [RFC 7009]( https://datatracker.ie
 
 ## Troubleshooting
 
-### Supported clusters
+### Supported Clusters
 OAuth is currently supported only on Meraki.com. Support for FedRAMP, China, Canada, and India will be added in the future.
 
-### Initial grant flow
+### Initial Grant Flow
 **Issue 1:** The user cannot find the relevant organization in the dropdown menu.
 
 **Solutions:**
@@ -138,7 +138,7 @@ For a user to find an organization in the dropdown menu, do the following:
 **Solution**: Verify if the client ID in the request is correct.
 
 
-### Errors returned to the redirect URI
+### Errors Returned to the Redirect URI
 **Issue**: An invalid scope error is returned to the redirect URI. For example, 
 ```
 https://localhost?error=invalid_scope&error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed.
@@ -156,13 +156,13 @@ https://localhost?error=access_denied&error_description=The+resource+owner+or+au
 **Solution**: 
 - Verify if the user has the required access rights. 
 
-### Errors exchanging tokens
+### Errors Exchanging Tokens
 1. The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client.
 - The access grant may have been used already.
 - More than 10 minutes have passed since the access grant was generated.
 - The access grant does ot 
 
-## Understanding OAuth scopes
+## Understanding OAuth Scopes
 OAuth scopes are a mechanism used in OAuth 2.0 to define and limit the access rights granted to an access token. When an integration requests authorization from the Meraki admin, it includes a list of scopes that it wants access to. The Meraki Dashboard then presents these scopes to the Meraki admin during the authorization process, allowing them to approve or deny the request.
 By using scopes, OAuth 2.0 provides a flexible and granular approach to controlling access to resources, allowing Meraki admins to make informed decisions about the level of access they grant to integrations. Additionally, scopes help ensure that integrations are provisioned access by the principle of least privilege, enhancing security and privacy.
 
