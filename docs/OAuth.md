@@ -2,13 +2,16 @@
 
 ## OAuth 2.0 Overview
 
-Meraki APIs are RESTful APIs customers and partners can use to programmatically manage and monitor Meraki environments. Until now, API access was only possible via user-scoped API keys, and today Meraki is introducing a new application-scoped auth method based on OAuth 2.0. In most cases, this new OAuth method can replace an application’s reliance on the user-scoped API keys, which have driven application integrations so far, to realize many benefits not available to user-scoped API keys.
+Meraki APIs are RESTful APIs that customers and partners can use to programmatically manage and monitor Meraki environments. Previously, API access was only possible through user-scoped API keys. From this release, Meraki introduces a new application-scoped authentication method based on OAuth 2.0. The OAuth 2.0 method replaces the application's reliance on user-scoped API keys and offers several benefits not available with user-scoped API keys.
+
 
 ## What is OAuth 2.0?
 
-OAuth 2.0 is a standard authorization framework that enables integrations to access Meraki data without users revealing their credentials/API keys. OAuth 2.0 is widely used for delegated access, particularly in the context of APIs and web applications, providing a secure and standardized way for users to authorize third-party access to their resources while maintaining control over their data.
+OAuth 2.0 is a standard authorization framework that enables integrations to access Meraki data without users revealing their credentials or API keys. OAuth 2.0  is widely used for delegated access, particularly in the context of APIs and web applications. OAuth 2.0   provides a secure and standardized way for users to authorize third-party access to their resources while maintaining control over their data.
 
-Learn more about the OAuth framework and definitions: [https://oauth.net/2/](https://oauth.net/2/)
+
+[Learn more about the OAuth framework and definitions](https://oauth.net/2/)
+
 
 ## Benefits of OAuth 2.0 integrations
 
