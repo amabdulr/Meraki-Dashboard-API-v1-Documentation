@@ -1,7 +1,6 @@
-![image](https://github.com/user-attachments/assets/9dca93f5-c361-415f-8ded-1bf5a77d6f00)![image](https://github.com/user-attachments/assets/10fb9fb3-93dd-4c2e-885e-ac2973ba808b)![image](https://github.com/user-attachments/assets/62008f36-4d8f-46f2-a44d-ccca9237948c)![image](https://github.com/user-attachments/assets/87533944-5a4e-4766-ba3e-fac196b187ff)# OAuth 2.0
+# OAuth 2.0 
 
-## OAuth 2.0 Overview
-
+## Overview
 Meraki APIs are RESTful APIs that customers and partners can use to programmatically manage and monitor Meraki environments. Previously, API access was only possible through user-scoped API keys. From this release, Meraki introduces a new application-scoped authentication method based on OAuth 2.0. The OAuth 2.0 method replaces the application's reliance on user-scoped API keys and offers several benefits not available with user-scoped API keys.
 
 
@@ -123,16 +122,19 @@ The Client application revocation is based on [RFC 7009]( https://datatracker.ie
 OAuth is currently supported only on Meraki.com. Support for FedRAMP, China, Canada, and India will be added in the future.
 
 ### Initial grant flow
-**Issue 1:** The user can’t find the relevant organization in the dropdown menu.
+**Issue 1:** The user cannot find the relevant organization in the dropdown menu.
+
 **Solutions:**
-For an organization to appear in the dropdown menu, do the following:
+For a user to find an organization in the dropdown menu, do the following:
 - Ensure that the user has full organization admin rights. Read-only and/or network admins cannot see their organization.
 - Ensure that the app has been integrated. If the app has been integrated, navigate to **organization** > **integrations** > **my integrations**. Revoke access to the app and try integrating the app once again. .  
 
 **Issue 2**: "An error has occurred: The requested redirect URI is malformed or doesn't match the client redirect URI.
+
 **Solution**: Verify if the redirect URI in the request is different from the redirect URIs registered in the app registry.
 
 **Issue 3**: Client authentication failed error. "An error has occurred: Client authentication failed due to unknown client, no client authentication included, or unsupported authentication method.."
+
 **Solution**: Verify if the client ID in the request is correct.
 
 
@@ -142,6 +144,7 @@ For an organization to appear in the dropdown menu, do the following:
 https://localhost?error=invalid_scope&error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed.
 ```
 In the above example, the redirect URI is https://localhost/.
+
 **Solution**: 
 - Verify if there is a mistake in the scopes included in the request. 
 - Verify if the request includes scopes that were not included during app registrations.
