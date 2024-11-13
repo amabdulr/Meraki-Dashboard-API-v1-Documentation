@@ -1,7 +1,7 @@
 # OAuth 2.0
 
 ## OAuth 2.0 Overview
-
+test
 Meraki APIs are RESTful APIs customers and partners can use to programmatically manage and monitor Meraki environments. Until now, API access was only possible via user-scoped API keys, and today Meraki is introducing a new application-scoped auth method based on OAuth 2.0. In most cases, this new OAuth method can replace an application’s reliance on the user-scoped API keys, which have driven application integrations so far, to realize many benefits not available to user-scoped API keys.
 
 ## What is OAuth 2.0?
