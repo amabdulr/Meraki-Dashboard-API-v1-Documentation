@@ -6,11 +6,15 @@ Meraki APIs are RESTful APIs that customers and partners can use to programmatic
 
 ## What is OAuth 2.0?
 
-OAuth 2.0 is a standard authorization framework that enables integrations to access Meraki data without users revealing their credentials or API keys. OAuth 2.0  is widely used for delegated access, particularly in the context of APIs and web applications. OAuth 2.0   provides a secure and standardized way for users to authorize third-party access to their resources while maintaining control over their data.
+OAuth 2.0 is a standard authorization framework that enables integrations to access Meraki data. Users do not need to reveal their credentials or API keys. OAuth 2.0 is widely used for delegated access, particularly in the context of APIs and web applications. OAuth 2.0 provides a secure and standardized way for users to authorize third party access to their resources while maintaining control over their data.
 
 
 [Learn more about the OAuth framework and definitions](https://oauth.net/2/)
 
+
+## What is an OAuth 2.0 Integration?
+
+An OAuth 2.0 integration (or integration) is a software application or system that connects to the Meraki platform and interacts with Meraki's services and data. An integration uses APIs to automate, manage, or enhance functionalities within a Meraki environment. By leveraging OAuth 2.0, integrations can securely access Meraki resources on behalf of users or organizations, allowing them to perform tasks such as monitoring network status, configuring network settings, or collecting data without requiring direct user credential input.
 
 ## Benefits of OAuth 2.0 Integrations
 
@@ -22,17 +26,17 @@ OAuth 2.0 offers several advantages over traditional API keys:
 
 ## Building an OAuth 2.0 Integration
 
-Building an OAuth 2.0 integration is simple and easy. Follow these steps:
+You can build an OAuth 2.0 integration by following these steps:
 
 1. Register your integration with Meraki.
-2. Using the OAuth Grant Flow, request the organization admin for permissions for the organization you’d like to manage.
+2. Using the OAuth Grant Flow, request the organization admin for permissions for the organization that you would like to manage.
 3. Use the Access Token to make API calls.
 4. Refresh your Access Token using your Refresh Token as necessary.
 
 ### 1. Register your Integration with Meraki
 
 1. Access the application registry at [integrate.cisco.com](https://integrate.cisco.com) using your Cisco.com credential
-2. Create a new app. Provide the name, redirect URIs, select the relevant scopes, and so forth.
+2. Create a new application. Provide the name, redirect URIs, select the relevant scopes, and so forth.
 
 **Note: `client_secret` is shown only once. Store the `client_secret` securely.** 
 Scopes and redirect URIs can be edited later.
@@ -45,10 +49,10 @@ Scopes and redirect URIs can be edited later.
 
    When the Meraki admin interacts with this trigger, redirect the admin to [https://as.meraki.com/oauth/authorize](https://as.meraki.com/oauth/authorize) with the following mandatory query parameters:
   - `response_type`: Must be set as `code`
-  - `client_id`: Issued when creating your app
-  - `redirect_uri`: Must match one of the URIs provided when you registered your integration.
-  - `scope`: A space-separated list of scopes being requested by your integration (see scopes)
-  - `state`: A unique string passed back to your integration upon completion.
+  - `client_id`: Issued when creating your application
+  - `redirect_uri`: Must match one of the URIs provided when you registered your integration
+  - `scope`: A space-separated list of scopes being requested by your integration (see the "Understanding OAuth Scopes" section below)
+  - `state`: A unique string passed back to your integration upon completion
   - `nonce` (optional)
 
 Here is an example link format:
@@ -57,11 +61,11 @@ https://as.meraki.com/oauth/authorize?response_type=code&client_id={client_id}&r
 
 ```
 
-2. Implement a callback receiver in your application to respond when a request returns the redirection URL. You should expect to receive a `code` attribute as one of the request parameters. This is the **access grant**, and it has a lifetime of 10 minutes.
+2. Implement a callback receiver in your application to respond when a request returns the redirection URL. You should expect to receive a `code` attribute as one of the request parameters. This is the **access grant**. The access grant has a lifetime of 10 minutes.
 3. Use the access grant to request a refresh token and an access token. Send a POST request to [https://as.meraki.com/oauth/token](https://as.meraki.com/oauth/token) with the following:
    - Headers: `Content-Type: application/x-www-form-urlencoded`
    - Authentication: Basic authentication using the `client_id` and `client_secret`
-   - Payload must include:
+   - Payload:
      ```json
      {
        "grant_type": "authorization_code",
@@ -101,7 +105,7 @@ The response includes a new refresh_token and a new access_token (valid for 60 m
 To know more about OAuth client authentication, see the [Client Password](https://datatracker.ietf.org/doc/html/rfc6749#section-2.3.1.) section of RFC 6749.
 
 ### 5. Revoking OAuth Refresh Tokens
-A refresh token can be revoked by the Dashboard admin (resource owner) or by the 3rd party application (client application):
+A refresh token can be revoked either by the Dashboard admin (resource owner) or by the third party application (client application):
 - **Dashboard admin revocation**: Navigate to **organization** > **integrations** > **my integrations**, and choose the relevant integration, and click **remove**.
 Currently, the client application is not notified when its token is revoked. However, once the refresh token is revoked, all API calls using the access token and the refresh token will fail.
 - **Client application revocation**: You can revoke the refresh token from the client application by sending a POST request to `https://as.meraki.com/oauth/revoke` with the following:
@@ -127,11 +131,11 @@ OAuth is currently supported only on Meraki.com. Support for FedRAMP, China, Can
 **Solutions:**
 For a user to find an organization in the dropdown menu, do the following:
 - Ensure that the user has full organization admin rights. Read-only and/or network admins cannot see their organization.
-- Ensure that the app has been integrated. If the app has been integrated, navigate to **organization** > **integrations** > **my integrations**. Revoke access to the app and try integrating the app once again. .  
+- Ensure that the application has been integrated. If the application has been integrated, navigate to **organization** > **integrations** > **my integrations**. Revoke access to the application and try integrating the application once again.  
 
 **Issue 2**: "An error has occurred: The requested redirect URI is malformed or doesn't match the client redirect URI.
 
-**Solution**: Verify if the redirect URI in the request is different from the redirect URIs registered in the app registry.
+**Solution**: Verify if the redirect URI in the request is different from the redirect URIs registered in the application registry.
 
 **Issue 3**: Client authentication failed error. "An error has occurred: Client authentication failed due to unknown client, no client authentication included, or unsupported authentication method.."
 
@@ -147,7 +151,7 @@ In the above example, the redirect URI is `https://localhost/`.
 
 **Solution**: 
 - Verify if there is a mistake in the scopes included in the request. 
-- Verify if the request includes scopes that were not included during app registrations.
+- Verify if the request includes scopes that were not included during application registrations.
 
 **Issue**: An access denied error is returned to the redirect URI. For example, 
 ```
@@ -159,7 +163,7 @@ https://localhost?error=access_denied&error_description=The+resource+owner+or+au
 **Issue**: The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client.
 
 **Solution**:
-- Ensure the access grant has not been used already.
+- Ensure that the access grant has not been used already.
 - Confirm that no more than 10 minutes have passed since the access grant was generated.
 - Verify that the access grant matches the expected parameters, including the redirection URI and client details.
 
