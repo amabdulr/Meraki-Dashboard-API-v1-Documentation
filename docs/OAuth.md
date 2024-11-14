@@ -156,20 +156,28 @@ https://localhost?error=access_denied&error_description=The+resource+owner+or+au
 **Solution**: 
 - Verify if the user has the required access rights. 
 
-### Errors Exchanging Tokens
-1. The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client.
-- The access grant may have been used already.
-- More than 10 minutes have passed since the access grant was generated.
-- The access grant does ot 
+**Issue**: The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client.
+
+**Solution**:
+- Ensure the access grant has not been used already.
+- Confirm that no more than 10 minutes have passed since the access grant was generated.
+- Verify that the access grant matches the expected parameters, including the redirection URI and client details.
+
 
 ## Understanding OAuth Scopes
-OAuth scopes are a mechanism used in OAuth 2.0 to define and limit the access rights granted to an access token. When an integration requests authorization from the Meraki admin, it includes a list of scopes that it wants access to. The Meraki Dashboard then presents these scopes to the Meraki admin during the authorization process, allowing them to approve or deny the request.
-By using scopes, OAuth 2.0 provides a flexible and granular approach to controlling access to resources, allowing Meraki admins to make informed decisions about the level of access they grant to integrations. Additionally, scopes help ensure that integrations are provisioned access by the principle of least privilege, enhancing security and privacy.
 
-Meraki offers two types of scopes - `config` scopes and `telemetry` scopes. Each scope has two permission levels: “read-only” and “write”.
+OAuth scopes in OAuth 2.0 are used to define and limit the access rights granted to an access token. When an integration requests authorization from a Meraki admin, it  must include a list of scopes that the integration seeks access to.  The Meraki Dashboard presents these scopes to the admin during the authorization process, allowing them to approve or deny the request.
 
-1. **`Config`** scopes grant access to configuration features that determine the operation of the network and the network experience. These features typically dictate the end-user network experience and the operation of Meraki devices, e.g. VPNs, VLANs, access controls, policies, SSIDs, and sensor names. Importantly, this excludes admin-facing telemetry configs, which can be managed via the next type of scope.
-2. **`Telemetry`** scopes grant access to telemetry and telemetry configuration that does not affect the end-user experience of the network. For example, features like event log, syslog, bandwidth utilization, client count, and camera snapshots.
+Using scopes, OAuth 2.0 offers a flexible and granular method for controlling resource access. This enables Meraki admins to make informed decisions regarding the level of access granted to integrations. This mechanism supports the principle of least privilege, enhancing security and privacy.
+
+  
+Meraki provides the following two scopes:
+1. **`config`**: This scope grants access to configuration features that influence the operation of the network and the overall network experience. The config scope dictates the end-user network experience and the functioning of Meraki devices, such as VPNs, VLANs, access controls, policies, SSIDs, and sensor names. Note that the `config` scope excludes admin-facing telemetry configurations, which are managed using telemetry scopes.
+
+2. **`telemetry`**: This scope grants access to telemetry data and configurations that do not impact the end-user network experience. They include features like event logs, syslog, bandwidth utilization, client counts, and camera snapshots.
+
+Note: The above Meraki scopes can have either "read-only" or "write" permission levels.
+
 
 | Category              | Read                           | Write                          |
 |-----------------------|--------------------------------|--------------------------------|
