@@ -4,7 +4,7 @@
 Meraki APIs are RESTful APIs that customers and partners can use to programmatically manage and monitor Meraki environments. Previously, API access was only possible through user-scoped API keys. From this release, Meraki introduces a new application-scoped authentication method based on OAuth 2.0. The OAuth 2.0 method replaces the application's reliance on user-scoped API keys and offers several benefits not available with user-scoped API keys.
 
 
-## What is OAuth 2.0?
+## What Is OAuth 2.0?
 
 OAuth 2.0 is a standard authorization framework that enables integrations to access Meraki data. Users do not need to reveal their credentials or API keys. OAuth 2.0 is widely used for delegated access, particularly in the context of APIs and web applications. OAuth 2.0 provides a secure and standardized way for users to authorize third party access to their resources while maintaining control over their data.
 
@@ -12,28 +12,28 @@ OAuth 2.0 is a standard authorization framework that enables integrations to acc
 [Learn more about the OAuth framework and definitions](https://oauth.net/2/)
 
 
-## What is an OAuth 2.0 Integration?
+## What Is an OAuth 2.0 Integration?
 
 An OAuth 2.0 integration (or integration) is a software application or system that connects to the Meraki platform and interacts with Meraki's services and data. An integration uses APIs to automate, manage, or enhance functionalities within a Meraki environment. By leveraging OAuth 2.0, integrations can securely access Meraki resources on behalf of users or organizations, allowing them to perform tasks such as monitoring network status, configuring network settings, or collecting data without requiring direct user credential input.
 
 ## Benefits of OAuth 2.0 Integrations
 
-OAuth 2.0 offers several advantages over traditional API keys:
+OAuth 2.0 offers the following advantages over traditional API keys:
 - **Flexible and least-privilege access**: Developers can request permission for a limited set of OAuth scopes, rather than having an all-or-nothing access.
 - **No more copying and pasting API keys**: OAuth 2.0 introduces a secure and seamless grant flow for exchanging credentials  
 - **No more API key rotations**: OAuth 2.0 uses short-lived access tokens that are automatically replaced in minutes.
 - **Simplified auditing**: Each integration has its own identity, making it easy to trace API calls back to the integration invoking the API call. 
 
-## Building an OAuth 2.0 Integration
+## Build an OAuth 2.0 Integration
 
 You can build an OAuth 2.0 integration by following these steps:
 
 1. Register your integration with Meraki.
 2. Using the OAuth Grant Flow, request the organization admin for permissions for the organization that you would like to manage.
-3. Use the Access Token to make API calls.
-4. Refresh your Access Token using your Refresh Token as necessary.
+3. Use the access token to make API calls.
+4. Refresh your access token using your Refresh Token as necessary.
 
-### 1. Register your Integration with Meraki
+### 1. Register Your Integration with Meraki
 
 1. Access the application registry at [integrate.cisco.com](https://integrate.cisco.com) using your Cisco.com credential
 2. Create a new application. Provide the name, redirect URIs, select the relevant scopes, and so forth.
@@ -43,7 +43,7 @@ Scopes and redirect URIs can be edited later.
 
 ### 2. Request Permission Using an OAuth Grant Flow
 
-#### Obtaining an Access Token and Refresh Token:
+#### Obtain Access Token and Refresh Token:
 
 1. Create a trigger point in your application to initiate the OAuth process, such as a “Connect to Meraki” button or a link.
 
@@ -79,7 +79,7 @@ https://as.meraki.com/oauth/authorize?response_type=code&client_id={client_id}&r
 
 **Note: Store this `refresh token` securely.**
 
-### 3. Use the OAuth Access Token to Make your API Calls
+### 3. Use the OAuth Access Token to Make API Calls
 Congratulations! You can now make API calls to api.meraki.com using the `access_token` (just as you did earlier with your API keys). The API calls can now use the `Authorization` header with `Bearer + access_token`.
 
 ```json
@@ -88,7 +88,7 @@ Congratulations! You can now make API calls to api.meraki.com using the `access_
 }
 ```
 
-### 4. Refresh your OAuth Access Token Using Your OAuth Refresh Token
+### 4. Refresh Your OAuth Access Token Using Your OAuth Refresh Token
 
 This procedure is based on [RFC 6749: Refreshing an Access Token](https://datatracker.ietf.org/doc/html/rfc6749#section-6)
 
@@ -104,7 +104,7 @@ The response includes a new refresh_token and a new access_token (valid for 60 m
 
 To know more about OAuth client authentication, see the [Client Password](https://datatracker.ietf.org/doc/html/rfc6749#section-2.3.1.) section of RFC 6749.
 
-### 5. Revoking OAuth Refresh Tokens
+### 5. Revoke an OAuth Refresh Token
 A refresh token can be revoked either by the Dashboard admin (resource owner) or by the third party application (client application):
 - **Dashboard admin revocation**: Navigate to **organization** > **integrations** > **my integrations**, and choose the relevant integration, and click **remove**.
 Currently, the client application is not notified when its token is revoked. However, once the refresh token is revoked, all API calls using the access token and the refresh token will fail.
@@ -123,7 +123,7 @@ The Client application revocation is based on [RFC 7009]( https://datatracker.ie
 ## Troubleshooting
 
 ### Supported Clusters
-OAuth is currently supported only on Meraki.com. Support for FedRAMP, China, Canada, and India will be added in the future.
+OAuth is currently supported only on Meraki.com. Support for Federal Risk and Authorization Management Program (FedRAMP), China, Canada, and India will be added in the future.
 
 ### Initial Grant Flow
 **Issue 1:** The user cannot find the relevant organization in the dropdown menu.
@@ -168,7 +168,7 @@ https://localhost?error=access_denied&error_description=The+resource+owner+or+au
 - Verify that the access grant matches the expected parameters, including the redirection URI and client details.
 
 
-## Understanding OAuth Scopes
+## Understand OAuth Scopes
 
 OAuth scopes in OAuth 2.0 are used to define and limit the access rights granted to an access token. When an integration requests authorization from a Meraki admin, it  must include a list of scopes that the integration seeks access to.  The Meraki Dashboard presents these scopes to the admin during the authorization process, allowing them to approve or deny the request.
 
