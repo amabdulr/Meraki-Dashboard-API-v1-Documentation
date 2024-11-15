@@ -16,7 +16,7 @@ OAuth 2.0 is a standard authorization framework that enables integrations to acc
 
 ## What Is an OAuth 2.0 Integration?
 
-An OAuth 2.0 integration (or integration) is a software application or system that connects to the Meraki platform and interacts with Meraki's services and data. An integration uses APIs to automate, manage, or enhance functionalities within a Meraki environment. By leveraging OAuth 2.0, integrations can securely access Meraki resources on behalf of users or organizations, allowing them to perform tasks such as monitoring network status, configuring network settings, or collecting data without requiring direct user credential input.
+An OAuth 2.0 integration (or integration) is a software application or system that connects to the Meraki platform and interacts with Meraki's services and data. An integration uses APIs to automate, manage, or enhance functionalities within a Meraki environment. With OAuth 2.0, integrations can securely access Meraki resources on behalf of users or organizations. This allows the users to perform tasks such as monitoring network status, configuring network settings, or collecting data without requiring direct user credential input.
 
 ## Benefits of OAuth 2.0 Integrations
 
@@ -53,7 +53,7 @@ Scopes and redirect URIs can be edited later.
   - `response_type`: Must be set as `code`
   - `client_id`: Issued when creating your application
   - `redirect_uri`: Must match one of the URIs provided when you registered your integration
-  - `scope`: A space-separated list of scopes being requested by your integration (see the "Understanding OAuth Scopes" section below)
+  - `scope`: Your integration requests this space-separated list of scopes (see the "Understanding OAuth Scopes" section below)
   - `state`: A unique string passed back to your integration upon completion
   - `nonce` (optional)
 
@@ -63,7 +63,7 @@ https://as.meraki.com/oauth/authorize?response_type=code&client_id={client_id}&r
 
 ```
 
-2. Implement a callback receiver in your application to respond when a request returns the redirection URL. You should expect to receive a `code` attribute as one of the request parameters. This is the **access grant**. The access grant has a lifetime of 10 minutes.
+2. Implement a callback receiver in your application to respond when a request returns the redirection URL. You should expect to receive a `code` attribute as one of the request parameters. This `code` attribute is the **access grant**. The access grant has a lifetime of 10 minutes.
 3. Use the access grant to request a refresh token and an access token. Send a POST request to [https://as.meraki.com/oauth/token](https://as.meraki.com/oauth/token) with the following:
    - Headers: `Content-Type: application/x-www-form-urlencoded`
    - Authentication: Basic authentication using the `client_id` and `client_secret`
@@ -125,7 +125,7 @@ The Client application revocation is based on [RFC 7009]( https://datatracker.ie
 ## Troubleshooting
 
 ### Supported Clusters
-OAuth is currently supported only on Meraki.com. Support for Federal Risk and Authorization Management Program (FedRAMP), China, Canada, and India will be added in the future.
+OAuth is currently supported only on Meraki.com. Support for the Federal Risk and Authorization Management Program (FedRAMP), China, Canada, and India will be added in the future.
 
 ### Initial Grant Flow
 **Issue 1:** The user cannot find the relevant organization in the dropdown menu.
