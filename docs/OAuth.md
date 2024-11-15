@@ -47,7 +47,7 @@ Scopes and redirect URIs can be edited later.
 
 #### Obtain Access Token and Refresh Token:
 
-1. Create a trigger point in your application to initiate the OAuth process, such as a “Connect to Meraki” button or a link.
+1. Create a trigger point in your application to start the OAuth process, such as a “Connect to Meraki” button or a link.
 
    When the Meraki admin interacts with this trigger, redirect the admin to [https://as.meraki.com/oauth/authorize](https://as.meraki.com/oauth/authorize) with the following mandatory query parameters:
   - `response_type`: Must be set as `code`
@@ -107,7 +107,7 @@ The response includes a new refresh_token and a new access_token (valid for 60 m
 To know more about OAuth client authentication, see the [Client Password](https://datatracker.ietf.org/doc/html/rfc6749#section-2.3.1.) section of RFC 6749.
 
 ### 5. Revoke an OAuth Refresh Token
-A refresh token can be revoked either by the Dashboard admin (resource owner) or by the third party application (client application):
+A refresh token can be revoked either by the Dashboard admin (resource owner) or by the third-party application (client application):
 - **Dashboard admin revocation**: Navigate to **organization** > **integrations** > **my integrations**, and choose the relevant integration, and click **remove**.
 Currently, the client application is not notified when its token is revoked. However, once the refresh token is revoked, all API calls using the access token and the refresh token will fail.
 - **Client application revocation**: You can revoke the refresh token from the client application by sending a POST request to `https://as.meraki.com/oauth/revoke` with the following:
@@ -132,16 +132,16 @@ OAuth is currently supported only on Meraki.com. Support for Federal Risk and Au
 
 **Solutions:**
 For a user to find an organization in the dropdown menu, do the following:
-- Ensure that the user has full organization admin rights. Read-only and/or network admins cannot see their organization.
+- Ensure that the user has full organization admin rights. Read-only and network admins cannot see their organization.
 - Ensure that the application has been integrated. If the application has been integrated, navigate to **organization** > **integrations** > **my integrations**. Revoke access to the application and try integrating the application once again.  
 
 **Issue 2**: "An error has occurred: The requested redirect URI is malformed or doesn't match the client redirect URI.
 
-**Solution**: Verify if the redirect URI in the request is different from the redirect URIs registered in the application registry.
+**Solution**: Check whether the redirect URI in the request is different from the redirect URIs registered in the application registry.
 
-**Issue 3**: Client authentication failed error. "An error has occurred: Client authentication failed due to unknown client, no client authentication included, or unsupported authentication method.."
+**Issue 3**: Client authentication failed error. "An error has occurred: Client authentication failed due to an unknown client, no client authentication included, or unsupported authentication method.."
 
-**Solution**: Verify if the client ID in the request is correct.
+**Solution**: Check whether the client ID in the request is correct.
 
 
 ### Errors Returned to the Redirect URI
@@ -152,22 +152,22 @@ https://localhost?error=invalid_scope&error_description=The+requested+scope+is+i
 In the above example, the redirect URI is `https://localhost/`.
 
 **Solution**: 
-- Verify if there is a mistake in the scopes included in the request. 
-- Verify if the request includes scopes that were not included during application registrations.
+- Check whether there is a mistake in the scopes included in the request. 
+- Check whether the request includes scopes that were not included during application registrations.
 
 **Issue**: An access denied error is returned to the redirect URI. For example, 
 ```
 https://localhost?error=access_denied&error_description=The+resource+owner+or+authorization+server+denied+the+request.
 ```
 **Solution**: 
-- Verify if the user has the required access rights. 
+- Check whether the user has the required permissions. 
 
 **Issue**: The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client.
 
 **Solution**:
 - Ensure that the access grant has not been used already.
 - Confirm that no more than 10 minutes have passed since the access grant was generated.
-- Verify that the access grant matches the expected parameters, including the redirection URI and client details.
+- Check whether the access grant matches the expected parameters, including the redirection URI and client details.
 
 
 ## Understand OAuth Scopes
@@ -182,7 +182,7 @@ Meraki provides the following two scopes:
 
 2. **`telemetry`**: This scope grants access to telemetry data and configurations that do not impact the end-user network experience. They include features like event logs, syslog, bandwidth utilization, client counts, and camera snapshots.
 
-Note: The above Meraki scopes can have either "read-only" or "write" permission levels.
+Note: The Meraki scopes can have either "read-only" or "write" permission levels.
 
 
 | Category              | Read                           | Write                          |
