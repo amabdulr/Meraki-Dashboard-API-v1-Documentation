@@ -174,7 +174,7 @@ https://localhost?error=access_denied&error_description=The+resource+owner+or+au
 
 OAuth scopes in OAuth 2.0 are used to define and limit the access rights granted to an access token. When an integration requests authorization from a Meraki admin, it  must include a list of scopes that the integration seeks access to.  The Meraki Dashboard presents these scopes to the admin during the authorization process, allowing them to approve or deny the request.
 
-Using scopes, OAuth 2.0 offers a flexible and granular method for controlling resource access. This enables Meraki admins to make informed decisions regarding the level of access granted to integrations. This mechanism supports the principle of least privilege, enhancing security and privacy.
+Using scopes, OAuth 2.0 offers a flexible and granular method for controlling access to resources. This enables Meraki admins to make informed decisions regarding the level of access granted to integrations. This mechanism supports the principle of least privilege, enhancing security and privacy.
 
   
 Meraki provides the following two scopes:
