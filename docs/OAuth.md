@@ -1,12 +1,14 @@
 # OAuth 2.0 
 
 ## Overview
-Meraki APIs are RESTful APIs that customers and partners can use to programmatically manage and monitor Meraki environments. Previously, API access was only possible through user-scoped API keys. From this release, Meraki introduces a new application-scoped authentication method based on OAuth 2.0. The OAuth 2.0 method replaces the application's reliance on user-scoped API keys and offers several benefits not available with user-scoped API keys.
+Meraki APIs are RESTful APIs that customers and partners can use to programmatically manage and monitor Meraki environments. Previously, API access was only possible through user-scoped API keys. 
+
+Starting with this release, a new application-scoped authentication method based on OAuth 2.0 has been introduced. The OAuth 2.0 method replaces the application's reliance on user-scoped API keys and offers several benefits not available with user-scoped API keys.
 
 
 ## What Is OAuth 2.0?
 
-OAuth 2.0 is a standard authorization framework that enables integrations to access Meraki data. Users do not need to reveal their credentials or API keys. OAuth 2.0 is widely used for delegated access, particularly in the context of APIs and web applications. OAuth 2.0 provides a secure and standardized way for users to authorize third-party access to their resources while maintaining control over data.
+OAuth 2.0 is a standard authorization framework that enables integrations to access Meraki data. Users do not need to reveal their credentials or API keys. OAuth 2.0 is commonly used to allow access through delegation, particularly in the context of APIs and web applications. OAuth 2.0 provides a secure and standardized way for users to authorize third-party access to their resources while maintaining control over data.
 
 
 [Learn more about the OAuth framework and definitions](https://oauth.net/2/)
@@ -18,10 +20,10 @@ An OAuth 2.0 integration (or integration) is a software application or system th
 
 ## Benefits of OAuth 2.0 Integrations
 
-OAuth 2.0 offers the following advantages over traditional API keys:
+The advantages of authentication using OAuth 2.0 over traditional API keys are as follows:
 - **Flexible and least-privilege access**: Developers can request permission for a limited set of OAuth scopes, rather than having an all-or-nothing access.
-- **No more copying and pasting API keys**: OAuth 2.0 introduces a secure and seamless grant flow for exchanging credentials  
-- **No more API key rotations**: OAuth 2.0 uses short-lived access tokens that are automatically replaced in minutes.
+- **No more copying and pasting API keys**: OAuth 2.0 provides a secure and seamless grant flow for exchanging credentials  
+- **No more API key rotations**: OAuth 2.0 uses short-lived access tokens. These tokens are automatically replaced in minutes.
 - **Simplified auditing**: Each integration has its own identity, making it easy to trace API calls back to the integration invoking the API call. 
 
 ## Build an OAuth 2.0 Integration
