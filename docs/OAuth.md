@@ -1,7 +1,7 @@
 # OAuth 2.0 
 
 ## Overview
-Meraki APIs are RESTful APIs that customers and partners can use to programmatically manage and monitor Meraki environments. Previously, API access was only possible through user-scoped API keys. 
+Meraki APIs are RESTful APIs that customers and partners can use to programmatically manage and monitor Meraki environments. Previously, you could access these APIs only through user-scoped API keys. 
 
 Starting with this release, a new application-scoped authentication method based on OAuth 2.0 has been introduced. The OAuth 2.0 method replaces the application's reliance on user-scoped API keys and offers several benefits not available with user-scoped API keys.
 
@@ -16,13 +16,13 @@ OAuth 2.0 is a standard authorization framework that enables integrations to acc
 
 ## What Is an OAuth 2.0 Integration?
 
-An OAuth 2.0 integration (or integration) is a software application or system that connects to the Meraki platform and interacts with Meraki's services and data. An integration uses APIs to automate, manage, or enhance functionalities within a Meraki environment. With OAuth 2.0, integrations can securely access Meraki resources on behalf of users or organizations. This allows the users to perform tasks such as monitoring network status, configuring network settings, or collecting data without requiring direct user credential input.
+An OAuth 2.0 integration (referred to as integration) is a software application or system that connects to the Meraki platform and interacts with Meraki's services and data. An integration uses APIs to automate, manage, or enhance functionalities within a Meraki environment. With OAuth 2.0, integrations can securely access Meraki resources on behalf of users or organizations. This allows the users to perform tasks such as monitoring network status, configuring network settings, or collecting data without requiring direct user credential input.
 
 ## Benefits of OAuth 2.0 Integrations
 
 The advantages of authentication using OAuth 2.0 over traditional API keys are as follows:
 - **Flexible and least-privilege access**: Developers can request permission for a limited set of OAuth scopes, rather than having an all-or-nothing access.
-- **No more copying and pasting API keys**: OAuth 2.0 provides a secure and seamless grant flow for exchanging credentials  
+- **No more copying and pasting API keys**: OAuth 2.0 provides a secure and seamless grant flow for exchanging credentials.
 - **No more API key rotations**: OAuth 2.0 uses short-lived access tokens. These tokens are automatically replaced in minutes.
 - **Simplified auditing**: Each integration has its own identity, making it easy to trace API calls back to the integration invoking the API call. 
 
@@ -31,14 +31,14 @@ The advantages of authentication using OAuth 2.0 over traditional API keys are a
 You can build an OAuth 2.0 integration by following these steps:
 
 1. Register your integration with Meraki.
-2. Using the OAuth Grant Flow, request the organization admin for permissions for the organization that you would like to manage.
+2. Using the OAuth grant flow, request the admin of your organization for permissions to manage that organization.
 3. Use the access token to make API calls.
-4. Refresh your access token using your Refresh Token as necessary.
+4. Refresh your access token using your refresh token as necessary.
 
 ### 1. Register Your Integration with Meraki
 
-1. Access the application registry at [integrate.cisco.com](https://integrate.cisco.com) using your Cisco.com credential
-2. Create a new application. Provide the name, redirect URIs, select the relevant scopes, and so forth.
+1. Access the application registry at [integrate.cisco.com](https://integrate.cisco.com) using your Cisco.com credentials.
+2. Create a new application. Provide the name and redirect URIs, select the relevant scopes, and enter any information requested.
 
 **Note: `client_secret` is shown only once. Store the `client_secret` securely.** 
 Scopes and redirect URIs can be edited later.
