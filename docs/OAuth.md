@@ -6,7 +6,7 @@ Meraki APIs are RESTful APIs that customers and partners can use to programmatic
 
 ## What Is OAuth 2.0?
 
-OAuth 2.0 is a standard authorization framework that enables integrations to access Meraki data. Users do not need to reveal their credentials or API keys. OAuth 2.0 is widely used for delegated access, particularly in the context of APIs and web applications. OAuth 2.0 provides a secure and standardized way for users to authorize third party access to their resources while maintaining control over their data.
+OAuth 2.0 is a standard authorization framework that enables integrations to access Meraki data. Users do not need to reveal their credentials or API keys. OAuth 2.0 is widely used for delegated access, particularly in the context of APIs and web applications. OAuth 2.0 provides a secure and standardized way for users to authorize third-party access to their resources while maintaining control over data.
 
 
 [Learn more about the OAuth framework and definitions](https://oauth.net/2/)
