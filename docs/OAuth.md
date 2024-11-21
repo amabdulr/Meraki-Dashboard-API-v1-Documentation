@@ -1,14 +1,14 @@
 # OAuth 2.0 
 
 ## Overview
-Meraki APIs are RESTful APIs that customers and partners can use to programmatically manage and monitor Meraki environments. Previously, you could access these APIs only through user-scoped API keys. 
+Meraki APIs are RESTful APIs that network administrators and developers can use to programmatically manage and monitor Meraki environments. Previously, you could access these APIs only through user-scoped API keys. 
 
-Starting with this release, a new application-scoped authentication method based on OAuth 2.0 has been introduced. The OAuth 2.0 method replaces the application's reliance on user-scoped API keys and offers several benefits not available with user-scoped API keys.
+This document aims to explain the new application-scoped authentication method based on OAuth 2.0, detailing its implementation and benefits.  The OAuth 2.0 method replaces the application's reliance on administrator-scoped API keys and offers several benefits not available with administrator-scoped API keys.
 
 
 ## What Is OAuth 2.0?
 
-OAuth 2.0 is a standard authorization framework that enables integrations to access Meraki data. Users do not need to reveal their credentials or API keys. OAuth 2.0 is commonly used to allow access through delegation, particularly in the context of APIs and web applications. OAuth 2.0 provides a secure and standardized way for users to authorize third-party access to their resources while maintaining control over data.
+OAuth 2.0 is a standard authorization framework. It enables integrations to access Meraki data. Administrators do not need to reveal their credentials or API keys. OAuth 2.0 is commonly used to allow access through delegation, particularly in the context of APIs and web applications. OAuth 2.0 provides a secure and standardized way for users to authorize third-party access to their resources while maintaining control over data.
 
 
 [Learn more about the OAuth framework and definitions](https://oauth.net/2/)
@@ -16,11 +16,11 @@ OAuth 2.0 is a standard authorization framework that enables integrations to acc
 
 ## What Is an OAuth 2.0 Integration?
 
-An OAuth 2.0 integration (referred to as integration) is a software application or system that connects to the Meraki platform and interacts with Meraki's services and data. An integration uses APIs to automate, manage, or enhance functionalities within a Meraki environment. With OAuth 2.0, integrations can securely access Meraki resources on behalf of users or organizations. This allows the users to perform tasks such as monitoring network status, configuring network settings, or collecting data without requiring direct user credential input.
+An OAuth 2.0 integration (referred to as integration) is a software application or system that connects to the Meraki platform and interacts with Meraki's services and data. An integration uses APIs to automate, manage, or enhance functionalities within a Meraki environment. With OAuth 2.0, integrations enable users to securely access Meraki resources, allowing them to monitor network status, configure settings, and collect data without needing to input credentials directly. 
 
 ## Benefits of OAuth 2.0 Integrations
 
-The advantages of authentication using OAuth 2.0 over traditional API keys are as follows:
+The advantages of using OAuth 2.0 for authentication compared to traditional API keys include:
 - **Flexible and least-privilege access**: Developers can request permission for a limited set of OAuth scopes, rather than having an all-or-nothing access.
 - **No more copying and pasting API keys**: OAuth 2.0 provides a secure and seamless grant flow for exchanging credentials.
 - **No more API key rotations**: OAuth 2.0 uses short-lived access tokens. These tokens are automatically replaced in minutes.
@@ -77,7 +77,7 @@ https://as.meraki.com/oauth/authorize?response_type=code&client_id={client_id}&r
      }
      ```
 
-- The response includes the `access_token` (valid for 60 minutes) and the `refresh_token` (used to generate new `access_token`s).
+- The response includes the `access_token`, which is valid for 60 minutes, and the `refresh_token` which is used to generate new `access_token`s.
 
 **Note: Store this `refresh token` securely.**
 
@@ -107,7 +107,7 @@ The response includes a new refresh_token and a new access_token (valid for 60 m
 To know more about OAuth client authentication, see the [Client Password](https://datatracker.ietf.org/doc/html/rfc6749#section-2.3.1.) section of RFC 6749.
 
 ### 5. Revoke an OAuth Refresh Token
-A refresh token can be revoked either by the Dashboard admin (resource owner) or by the third-party application (client application):
+A refresh token can be revoked by either the Dashboard admin (resource owner) or by the third-party application (client application):
 - **Dashboard admin revocation**: Navigate to **organization** > **integrations** > **my integrations**, and choose the relevant integration, and click **remove**.
 Currently, the client application is not notified when its token is revoked. However, once the refresh token is revoked, all API calls using the access token and the refresh token will fail.
 - **Client application revocation**: You can revoke the refresh token from the client application by sending a POST request to `https://as.meraki.com/oauth/revoke` with the following:
