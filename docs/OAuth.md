@@ -136,7 +136,7 @@ OAuth is currently supported only on Meraki.com. Support for the Federal Risk an
 ### Initial Grant Flow
 **Issue 1:** The administrator cannot find the relevant organization in the dropdown menu.
 
-**Solutions:**
+**Solution:**
 For an administrator to find an organization in the dropdown menu, do the following:
 - Ensure that the Meraki administrator has full **Organization admin** rights. Both the "Organization admin" with read-only permissions and the "Network admin" have insufficient permissions to view the organization.
 - Ensure that the application has been integrated.
