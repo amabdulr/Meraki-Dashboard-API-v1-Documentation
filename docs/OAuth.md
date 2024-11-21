@@ -54,7 +54,7 @@ Scopes and redirect URIs can be edited later.
 
 1. To start the OAuth process, create a trigger point in your application, such as a “Connect to Meraki” button or a link.
 
-   When the Meraki admininstrator interacts with this trigger, redirect the admininstrator to [https://as.meraki.com/oauth/authorize](https://as.meraki.com/oauth/authorize) with the following mandatory query parameters:
+   When the Meraki administrator interacts with this trigger, redirect the administrator to [https://as.meraki.com/oauth/authorize](https://as.meraki.com/oauth/authorize) with the following mandatory query parameters:
   - `response_type`: Must be set as `code`
   - `client_id`: Issued when creating your application
   - `redirect_uri`: Must match one of the URIs provided when you registered your integration
