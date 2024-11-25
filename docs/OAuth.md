@@ -160,7 +160,7 @@ In the above example, the redirect URI is `https://localhost/`.
 
 **Solution**: 
 - Check whether there is a mistake in the scopes included in the request. 
-- Check whether the request includes scopes that were not included during application registrations.
+- Check whether the request includes scopes that were not included during the application's registration.
 
 **Issue**: An access denied error is returned to the redirect URI. For example, 
 ```
