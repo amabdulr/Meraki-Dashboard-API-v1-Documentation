@@ -16,7 +16,7 @@ Using OAuth 2.0 for authentication offers several advantages compared to traditi
 
 ## Building an OAuth 2.0 Integration
 
-**Context**: Building an OAuth 2.0 integration enables secure access to Meraki resources by allowing applications to interact with the system through a structured authorization process. This integration is essential for managing Meraki organizations and accessing their resources securely.
+Building an OAuth 2.0 integration enables secure access to Meraki resources by allowing applications to interact with the system through a structured authorization process. This integration is essential for managing Meraki organizations and accessing their resources securely.
 
 The components involved in building an OAuth Integration:
 - **Application registry**: The platform where you register your application to obtain necessary credentials.
