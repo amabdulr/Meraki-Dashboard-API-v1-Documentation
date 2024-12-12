@@ -10,7 +10,7 @@ OAuth 2.0 is a standard authorization framework that enables integrations to acc
 Using OAuth 2.0 for authentication offers several advantages compared to traditional API keys, including:
 
 - **Flexible and least-privilege access**: Developers can request permission for a limited set of OAuth scopes, rather than having all-or-nothing access.
-- **Avoid copy-pasting API keys**: OAuth 2.0 provides a secure and seamless grant flow for exchanging credentials.
+- **Avoid copy-pasting API keys**: OAuth 2.0 enables a secure and seamless grant flow for exchanging credentials.
 - **Avoid API key rotations**: OAuth 2.0 uses short-lived access tokens. These tokens are automatically rotated in minutes.
 - **Simplified auditing**: Each integration has its identity, which makes it easy to trace API calls back to the integration invoking the API call.
 
