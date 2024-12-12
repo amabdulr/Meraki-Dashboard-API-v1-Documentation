@@ -103,10 +103,10 @@ Follow these steps to acquire and use tokens:
 
 **Required**: Store the `refresh token` securely.
 
-### 4. **Refresh tokens**
-To maintain continuous access to Meraki resources, refresh tokens as needed. Access tokens expire after 60 minutes and require refreshing. 
+### 4. **Refresh your tokens**
+Access tokens expire after 60 minutes and require refreshing. To maintain continuous access to Meraki resources, refresh your access tokens as needed. 
 
-Follow these steps to refresh your access tokens with your refresh token:
+Follow these steps to refresh your access tokens using your refresh token:
 - Step 1: Send a POST request to `https://as.meraki.com/oauth/token`.
 - Step 2: Include headers `Content-Type: application/x-www-form-urlencoded`.
 - Step 3: Include the payload `grant_type=refresh_token&refresh_token={refresh_token}`.
@@ -129,7 +129,7 @@ Revoke a refresh token using the Meraki dashboard.
 
 **Before you begin**: You must be a Meraki **Organization admin** (resource owner).
 
-Follow these steps to revoke the token:
+Follow these steps to revoke your refresh token:
 - Step 1: From the Meraki dashboard left-navigation pane, choose **Organization** > **Integrations**.
 - Step 2: From the **My integrations** tab, choose your integration.
 - Step 3: From the integration window that opens, from the top-right corner, click **Remove**.
@@ -146,8 +146,8 @@ Revoke a refresh token using a client application.
 Follow these steps to revoke the token:
 - Step 1: Send a POST request to `https://as.meraki.com/oauth/revoke`.
 - Step 2: Include the following in the request:
-  - Headers: `Content-Type: application/x-www-form-urlencoded`
-  - Authentication: Basic Authentication using `client_id` and `client_secret`
+  - Headers: `Content-Type: application/x-www-form-urlencoded`.
+  - Authentication: Basic Authentication using `client_id` and `client_secret`.
   - Payload: 
     ```
     {'token': <the refresh token to be revoked>,
