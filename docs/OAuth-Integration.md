@@ -26,7 +26,7 @@ The components involved in building an OAuth Integration:
 - **Application registry**: The platform where you register your application to obtain necessary credentials.
 - **Administrator**: The entity responsible for granting permissions to manage the organization.
 - **Access token**: A token used to authenticate API calls to Meraki resources. An access token expires 60 minutes after being generated.
-- **Refresh token**: A token that is long-lived and used to obtain new access tokens once they expire. Always store the refresh tokens securely.
+- **Refresh token**: A token that is long-lived and used to obtain new access tokens once they expire. Always store the refresh tokens securely. The refresh token is automatically revoked after 90 days of inactivity.
 
 These are the stages of building an OAuth 2.0 integration:
 1. Register your integration with Meraki.
