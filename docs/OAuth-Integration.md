@@ -64,7 +64,7 @@ Follow these steps to request permission:
 
 **Result**: You receive an access grant valid for ten minutes.
 
-### **Acquire and Use Tokens** 
+### 3. **Acquire and Use Tokens** 
 To authenticate API calls, acquire and use tokens obtained through the authorization process. Tokens are required to make authenticated API requests to Meraki resources.
 Follow these steps to acquire and use tokens:
 - Step 1: Use the received access grant to request an access token and a refresh token by sending a POST request to [https://as.meraki.com/oauth/token](https://as.meraki.com/oauth/token).
@@ -91,7 +91,7 @@ Follow these steps to acquire and use tokens:
 **Result**: You have acquired tokens and securely interact with Meraki resources using the access tokens.. 
 **Required**: Store the `refresh token` securely.
 
-### **Refresh Tokens** **(Task)**
+### 4. **Refresh Tokens** **(Task)**
 To maintain continuous access to Meraki resources, refresh tokens as needed.
 Context: Access tokens expire after 60 minutes and require refreshing.
 Follow these steps to refresh tokens:
