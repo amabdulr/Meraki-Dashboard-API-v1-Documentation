@@ -25,19 +25,21 @@ Building an OAuth 2.0 integration enables secure access to Meraki resources by a
 The components involved in building an OAuth Integration:
 - **Application registry**: The platform where you register your application to obtain necessary credentials.
 - **Administrator**: The entity responsible for granting permissions to manage the organization.
-- **Access token**: A token used to authenticate API calls to Meraki resources. An access_token expires 60 minutes after being generated.
+- **Access token**: A token used to authenticate API calls to Meraki resources. An access token expires 60 minutes after being generated.
 - **Refresh token**: A token that is long-lived and used to obtain new access tokens once they expire. Always store the refresh tokens securely.
 
 These are the stages of building an OAuth 2.0 integration:
 1. Register your integration with Meraki.
 2. Request the administrator for permission to manage that organization using the OAuth Grant Flow. 
-3. Acquire and Use Tokens.
+3. Acquire and use tokens.
 4. Refresh your access token.
 
 ### 1. Register Your Integration with Meraki
 To register your application, you must provide necessary details in the application registry.
 
-**Before you begin**: Ensure you have Cisco.com credentials for accessing the application registry.
+**Before you begin**: 
+- Ensure you have Cisco.com credentials for accessing the application registry.
+- Understand OAuth scopes. See the OAuth Scopes section. 
 
 Follow these steps to register your application:
 - Step 1: Access the application registry at [integrate.cisco.com](https://integrate.cisco.com) using your Cisco.com credentials.
@@ -52,7 +54,8 @@ To obtain permission to manage a Meraki organization, use the OAuth Grant Flow. 
 
 Follow these steps to request permission:
 - Step 1: Trigger the OAuth process in your application, such as with a "Connect to Meraki" button or a link.
-- Step 2: Redirect the administrator to [https://as.meraki.com/oauth/authorize](https://as.meraki.com/oauth/authorize) with the required query parameters: `response_type`, `client_id`, `redirect_uri`, `scope`, `state`, and optional `nonce`.
+- Step 2: Redirect the administrator to [https://as.meraki.com/oauth/authorize](https://as.meraki.com/oauth/authorize) with the required query parameters:
+  
   - `response_type`: Must be set as `code`
   - `client_id`: Issued when creating your application
   - `redirect_uri`: Must match one of the URIs provided when you registered your integration
@@ -70,29 +73,32 @@ Follow these steps to request permission:
 
 ### 3. **Acquire and Use Tokens** 
 To authenticate API calls, acquire and use tokens obtained through the authorization process. Tokens are required to make authenticated API requests to Meraki resources.
+
 Follow these steps to acquire and use tokens:
 - Step 1: Use the received access grant to request an access token and a refresh token by sending a POST request to [https://as.meraki.com/oauth/token](https://as.meraki.com/oauth/token).
 - Step 2: Include these headers:
-- 	Headers: `Content-Type: application/x-www-form-urlencoded`
-- 	Athentication: Basic authentication using the `client_id` and `client_secret`
-- 	Payload:
-	     ```json
-	     {
-	       "grant_type": "authorization_code",
-	       "code": "{access_code}",
-	       "redirect_uri": "{redirect_url}",
-	       "scope": "{scopes}"
-	     }
-	     ``
-  	The response includes the `access_token`, which is valid for 60 minutes, and the `refresh_token`, which is used to generate new `access_token`s.
+	- 	Headers: `Content-Type: application/x-www-form-urlencoded`
+	- 	Athentication: Basic authentication using the `client_id` and `client_secret`
+	- 	Payload:
+	
+		     ```
+		     {
+		       "grant_type": "authorization_code",
+		       "code": "{access_code}",
+		       "redirect_uri": "{redirect_url}",
+		       "scope": "{scopes}"
+		     }
+		     ``
+	  	The response includes the `access_token`, which is valid for 60 minutes, and the `refresh_token`, which is used to generate new `access_token`s.
 
 - Step 3: Make API calls using the access token with the `Authorization` header in `Bearer <access_token>` format.
-	```json
-	{
-		"Authorization": "Bearer <access_token>"
-	}
-	```
-**Result**: You have acquired tokens and securely interact with Meraki resources using the access tokens.. 
+		```json
+		{
+			"Authorization": "Bearer <access_token>"
+		}
+		```
+**Result**: You have acquired tokens and securely interact with Meraki resources using the access tokens.
+
 **Required**: Store the `refresh token` securely.
 
 ### 4. **Refresh Tokens**
