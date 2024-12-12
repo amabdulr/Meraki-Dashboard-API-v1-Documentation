@@ -25,8 +25,8 @@ Building an OAuth 2.0 integration enables secure access to Meraki resources by a
 The components involved in building an OAuth Integration:
 - **Application registry**: The platform where you register your application to obtain necessary credentials.
 - **Administrator**: The entity responsible for granting permissions to manage the organization.
-- **Access token**: A token used to authenticate API calls to Meraki resources. An access token expires sixty minutes after being generated.
-- **Refresh token**: A token that is long-lived and used to obtain new access tokens once they expire. Always store the refresh tokens securely. The refresh token is automatically revoked after ninety days of inactivity.
+- **Access token**: A token used to authenticate API calls to Meraki resources. An access token expires 60 minutes after being generated.
+- **Refresh token**: A token that is long-lived and used to obtain new access tokens once they expire. Always store the refresh tokens securely. The refresh token is automatically revoked after 90 days of inactivity.
 
 These are the stages of building an OAuth 2.0 integration:
 1. Register your integration with Meraki.
@@ -89,7 +89,7 @@ Follow these steps to acquire and use tokens:
 		       "scope": "{scopes}"
 		     }
 		     ``
-	  	The response includes the `access_token`, which is valid for sixty minutes, and the `refresh_token`, which is used to generate a new `access_token`.
+	  	The response includes the `access_token`, which is valid for 60 minutes, and the `refresh_token`, which is used to generate a new `access_token`.
 
 - Step 3: Make API calls using the access token with the `Authorization` header in the format `Bearer <access_token>` format.
   
@@ -104,7 +104,7 @@ Follow these steps to acquire and use tokens:
 **Required**: Store the `refresh token` securely.
 
 ### 4. Refresh your tokens
-Access tokens expire after sixty minutes and require refreshing. To maintain continuous access to Meraki resources, refresh your access tokens as needed. 
+Access tokens expire after 60 minutes and require refreshing. To maintain continuous access to Meraki resources, refresh your access tokens as needed. 
 
 Follow these steps to refresh your access tokens using your refresh token:
 - Step 1: Send a POST request to `https://as.meraki.com/oauth/token`.
@@ -112,11 +112,11 @@ Follow these steps to refresh your access tokens using your refresh token:
 - Step 3: Include the payload `grant_type=refresh_token&refresh_token={refresh_token}`.
 - Step 4: Use HTTP basic authentication.
 
-**Result**: You receive a new `access_token` and `refresh_token`. The refresh token is long-lived and can be used to obtain new access_tokens.  The access_token expires sixty minutes after being generated. The previous refresh token is revoked for security reasons. 
+**Result**: You receive a new `access_token` and `refresh_token`. The refresh token is long-lived and can be used to obtain new access_tokens.  The access_token expires 60 minutes after being generated. The previous refresh token is revoked for security reasons. 
 
 **Post-requisites:** Store the `refresh_token` and `access_token` securely.
 
-**Note:** The refresh token is automatically revoked after ninety days of inactivity.
+**Note:** The refresh token is automatically revoked after 90 days of inactivity.
 
 #### RFC 6749
 The Refresh Token procedure is based on [RFC 6749: Refreshing an Access Token](https://datatracker.ietf.org/doc/html/rfc6749#section-6).  To know more about OAuth client authentication, see the [Client Password](https://datatracker.ietf.org/doc/html/rfc6749#section-2.3.1.) section of RFC 6749.
