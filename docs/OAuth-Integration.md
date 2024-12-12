@@ -14,6 +14,10 @@ Using OAuth 2.0 for authentication offers several advantages compared to traditi
 - **Avoid API key rotations**: OAuth 2.0 uses short-lived access tokens. These tokens are automatically rotated in minutes.
 - **Simplified auditing**: Each integration has its own identity, making it easy to trace API calls back to the integration invoking the API call.
 
+## Guidelines for Building OAuth 2.0 Integration
+- Ensure you store the `refresh_token` and the `access_token` securely.
+- Use HTTP Authentication.
+  
 ## Building an OAuth 2.0 Integration
 
 Building an OAuth 2.0 integration enables secure access to Meraki resources by allowing applications to interact with the system through a structured authorization process. This integration is essential for managing Meraki organizations and accessing their resources securely.
@@ -91,7 +95,7 @@ Follow these steps to acquire and use tokens:
 **Result**: You have acquired tokens and securely interact with Meraki resources using the access tokens.. 
 **Required**: Store the `refresh token` securely.
 
-### 4. **Refresh Tokens** **(Task)**
+### 4. **Refresh Tokens**
 To maintain continuous access to Meraki resources, refresh tokens as needed.
 Context: Access tokens expire after 60 minutes and require refreshing.
 Follow these steps to refresh tokens:
@@ -99,7 +103,8 @@ Follow these steps to refresh tokens:
 - Step 2: Include the payload `grant_type=refresh_token&refresh_token={refresh_token}` and use HTTP basic authentication.
 
 **Result**: You receive a new access token and refresh token. The refresh_token is long-lived and can be used to obtain new access_tokens.  An access_token expires 60 minutes after being generated. The previous refresh token is revoked for security reasons. 
-**Post-requisites:** Store the refresh_token and access_token securely
+
+**Post-requisites:** Store the `refresh_token` and `access_token` securely
 
 **Note:** The refresh_token is automatically revoked after 90 days of inactivity.
 This procedure is based on [RFC 6749: Refreshing an Access Token](https://datatracker.ietf.org/doc/html/rfc6749#section-6). To know more about OAuth client authentication, see the [Client Password](https://datatracker.ietf.org/doc/html/rfc6749#section-2.3.1.) section of RFC 6749.
@@ -114,10 +119,12 @@ Follow these steps to revoke the token:
 - Step 1: From the Meraki dashboard left-navigation pane, choose **Organization** > **Integrations**.
 - Step 2: From the **My integrations** tab, choose your integration.
 - Step 3: From the integration window that opens, from the top-right corner, click **Remove**.
+- 
 **Result**: The refresh token is revoked, and all API calls using the token fail. Currently, the client application is not notified when its token is revoked.
 
 **Client application revocation**: 
 Revoke a refresh token using a client application.
+
 **Before you begin**: Ensure you have the `client_id` and `client_secret`.
 Follow these steps to revoke the token:
 - Step 1: Send a POST request to `https://as.meraki.com/oauth/revoke`.
