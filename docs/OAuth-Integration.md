@@ -114,7 +114,7 @@ Follow these steps to refresh tokens:
 
 **Result**: You receive a new `access_token` and `refresh_token`. The refresh token is long-lived and can be used to obtain new access_tokens.  The access_token expires 60 minutes after being generated. The previous refresh token is revoked for security reasons. 
 
-**Post-requisites:** Store the `refresh_token` and `access_token` securely
+**Post-requisites:** Store the `refresh_token` and `access_token` securely.
 
 **Note:** The refresh token is automatically revoked after 90 days of inactivity.
 
