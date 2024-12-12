@@ -140,6 +140,7 @@ Follow these steps to revoke the token:
 Revoke a refresh token using a client application.
 
 **Before you begin**: Ensure you have the `client_id` and `client_secret`.
+
 Follow these steps to revoke the token:
 - Step 1: Send a POST request to `https://as.meraki.com/oauth/revoke`.
 - Step 2: Include the following in the request:
