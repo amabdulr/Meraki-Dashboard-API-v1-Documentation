@@ -77,8 +77,8 @@ To authenticate API calls, acquire and use tokens obtained through the authoriza
 Follow these steps to acquire and use tokens:
 - Step 1: Use the received access grant to request an access token and a refresh token by sending a POST request to [https://as.meraki.com/oauth/token](https://as.meraki.com/oauth/token).
 - Step 2: Include these headers:
-	- 	Headers: `Content-Type: application/x-www-form-urlencoded`
-	- 	Athentication: Basic authentication using the `client_id` and `client_secret`
+	- 	Headers: `Content-Type: application/x-www-form-urlencoded`.
+	- 	Authentication: Basic authentication using the `client_id` and `client_secret`.
 	- 	Payload:
 	
 		     ```
@@ -89,7 +89,7 @@ Follow these steps to acquire and use tokens:
 		       "scope": "{scopes}"
 		     }
 		     ``
-	  	The response includes the `access_token`, which is valid for 60 minutes, and the `refresh_token`, which is used to generate new `access_token`s.
+	  	The response includes the `access_token`, which is valid for 60 minutes, and the `refresh_token`, which is used to generate a new `access_token`.
 
 - Step 3: Make API calls using the access token with the `Authorization` header in `Bearer <access_token>` format.
 		```json
@@ -102,18 +102,21 @@ Follow these steps to acquire and use tokens:
 **Required**: Store the `refresh token` securely.
 
 ### 4. **Refresh Tokens**
-To maintain continuous access to Meraki resources, refresh tokens as needed.
-Context: Access tokens expire after 60 minutes and require refreshing.
-Follow these steps to refresh tokens:
-- Step 1: Send a POST request to `https://as.meraki.com/oauth/token` with headers `Content-Type: application/x-www-form-urlencoded`.
-- Step 2: Include the payload `grant_type=refresh_token&refresh_token={refresh_token}` and use HTTP basic authentication.
+To maintain continuous access to Meraki resources, refresh tokens as needed. Access tokens expire after 60 minutes and require refreshing.
 
-**Result**: You receive a new access token and refresh token. The refresh_token is long-lived and can be used to obtain new access_tokens.  An access_token expires 60 minutes after being generated. The previous refresh token is revoked for security reasons. 
+Follow these steps to refresh tokens:
+- Step 1: Send a POST request to `https://as.meraki.com/oauth/token`
+- Step 2: Include headers `Content-Type: application/x-www-form-urlencoded`.
+- Step 3: Include the payload `grant_type=refresh_token&refresh_token={refresh_token}` and use HTTP basic authentication.
+
+**Result**: You receive a new `access_token` and `refresh_token`. The refresh token is long-lived and can be used to obtain new access_tokens.  The access_token expires 60 minutes after being generated. The previous refresh token is revoked for security reasons. 
 
 **Post-requisites:** Store the `refresh_token` and `access_token` securely
 
 **Note:** The refresh_token is automatically revoked after 90 days of inactivity.
-This procedure is based on [RFC 6749: Refreshing an Access Token](https://datatracker.ietf.org/doc/html/rfc6749#section-6). To know more about OAuth client authentication, see the [Client Password](https://datatracker.ietf.org/doc/html/rfc6749#section-2.3.1.) section of RFC 6749.
+
+#### RFC 6749
+The Refresh Token procedure is based on [RFC 6749: Refreshing an Access Token](https://datatracker.ietf.org/doc/html/rfc6749#section-6).  To know more about OAuth client authentication, see the [Client Password](https://datatracker.ietf.org/doc/html/rfc6749#section-2.3.1.) section of RFC 6749.
 
 ## Revoke an OAuth Refresh Token
 To revoke an OAuth refresh token, you can use the Meraki dashboard or a client application.
