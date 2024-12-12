@@ -135,6 +135,7 @@ Follow these steps to revoke the token:
 - Step 3: From the integration window that opens, from the top-right corner, click **Remove**.
   
 **Result**: The refresh token is revoked, and all API calls using the token fail. 
+
 **Note**: Currently, the client application is not notified when its token is revoked.
 
 ### Client application revocation
