@@ -20,7 +20,7 @@ Using OAuth 2.0 for authentication offers several advantages compared to traditi
   
 ## Building an OAuth 2.0 integration
 
-Use OAuth 2.0 integration for secure access to Meraki resources, allowing applications to interact through a structured and secure authorization process.
+Use OAuth 2.0 integration for secure access to Meraki resources, allowing structured authorization to applications.
 
 You can build an OAuth intgration with these components:
 - **Application registry**: The platform where you register your application to get necessary credentials.
@@ -159,5 +159,5 @@ Follow these steps to revoke the token:
 **Post-requisites**: Wait up to 10 minutes for the revoked access token to stop working.
 
 ### **RFC 7009** 
-The process of revoking an OAuth refresh token follows the guidelines set out in RFC 7009, which provides a standard protocol for OAuth 2.0 token revocation.
+The procedure to revoke an OAuth refresh token follows the RFC 7009 guidelines for OAuth 2.0 token revocation."
 
