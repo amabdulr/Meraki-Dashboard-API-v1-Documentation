@@ -92,11 +92,13 @@ Follow these steps to acquire and use tokens:
 	  	The response includes the `access_token`, which is valid for 60 minutes, and the `refresh_token`, which is used to generate a new `access_token`.
 
 - Step 3: Make API calls using the access token with the `Authorization` header in `Bearer <access_token>` format.
+  
 		```json
 		{
 			"Authorization": "Bearer <access_token>"
 		}
 		```
+
 **Result**: You have acquired tokens and securely interact with Meraki resources using the access tokens.
 
 **Required**: Store the `refresh token` securely.
