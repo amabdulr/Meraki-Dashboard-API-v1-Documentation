@@ -107,15 +107,16 @@ Follow these steps to acquire and use tokens:
 To maintain continuous access to Meraki resources, refresh tokens as needed. Access tokens expire after 60 minutes and require refreshing.
 
 Follow these steps to refresh tokens:
-- Step 1: Send a POST request to `https://as.meraki.com/oauth/token`
+- Step 1: Send a POST request to `https://as.meraki.com/oauth/token`.
 - Step 2: Include headers `Content-Type: application/x-www-form-urlencoded`.
-- Step 3: Include the payload `grant_type=refresh_token&refresh_token={refresh_token}` and use HTTP basic authentication.
+- Step 3: Include the payload `grant_type=refresh_token&refresh_token={refresh_token}`.
+- Step 4: Use HTTP basic authentication.
 
 **Result**: You receive a new `access_token` and `refresh_token`. The refresh token is long-lived and can be used to obtain new access_tokens.  The access_token expires 60 minutes after being generated. The previous refresh token is revoked for security reasons. 
 
 **Post-requisites:** Store the `refresh_token` and `access_token` securely
 
-**Note:** The refresh_token is automatically revoked after 90 days of inactivity.
+**Note:** The refresh token is automatically revoked after 90 days of inactivity.
 
 #### RFC 6749
 The Refresh Token procedure is based on [RFC 6749: Refreshing an Access Token](https://datatracker.ietf.org/doc/html/rfc6749#section-6).  To know more about OAuth client authentication, see the [Client Password](https://datatracker.ietf.org/doc/html/rfc6749#section-2.3.1.) section of RFC 6749.
@@ -123,17 +124,19 @@ The Refresh Token procedure is based on [RFC 6749: Refreshing an Access Token](h
 ## Revoke an OAuth Refresh Token
 To revoke an OAuth refresh token, you can use the Meraki dashboard or a client application.
 
-**Dashboard revocation by administrator**: 
+### Dashboard revocation by administrator
 Revoke a refresh token using the Meraki dashboard.
+
 **Before you begin**: You must be an Meraki **Organization admin** (resource owner).
+
 Follow these steps to revoke the token:
 - Step 1: From the Meraki dashboard left-navigation pane, choose **Organization** > **Integrations**.
 - Step 2: From the **My integrations** tab, choose your integration.
 - Step 3: From the integration window that opens, from the top-right corner, click **Remove**.
-- 
+  
 **Result**: The refresh token is revoked, and all API calls using the token fail. Currently, the client application is not notified when its token is revoked.
 
-**Client application revocation**: 
+### Client application revocation
 Revoke a refresh token using a client application.
 
 **Before you begin**: Ensure you have the `client_id` and `client_secret`.
@@ -149,6 +152,7 @@ Follow these steps to revoke the token:
     ```
 
 **Result**: You receive a 200 OK response if the token is successfully revoked.
+
 **Post-requisites**: Wait up to 10 minutes for the revoked access token to stop working.
 
 ### **RFC 7009** 
