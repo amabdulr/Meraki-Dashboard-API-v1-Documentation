@@ -1,4 +1,4 @@
-# Introduction to Meraki Dashboard API (Concept)
+# Introduction to Meraki Dashboard API
 
 The Meraki Dashboard API (referred to as Meraki API) is a RESTful API interface that allows you to programmatically manage and monitor Meraki networks at scale.
 
@@ -15,7 +15,7 @@ Meraki APIs provide a range of operations to
 
 Checkout out the [Explore](https://developer.cisco.com/meraki/explore/) section for open source projects, or browse the [Marketplace](https://apps.meraki.io/) for partner solutions.
 
-## What is a Resource (Concept)
+## What is a Resource 
 
 A resource is an entity or component within the Meraki ecosystem.  Resources represent the various elements of a network.  Here are some examples of Meraki resources:
 
@@ -27,7 +27,7 @@ A resource is an entity or component within the Meraki ecosystem.  Resources rep
 
 Each resource is typically represented by a unique URL. You can use APIs to configure or retrieve information about these resources.
 
-## What is a Service (Concept)
+## What is a Service 
 
 A service is a functionality or a set of API operations that interact with the resources of a Meraki product. (These operations are specific actions performed on a resource, such as GET, POST, PUT, or DELETE.)
 
@@ -37,11 +37,11 @@ Here are some services:
 - MONITOR service: is a set of operations return status and history information, and
 - LIVE TOOL service: is a set of operations that directly interacts with the device.
 
-## What is a Meraki Product (Concept)
+## What is a Meraki Product 
 
 A Meraki product refers to the hardware and software solutions offered by Cisco Meraki that are used to build and manage network infrastructure. These products include wireless access points, switches, or security appliances.
 
-## What is a Resource URL or Path (Concept)
+## What is a Resource URL or Path 
 
 The path or URL of a resource contains the name of the Meraki product to reduce ambiguity when working with resources that have similar yet unique functionality. 
 
@@ -53,7 +53,7 @@ The format of the path is 'product/service'.
 >
 > `/switch/ports`
 
-## What is the Base URI (Concept)
+## What is the Base URI 
 
 A base URI is the root address or endpoint that serves as the starting point for accessing the API's resources. The base URI includes the protocol, domain, and base path. All API requests append specific resource paths to this base URI.
 
