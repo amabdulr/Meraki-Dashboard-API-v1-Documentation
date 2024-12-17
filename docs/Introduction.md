@@ -51,7 +51,7 @@ The format of the path is 'product/service'.
 >
 > `/switch/ports`
 
-## What is the Base URI 
+## Base URI 
 
 A base URI is the root address or endpoint that serves as the starting point for accessing the API's resources. The base URI includes the protocol, domain, and base path. All API requests append specific resource paths to this base URI.
 
