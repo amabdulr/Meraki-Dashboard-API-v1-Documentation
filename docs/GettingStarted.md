@@ -227,9 +227,9 @@ Ensure you have
 
 Follow these steps to get uplink addresses:
 
-**Step 1**: Send a GET request to the /organizations/:organizationId/devices/uplinks/addresses/byDevice endpoint.
+**Step 1**: Send a GET request to the /organizations/:organizationId/devices/uplinks/addresses/byDevice endpoint. For more information, see [Get organization devices uplink addresses by device](##!get-organization-devices-uplinks-addresses-by-device)
+
 **Step 2**: Include serials[] query parameters for the devices.
-**Step 3**: Authenticate with your API key and send the request.
 
 ### Example request for one device:
 
