@@ -57,6 +57,7 @@ Follow these steps to use the Python library:
 # Finding organization ID 
 
 Retrieve your organization ID to perform further operations.  
+
 Follow these steps to get your organization ID:
 
 - **Step 1:** List the organisations you have access to. Send a GET request to the `/organizations` endpoint. For more information, see [Get Organization](##!get-organizations) API.
@@ -99,25 +100,53 @@ Successful HTTP Status: 200
 # Finding network ID 
 List the networks of your organization using the organization ID.
 
+**Before You Begin:** Ensure you have the organization ID. 
+
 Follow these steps to get your network ID:
 
-Step 1: Use the GET /organizations/:organizationId/networks endpoint.
-Step 2: Provide your organization ID and API key in the request.
+Step 1: Send a GET request to the /organizations/:organizationId/networks endpoint. For more information, see [Get Organization Networks](##!get-organization-networks).
+Step 2: Provide your organization ID and Bearer Token in the request.
+
+### Example Request: 
+
+`GET /organizations/:organizationId/networks`
+
+```cURL
+curl https://api.meraki.com/api/v1/organizations/{organizationId}/networks \
+  -L -H 'Authorization: Bearer {MERAKI-API-KEY}'
+```
+
+```Python
+import meraki
+dashboard = meraki.DashboardAPI(API_KEY)
+response = dashboard.organizations.getOrganizationNetworks(org_id)
+```
+
 Step 3: Extract the network ID from the response for further actions.
 
-Result: You obtain the network ID for network-specific operations.**Example Response:**
-```
+### Example Response:
+
+```JSON
+Successful HTTP Status: 200
 [
   {
-    "id": "N_1234",
-    "organizationId": "12345678",
+    "id":"N_1234",
+    "organizationId":"12345678",
     "type": "wireless",
-    "name": "My network",
+    "name":"My network",
     "timeZone": "US/Pacific",
     "tags": null
   }
 ]
 ```
+
+```Python
+>>> print(response)
+[{'id': 'L_646829496481105433', 'organizationId': '549236', 'name': 'DevNet Sandbox Always on READ ONLY', 'timeZone': 'America/Los_Angeles', 'tags': None, 'productTypes': ['appliance', 'switch', 'wireless'], 'type': 'combined', 'disableMyMerakiCom': False, 'disableRemoteStatusPage': True}]
+```
+**Result:** You obtain the network ID for network-specific operations.
+**Post-requisite:** Note the network ID for subsequent API requests.
+
 # Finding devices and serials 
 List the devices in your organization to obtain serials.
 
