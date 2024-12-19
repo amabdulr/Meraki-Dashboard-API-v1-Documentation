@@ -155,7 +155,7 @@ Successful HTTP Status: 200
 # Finding devices and serials 
 List the devices in your organization to obtain the serial numbers of the devices.
 
-**Before You Begin:** 
+**Before you begin:** 
 Ensure you have
 - the organization ID, and the
 - (optional) the network identifier. This parameter helps you narrow down the devices to a specific network in your organization. 
@@ -165,7 +165,7 @@ Follow these steps to find devices and their serials:
 - **Step 1**: Send a GET request to the /organizations/:organizationId/devices endpoint.
 - **Step 2**: Include your organization identifier and API key in the request.
 
-### Example Request:
+### Example request:
 
 `GET /organizations/:organizationId/devices`
 
@@ -183,7 +183,7 @@ response = dashboard.organizations.getOrganizationDevices({organizationId})
 
 - **Step 3**: Note the value of the `serial` field of each device from the response.
 
-### Example Response:
+### Example response:
 
 
 ```JSON
@@ -325,8 +325,6 @@ Successful HTTP Status: 200
 [{'mac': '00:11:22:33:44:55', 'name': 'My Switch 1', 'network': {'id': 'L_24329156'}, 'productType': 'switch', 'serial': '{serial}', 'tags': ['example', 'switch'], 'uplinks': [{'interface': 'man1', 'addresses': [{'protocol': 'ipv4', 'address': '10.0.1.2', 'gateway': '10.0.1.1', 'assignmentMode': 'dynamic', 'nameservers': {'addresses': ['208.67.222.222', '208.67.220.220']}, 'public': {'address': '78.11.19.49'}}, {'protocol': 'ipv6', 'address': '2600:1700:ae0::c8ff:fe1e:12d2', 'gateway': 'fe80::fe1b:202a', 'assignmentMode': 'dynamic', 'nameservers': {'addresses': ['::', '::']}, 'public': {'address': None}}]}]}]
 ```
 ### Example response for two devices:
-
-### Response for two devices
 
 ```Python
 >>> print(response)
