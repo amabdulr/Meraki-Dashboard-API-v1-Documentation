@@ -104,8 +104,8 @@ List the networks of your organization using the organization ID.
 
 Follow these steps to get your network ID:
 
-Step 1: Send a GET request to the /organizations/:organizationId/networks endpoint. For more information, see [Get Organization Networks](##!get-organization-networks).
-Step 2: Provide your organization ID and Bearer Token in the request.
+- **Step 1:** Send a GET request to the /organizations/:organizationId/networks endpoint. For more information, see [Get Organization Networks](##!get-organization-networks).
+- **Step 2:** Provide your organization ID and Bearer Token in the request.
 
 ### Example Request: 
 
@@ -122,7 +122,7 @@ dashboard = meraki.DashboardAPI(API_KEY)
 response = dashboard.organizations.getOrganizationNetworks(org_id)
 ```
 
-Step 3: Extract the network ID from the response for further actions.
+- **Step 3:** Extract the network ID from the response for further actions.
 
 ### Example Response:
 
@@ -152,14 +152,31 @@ List the devices in your organization to obtain serials.
 
 Follow these steps to find devices and their serials:
 
-Step 1: Send a GET request to /organizations/:organizationId/devices.
-Step 2: Include your organization ID and API key in the request.
-Step 3: Note the serial numbers of the devices from the response.
+- **Step 1**: Send a GET request to /organizations/:organizationId/devices.
+- **Step 2**: Include your organization ID and API key in the request.
 
-**Result**: You have device serials for operations involving specific devices.
+### Example Request:
 
-**Example Response:**
+`GET /organizations/:organizationId/devices`
+
+```cURL
+curl https://api.meraki.com/api/v1/organizations/{organizationId}/devices \
+  -L -H 'Authorization: Bearer {MERAKI-API-KEY}'
 ```
+
+```Python
+import meraki
+dashboard = meraki.DashboardAPI(API_KEY)
+response = dashboard.organizations.getOrganizationDevices({organizationId})
+```
+
+- **Step 3**: Note the serial numbers of each device from the response.
+
+### Example Response:
+
+
+```JSON
+Successful HTTP Status: 200
 [
     {
         "name": "My AP",
@@ -179,17 +196,33 @@ Step 3: Note the serial numbers of the devices from the response.
 ]
 ```
 
+```Python
+>>> print(response)
+[{ 'name': 'My AP', 'lat': 37.4180951010362, 'lng': -122.098531723022, 'address': '1600 Pennsylvania Ave', 'notes': 'My AP note', 'tags': [ 'recently-added' ], 'networkId': 'N_24329156', 'serial': 'Q234-ABCD-5678', 'model': 'MR34', 'mac': '00:11:22:33:44:55', 'lanIp': '1.2.3.4', 'firmware': 'wireless-25-14', 'productType': 'wireless'}]
+```
+
+**Result**: You have device serial numbers for each device.
+**Post-requisite:** Note the value of the `serial` field. You can use this value in requests allowing a serial number as a path or query parameter. If you have two devices in your organization, note the values of both devices.
+
+
+
 # Getting devices uplink addresses 
 
 Retrieve uplink addresses for specific devices using their serials.
 
 Follow these steps to get uplink addresses:
 
-Step 1: Use the endpoint /organizations/:organizationId/devices/uplinks/addresses/byDevice.
-Step 2: Include serials[] query parameters for the devices.
-Step 3: Authenticate with your API key and send the request.
+**Step 1**: Use the endpoint /organizations/:organizationId/devices/uplinks/addresses/byDevice.
+**Step 2**: Include serials[] query parameters for the devices.
+**Step 3**: Authenticate with your API key and send the request.
 
-Result: You receive the uplink addresses for the specified devices.**Example Response:**
+### Example Request:
+
+**Result**: You receive the uplink addresses for the specified devices.
+
+### Example Response:
+
+
 ```
 [
  {
