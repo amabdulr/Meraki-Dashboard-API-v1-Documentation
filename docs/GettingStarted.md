@@ -2,16 +2,41 @@
 
 The Meraki Dashboard API is a programming interface that allows users to interact with and manage their Meraki networks programmatically. It provides access to various operations such as retrieving organizations, networks, devices, and device uplink addresses. The API supports multiple authentication methods, including bearer tokens, and offers flexibility in accessing data related to network configurations and status.
 
+# Authorization using bearer token 
+The Meraki Dashboard API requires authorization using a Bearer token (or BEARER_TOKEN), which can be
+- the Meraki API Key, or
+- the OAuth access token.
+
+Include the following in your request header:
+
+```JSON
+{
+ "Authorization": "Bearer <BEARER_TOKEN>"
+}
+```
+
+```curl
+curl https://api.meraki.com/api/v1/organizations \
+  -H 'Authorization: Bearer {BEARER_TOKEN}'
+```
+
+```Python
+import meraki
+dashboard = meraki.DashboardAPI(BEARER_TOKEN)
+```
+
+For more information, see [Authorization](#!authorization).
+
 # Using Postman for Meraki API 
 
 Use Postman to explore and interact with the Meraki API.  
 
-**Before you begin**: Ensure that you have Postman installed and your Meraki API key ready.  
+**Before you begin**: Ensure that you have Postman installed and your Bearer token ready. 
 Follow these steps to use Postman:
 
 - **Step 1:** Go to [Postman and our Postman collection](https://documenter.getpostman.com/view/897512/SzYXYfmJ).
 - **Step 2:** Import the collection by clicking the 'Run in Postman' button.
-- **Step 3:** Use your Meraki API key for authorization.
+- **Step 3:** Use your Bearer token for authorization. (comment: add link to the authorization section)
 - **Step 4:** Explore the endpoints available in the collection.
 
 **Result:** You can now interact with Meraki networks using Postman. 
@@ -24,29 +49,52 @@ Follow these steps to use the Python library:
 
 - **Step 1:** Install the library using the command `pip install meraki`.
 - **Step 2:** Import the library in your Python script with `import meraki`.
-- **Step 3:** Initialize the Dashboard API with `dashboard = meraki.DashboardAPI(API_KEY)`.
+- **Step 3:** Initialize the Dashboard API with `dashboard = meraki.DashboardAPI(BEARER_TOKEN)`.
 
 **Result:** You can now perform API operations within your Python scripts.
+
 
 # Finding organization ID 
 
 Retrieve your organization ID to perform further operations.  
 Follow these steps to get your organization ID:
 
-- **Step 1:** Send a GET request to `/organizations` endpoint.
-- **Step 2:** Use your API key in the header for authorization.
-- **Step 3:** Retrieve the organization ID from the response.
+- **Step 1:** List the organisations you have access to. Send a GET request to the `/organizations` endpoint. For more information, see [Get Organization](##!get-organizations) API.
 
-**Result:** You have your organization ID for subsequent API requests.  
-**Example Response:**
-```json
+### Example Request:
+
+```cURL
+curl https://api.meraki.com/api/v1/organizations \
+  -L -H 'Authorization: Bearer {MERAKI-API-KEY}'
+```
+
+```Python
+import meraki
+dashboard = meraki.DashboardAPI(API_KEY)
+response = dashboard.organizations.getOrganizations()
+```
+
+- **Step 2:** Retrieve the `id` from the response. This `id` is organization’s identifier.
+
+### Example Response:  
+
+```JSON
+Successful HTTP Status: 200
 [
   {
     "id": "549236",
-    "name": "DevNet Sandbox"
+    "name":"DevNet Sandbox"
   }
 ]
 ```
+
+```Python
+>>> print(response)
+[{'id': '549236', 'name': 'DevNet Sandbox'}]
+```
+**Note:** Irrelevant response attributes are omitted from the examples for brevity.
+**Result:** You have your organization ID for subsequent API requests.  
+**Post-requisite:** Note the organization ID for subsequent API requests.  
 
 # Finding network ID 
 List the networks of your organization using the organization ID.
@@ -168,21 +216,21 @@ Result: You receive the uplink addresses for the specified devices.**Example Res
 ]
 
 ```
-# Base URI reference 
-API requests use a base URI that varies by region.
+# Country-specific base URI  
+In most parts of the world, every API request will begin with the following **base URI**:
 
-General: https://api.meraki.com/api/v1
-Canada: https://api.meraki.ca/api/v1
-China: https://api.meraki.cn/api/v1
-India: https://api.meraki.in/api/v1
-United States FedRAMP: https://api.gov-meraki.com/api/v1
+> `https://api.meraki.com/api/v1`
 
-Select the appropriate URI for your location to ensure proper API access.
-Authorization Requirements (Reference)
-The Meraki Dashboard API requires authorization via a bearer token.Include the following in your request header:
+For organizations hosted in the following country dashboard, please specify the respective base URI instead:
 
-```
-{
- "Authorization": "Bearer <Meraki_API_Key>"
-}
-```
+|  Country         |  URI                              |
+|------------------|-----------------------------------|
+| Canada           | `https://api.meraki.ca/api/v1`    |
+| China            | `https://api.meraki.cn/api/v1`    |
+| India            | `https://api.meraki.in/api/v1`    |
+| United States FedRAMP | `https://api.gov-meraki.com/api/v1` |
+
+
+For more information about path schema, see [here](PathSchema.md). 
+
+
