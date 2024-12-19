@@ -96,7 +96,7 @@ Develop your application using the most efficient API calls available for your u
 
 
 
-# Troubleshooting Rate Limiting Issues
+# Troubleshooting rate limiting issues
 Diagnose and resolve issues when your application is rate limited to ensure optimal API performance.
 
 Before you begin: Familiarize yourself with the concept of API call budgets and rate limiting.
