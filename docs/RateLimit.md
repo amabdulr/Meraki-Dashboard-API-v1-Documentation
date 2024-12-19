@@ -2,7 +2,9 @@
 An API call budget is a limit that defines the number of API calls an API client can make in a given amount of time. It serves as a safeguard against runaway applications and malicious behavior. Call budgets are a standard feature of high-performance APIs across industries, and managing them effectively is crucial for developers. Key attributes include a defined number of requests per second, shared budgets among applications, and mechanisms to handle excess calls.
 
 ## Rate limits per organization
-Each Meraki organization has a call budget of 10 requests per second. A burst of 10 additional requests is allowed in the first second, allowing for a maximum of 30 requests in the first 2 seconds. This budget is shared across all API applications in the organization using API authentication. You can check the recent API activity for the given organization to understand if you are sharing the budget with other applications.
+Each Meraki organization has a call budget of 10 requests per second. This is regardless of the number of API applications interacting with that organization.
+
+A burst of 10 additional requests is allowed in the first second, allowing for a maximum of 30 requests in the first 2 seconds. This budget is shared across all API applications in the organization using API authentication. You can check the recent API activity for the given organization to understand if you are sharing the budget with other applications.
 
 This budget is shared across all API applications in the organization that leverage [API authentication](https://developer.cisco.com/meraki/api-v1/authorization/). You can [check the recent API activity](https://developer.cisco.com/meraki/api-v1/get-organization-api-requests-overview-response-codes-by-interval/) for the given organization to understand if you are sharing the budget with other applications.
 
@@ -10,6 +12,7 @@ For more information on the rate-limiting technique used, see [token bucket mode
 
 ## Rate limits per source IP address
 Each source IP address making API requests has a call budget of 100 requests per second, regardless of the number of API clients working from that IP address.
+
 
 ## Response codes for rate limiting
 A `429` status code is returned when the rate limit is exceeded. The response includes a `Retry-After` header indicating the wait time before making a follow-up request. When an application exceeds the rate limit, the following message will be returned in the response body:
