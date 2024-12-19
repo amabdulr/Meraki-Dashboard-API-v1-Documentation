@@ -145,14 +145,20 @@ Successful HTTP Status: 200
 [{'id': 'L_646829496481105433', 'organizationId': '549236', 'name': 'DevNet Sandbox Always on READ ONLY', 'timeZone': 'America/Los_Angeles', 'tags': None, 'productTypes': ['appliance', 'switch', 'wireless'], 'type': 'combined', 'disableMyMerakiCom': False, 'disableRemoteStatusPage': True}]
 ```
 **Result:** You obtain the network ID for network-specific operations.
+
 **Post-requisite:** Note the network ID for subsequent API requests.
 
 # Finding devices and serials 
 List the devices in your organization to obtain serials.
 
+**Before You Begin:** 
+Ensure you have the
+- organization ID, and the
+- (optional) network identifier. This parameter helps you narrow down the devices to a specific network in your organization. 
+
 Follow these steps to find devices and their serials:
 
-- **Step 1**: Send a GET request to /organizations/:organizationId/devices.
+- **Step 1**: Send a GET request to the /organizations/:organizationId/devices endpoint.
 - **Step 2**: Include your organization ID and API key in the request.
 
 ### Example Request:
@@ -169,6 +175,7 @@ import meraki
 dashboard = meraki.DashboardAPI(API_KEY)
 response = dashboard.organizations.getOrganizationDevices({organizationId})
 ```
+**Note:** This example does not use the network identifier parameter.
 
 - **Step 3**: Note the serial numbers of each device from the response.
 
@@ -202,7 +209,8 @@ Successful HTTP Status: 200
 ```
 
 **Result**: You have device serial numbers for each device.
-**Post-requisite:** Note the value of the `serial` field. You can use this value in requests allowing a serial number as a path or query parameter. If you have two devices in your organization, note the values of both devices.
+
+**Post-requisite:** Note the value of the `serial` field. You can use this value in requests requiring a serial number as a path or query parameter. If you have two devices in your organization, note the values of both devices.
 
 
 
