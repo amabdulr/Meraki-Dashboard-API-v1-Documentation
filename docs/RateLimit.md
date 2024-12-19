@@ -4,9 +4,9 @@ An API call budget is a limit that defines the number of API calls an API client
 ## Rate limits per organization
 Each Meraki organization has a call budget of 10 requests per second. A burst of 10 additional requests is allowed in the first second, allowing for a maximum of 30 requests in the first 2 seconds. This budget is shared across all API applications in the organization using API authentication. You can check the recent API activity for the given organization to understand if you are sharing the budget with other applications.
 
-For more information on the rate-limiting technique used, see [token bucket model](https://en.wikipedia.org/wiki/Token_bucket).
-
 This budget is shared across all API applications in the organization that leverage [API authentication](https://developer.cisco.com/meraki/api-v1/authorization/). You can [check the recent API activity](https://developer.cisco.com/meraki/api-v1/get-organization-api-requests-overview-response-codes-by-interval/) for the given organization to understand if you are sharing the budget with other applications.
+
+For more information on the rate-limiting technique used, see [token bucket model](https://en.wikipedia.org/wiki/Token_bucket).
 
 ## Rate limits per source IP address
 Each source IP address making API requests has a call budget of 100 requests per second, regardless of the number of API clients working from that IP address.
@@ -31,8 +31,11 @@ Handle cases when the API rate limit is exceeded to ensure continued application
 Follow these steps to manage rate limit exceedance:
 
 Step 1: Check the HTTP response code when making API calls.
+
 Step 2: If you receive a `429` status code, read the `Retry-After` header to determine how long to wait before retrying.
+
 Step 3: Implement a backoff mechanism to wait for 1-2 seconds, or potentially longer if a large number of requests were made, before attempting subsequent API calls.
+
 Step 4: Utilize the official Meraki Python library for automatic retry and backoff handling, if using Python. See [the official Meraki Python library](https://github.com/meraki/dashboard-api-python). Here is an example implementation:
 
 
@@ -55,6 +58,7 @@ To efficiently manage API usage and reduce the number of individual API calls du
 **Before you begin**: Familiarize yourself with the provisioning process and ensure you understand the concept of action batches.
 
 **Step 1: Use action batches for bulk operations and reduce individual API calls**
+
 Action Batches are a tool for submitting batched configuration requests in a single synchronous or asynchronous transaction. They are useful for bulk constructive or destructive operations such as `POST`, `PUT`, or `DELETE`. Action Batches help in maintaining efficient API usage and reducing the number of individual API calls.
 
 For more information, see [our overview](https://developer.cisco.com/meraki/api-v1/action-batches-overview/#action-batches), the [GitHub Demo](https://developer.cisco.com/codeexchange/github/repo/shiyuechengineer/action-batches/), or the [Meraki Blog](https://meraki.cisco.com/blog/2019/06/action-batches-a-recipe-for-success/).
@@ -67,12 +71,10 @@ Once you are confident that an organization is configured correctly, leverage [g
 
 [Meraki configuration templates](https://documentation.meraki.com/General_Administration/Templates_and_Config_Sync/Managing_Multiple_Networks_with_Configuration_Templates) are an easy way to ensure a highly consistent configuration is deployed across networks. 
 
-Result: You will maintain efficient API usage and reduce the number of individual API calls during provisioning, ensuring optimal performance and minimizing the risk of hitting rate limits.
+**Result**: You will maintain efficient API usage and reduce the number of individual API calls during provisioning, ensuring optimal performance and minimizing the risk of hitting rate limits.
 
 
-## Best practices and tips for managing call budgets
-
-### Use the most efficient operations for your use case
+## Use the most efficient operations for your use case
 
 Strategize your data polling. The most common cause of `429` responses is unnecessarily frequent polling of information that changes infrequently after day 1 of a network deployment, such as the list of [networks](https://developer.cisco.com/meraki/api-v1/get-organization-networks/) or [policy objects](https://developer.cisco.com/meraki/api-v1/get-organization-policy-objects/) in an organization.
 
