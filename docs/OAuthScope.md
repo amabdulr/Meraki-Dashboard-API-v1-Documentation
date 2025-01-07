@@ -1,4 +1,4 @@
-## OAuth Scopes
+## OAuth scopes
 OAuth scopes in OAuth 2.0 are used to define and limit the access rights granted to an access token. 
 
 When an integration requests authorization from an administrator, it  must include a list of scopes that the integration seeks access to.  The Meraki Dashboard presents these scopes to the admin during the authorization process, allowing them to approve or deny the request.
