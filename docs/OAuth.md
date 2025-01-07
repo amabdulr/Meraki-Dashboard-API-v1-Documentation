@@ -1,15 +1,16 @@
-# OAuth 2.0 integration
+# OAuth 2.0
+## OAuth 2.0 integration
 An Open Authorization (OAuth) 2.0 integration (integration), is a software application or system that connects to the Meraki platform and interacts with Meraki's services and data. This integration forms a crucial link between external applications and Meraki's infrastructure, facilitating smooth interaction with the platform.
 
 An integration uses APIs to automate, manage, or enhance functionalities within a Meraki environment. 
 
 With OAuth 2.0, integrations enable developers to securely access Meraki resources. This secure access allows developers to monitor network status, configure settings, and collect data without needing to input credentials directly.
 
-## OAuth 2.0 
+### OAuth 2.0 
 OAuth 2.0 is a standard authorization framework that offers integrations to access Meraki data securely, eliminating the need for administrators to reveal their credentials or API keys. OAuth 2.0 is commonly used to allow delegated access, particularly in the context of APIs and web applications. OAuth 2.0 offers secure and standardized method for the network administrator to authorize third-party access to their resources while maintaining control over data.
 [Learn more about the OAuth framework and definitions](https://oauth.net/2/)
 
-## Benefits of OAuth 2.0 integrations
+### Benefits of OAuth 2.0 integrations
 
 Using OAuth 2.0 for authentication offers several advantages compared to traditional API keys, including:
 
@@ -18,11 +19,11 @@ Using OAuth 2.0 for authentication offers several advantages compared to traditi
 - **Avoid API key rotations**: OAuth 2.0 uses short-lived access tokens. These tokens rotate automatically every sixty minutes.
 - **Simplified auditing**: Each integration has its identity, which makes it easy to trace API calls back to the integration invoking the API call.
 
-## Guidelines for building an OAuth 2.0 integration
+### Guidelines for building an OAuth 2.0 integration
 - Store the `refresh_token` and the `access_token` securely.
 - Use HTTP Authentication.
   
-## Building an OAuth 2.0 integration
+### Building an OAuth 2.0 integration
 
 Use OAuth 2.0 integration for secure access to Meraki resources, allowing structured authorization to applications.
 
@@ -38,7 +39,7 @@ These are the stages of building an OAuth 2.0 integration:
 3. Acquire and use tokens to make API calls.
 4. Refresh your tokens to ensure secure and continuous access to your Meraki resources.
 
-### 1. Register your integration with Meraki
+#### 1. Register your integration with Meraki
 To register your application, you must provide necessary details in the application registry.
 
 **Before you begin**: 
@@ -53,7 +54,7 @@ Follow these steps to register your application:
 
 **Requirement**: Store the `client_secret` securely as it is displayed only once. 
 
-### 2.Request permission using an OAuth grant glow
+#### 2.Request permission using an OAuth grant glow
 To get permission to manage a Meraki organization, use the OAuth Grant Flow. This procedure involves obtaining an access grant from an administrator.
 
 Follow these steps to request permission:
@@ -75,7 +76,7 @@ Follow these steps to request permission:
 
 **Result**: You receive an access grant valid for 10 minutes.
 
-### 3. Acquire and use tokens to make API calls
+#### 3. Acquire and use tokens to make API calls
 To authenticate API calls, acquire and use tokens that are obtained through the authorization process. Tokens are required to make authenticated API requests to Meraki resources.
 
 Follow these steps to acquire and use tokens:
@@ -107,7 +108,7 @@ Follow these steps to acquire and use tokens:
 
 **Required**: Store the `refresh token` securely.
 
-### 4. Refresh your tokens
+#### 4. Refresh your tokens
 Access tokens expire after 60 minutes (one hour) and require refreshing. To maintain continuous access to Meraki resources, refresh your access tokens as needed. 
 
 Follow these steps to refresh your access tokens using your refresh token:
@@ -122,13 +123,13 @@ Follow these steps to refresh your access tokens using your refresh token:
 
 **Note:** The refresh token is automatically revoked after 90 days of inactivity.
 
-#### RFC 6749
+##### RFC 6749
 The Refresh Token procedure is based on [RFC 6749: Refreshing an Access Token](https://datatracker.ietf.org/doc/html/rfc6749#section-6).  To know more about OAuth client authentication, see the [Client Password](https://datatracker.ietf.org/doc/html/rfc6749#section-2.3.1.) section of RFC 6749.
 
-## Revoke an OAuth refresh token
+### Revoke an OAuth refresh token
 To revoke an OAuth refresh token, you can use the Meraki dashboard or a client application.
 
-### Dashboard revocation by administrator
+#### Dashboard revocation by administrator
 Revoke a refresh token using the Meraki dashboard.
 
 **Before you begin**: You must be a Meraki **Organization admin** (resource owner).
@@ -142,7 +143,7 @@ Follow these steps to revoke your refresh token:
 
 **Note**: Currently, the client application is not notified when its token is revoked.
 
-### Client application revocation
+#### Client application revocation
 Revoke a refresh token using a client application.
 
 **Before you begin**: Ensure you have the `client_id` and `client_secret`.
@@ -162,6 +163,6 @@ Follow these steps to revoke the token:
 
 **Post-requisites**: Wait up to 10 minutes for the revoked access token to stop working.
 
-### **RFC 7009** 
+#### **RFC 7009** 
 The procedure to revoke an OAuth refresh token follows the RFC 7009 guidelines for OAuth 2.0 token revocation."
 
