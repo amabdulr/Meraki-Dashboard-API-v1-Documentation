@@ -13,12 +13,17 @@
         },
         {
           "title": "Authentication",
-          "content": "docs/Authorization_Bearer.md",
+          "content": "docs/Authorization.md",
           "uri": "authorization",
           "config": {
             "expand": 1
           },
           "items": [
+            {
+              "title": "API Key",
+              "content": "Authorization_Bearer.md",
+              "uri": "apikey"
+            },
             {
               "title": "OAuth 2.0",
               "content": "OAuth.md",
