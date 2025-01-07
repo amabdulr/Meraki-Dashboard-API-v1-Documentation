@@ -14,7 +14,35 @@
         {
           "title": "Authentication",
           "content": "docs/Authorization.md",
-          "uri": "authorization"
+          "uri": "authorization",
+          "config": {
+            "expand": 1
+          },
+          "items": [
+            {
+              "title": "Bearer Token",
+              "content": "docs/Authorization_Bearer.md",
+              "uri": "bearer",
+              
+            },
+            {
+              "title": "OAuth 2.0",
+              "content": "docs/OAuth_Integration.md",
+              "uri": "oauth",
+              "items": [
+                {
+                  "title": "OAuth Scope",
+                  "content": "docs/OAuthScope.md",
+                  "uri": "scope"
+                },
+                {
+                  "title": "OAuth Troubleshooting",
+                  "content": "docs/OAuth_Troubleshooting.md",
+                  "uri": "troubleshooting"
+                }
+              ]
+            }
+          ]
         },
         {
           "title": "Errors",
@@ -46,7 +74,13 @@
             },
             {
               "title": "Deprecation",
-              "content": "docs/deprecation.md"
+              "content": "docs/deprecation.md",
+              "items": [
+                {
+                  "title": "Deprecated operations",
+                  "content": "docs/deprecated-operations.md"
+                }
+              ]
             },
             {
               "title": "API Changelog",
@@ -81,6 +115,10 @@
         {
           "title": "Callbacks",
           "content": "docs/Callbacks.md"
+        },
+        {
+          "title": "OAuth 2.0",
+          "content": "docs/OAuth.md"
         },
         {
           "title": "Path Parameters",
