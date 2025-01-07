@@ -13,34 +13,16 @@
         },
         {
           "title": "Authentication",
-          "content": "docs/Authorization.md",
+          "content": "docs/Authorization_Bearer.md",
           "uri": "authorization",
           "config": {
             "expand": 1
           },
           "items": [
             {
-              "title": "Bearer Token",
-              "content": "docs/Authorization_Bearer.md",
-              "uri": "bearer",
-              
-            },
-            {
               "title": "OAuth 2.0",
-              "content": "docs/OAuth_Integration.md",
-              "uri": "oauth",
-              "items": [
-                {
-                  "title": "OAuth Scope",
-                  "content": "docs/OAuthScope.md",
-                  "uri": "scope"
-                },
-                {
-                  "title": "OAuth Troubleshooting",
-                  "content": "docs/OAuth_Troubleshooting.md",
-                  "uri": "troubleshooting"
-                }
-              ]
+              "content": "OAuth.md",
+              "uri": "oauth"
             }
           ]
         },
