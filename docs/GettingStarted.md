@@ -2,7 +2,7 @@
 
 ## Overview
 
-In this guide, we'll:
+In this guide, we'll:   
 
 1. Find out which organizations we can access using our auth token
 2. Retrieve the list of networks in one of those organizations
