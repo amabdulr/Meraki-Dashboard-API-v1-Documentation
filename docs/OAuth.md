@@ -21,7 +21,6 @@ Using OAuth 2.0 for authentication offers several advantages compared to traditi
 
 ### Guidelines for building an OAuth 2.0 integration
 - Store the `refresh_token` and the `access_token` securely.
-- Use HTTP Authentication.
   
 ### Building an OAuth 2.0 integration
 
