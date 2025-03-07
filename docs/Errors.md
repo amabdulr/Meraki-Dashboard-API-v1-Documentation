@@ -1,4 +1,8 @@
-Error responses from the API generally use standard HTTP status codes. Some examples:
+APIs return response codes that help you understand the status of the API operation.  The response codes use standard HTTP status codes. 
+
+Here are examples of common response codes and their descriptions:
+
+## Common Response Codes and Descriptions
 
 **Response Code**|**Description**
  :-------------: |:-------------:
@@ -10,8 +14,13 @@ Error responses from the API generally use standard HTTP status codes. Some exam
 429 - Too Many Requests|	Too many requests hit the API too quickly. We recommend an exponential backoff of your requests.
 500, 502, 503, 504 - Server Errors|	Meraki was unable to process the request.
 
+## Error Responses
 
-If the response code is not specific enough to determine the cause of the issue, error messages will be included in the response in JSON format, for example:
+Some of the response codes indicate exceptions where something has failed, or that there are missing or invalid parameters.  
+**Recommendation**: Ensure that your code gracefully handles all possible API exceptions.
+
+**Insufificent response code** 
+If the response code is not specific enough to determine the cause of the issue, you can also check the error messages included in the response in JSON format.  
 
 ```
 {
@@ -21,15 +30,12 @@ If the response code is not specific enough to determine the cause of the issue,
 }
 ```
 
-## Error Handling
+##  Unknown 5xx response code
 
-The API will raise exceptions in the event something failed, such as missing or invalid parameters. 
-We recommend writing code that gracefully handles all possible API exceptions.
+When you interact with the Meraki dasbhoard via API, you may want details of the requests that successfully reache the Meraki dashboard.  You can find such customer-facing telemetry using the [apiRequests](https://developer.cisco.com/meraki/api-v1/search/?q=api%20requests) operations. The telemetry information provides insight into most issues that can affect the API client experience.
 
-**Absence of 5xx errors in certain API responses**
+The response code of the [apiRequests](https://developer.cisco.com/meraki/api-v1/search/?q=api%20requests) operations are generally between 200 to 500.
 
-When interacting with the Meraki dashboard via API, the [apiRequests](https://developer.cisco.com/meraki/api-v1/search/?q=api%20requests) operations offer customer-facing telemetry that includes helpful detail about requests that successfully reached the Meraki dashboard. This includes API calls to known API operations with response codes >= 200 and <= 500. This telemetry can inform most issues that might affect the API client experience.
+Sometimes, the response code is outside this range, such as 502 or 504, and hence not part of the customer-facing telemetry. The response code indicates that the request is likely to have not reached the Meraki dashboard, and that there could be an issue between the API client and the Meraki dasbboard. 
 
-In some cases, API clients may receive response codes outside of this range, such as 502 or 504, which are not captured in the customer-facing telemetry. This happens usually if the requests did not successfully reach Meraki dashboard. This could indicate an issue between the API client and Meraki dashboard.
-
-Occasional API errors should not materially interfere with the operation of a well developed application. However, if you are encountering a substantial proportion of API errors with response codes >= 500, then please contact Meraki Support for assistance.
+Ocassional occurences of such API errors (where the response code is higher than 500) do not interfere with the operation of a well-developed application. However, if the number of such errors are high, contact Meraki Support for assistance.
