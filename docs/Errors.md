@@ -1,6 +1,6 @@
 APIs return response codes that help you understand the status of the API operation.  The response codes use standard HTTP status codes. 
 
-Here are examples of common response codes and their descriptions:
+Examples of common response codes and their descriptions are:
 
 ## Common Response Codes and Descriptions
 
@@ -32,8 +32,8 @@ If the response code is not specific enough to determine the cause of the issue,
 
 ##  Unknown 5xx response code
 
-When you interact with the Meraki dasbhoard via API, you can track requests that successfully reached the Meraki dashboard using the [apiRequests](https://developer.cisco.com/meraki/api-v1/search/?q=api%20requests) operations. The telemetry information provides insight into most issues that can affect the API client experience.
+When you interact with the Meraki dashboard via API, you can track requests that successfully reached the Meraki dashboard using the [apiRequests](https://developer.cisco.com/meraki/api-v1/search/?q=api%20requests) operations. The telemetry information provides insight into most issues that can affect the API client experience.
 
-While the response codes of the [apiRequests](https://developer.cisco.com/meraki/api-v1/search/?q=api%20requests) operations generally range between 200 to 500, some codes, such as 502 or 504, may fall out of this range and are not part of the customer-facing telemetry. These response codes indicate that the request likely did not reach the Meraki dashboard, suggesting an issue between the API client and the Meraki dasbboard. 
+The response codes of the [apiRequests](https://developer.cisco.com/meraki/api-v1/search/?q=api%20requests) operations generally range from 200 to 500. However, some codes, such as 502 or 504, may be outside this range. These are not part of the customer-facing telemetry. These response codes indicate that the request likely did not reach the Meraki dashboard, suggesting an issue between the API client and the Meraki dashboard. 
 
-Ocassional occurences of such API errors (response code is higher than 500) do not interfere with the well-developed application's operation. However, if the number of such errors are high, contact Meraki Support for assistance.
+Occasional occurrences of such API errors (response code is higher than 500) do not interfere with the well-developed application's operation. However, if the number of such errors is high, contact Meraki Support for assistance.
