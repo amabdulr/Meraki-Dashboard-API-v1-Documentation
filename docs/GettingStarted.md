@@ -331,12 +331,7 @@ Successful HTTP Status: 200
 >>> print(response)
 [{'mac': '00:11:22:33:44:55', 'name': 'My Switch 1', 'network': {'id': 'L_24329156'}, 'productType': 'switch', 'serial': '{serial1}', 'tags': ['example', 'switch'], 'uplinks': [{'interface': 'man1', 'addresses': [{'protocol': 'ipv4', 'address': '10.0.1.2', 'gateway': '10.0.1.1', 'assignmentMode': 'dynamic', 'nameservers': {'addresses': ['208.67.222.222', '208.67.220.220']}, 'public': {'address': '78.11.19.49'}}, {'protocol': 'ipv6', 'address': '2600:1700:ae0::c8ff:fe1e:12d2', 'gateway': 'fe80::fe1b:202a', 'assignmentMode': 'dynamic', 'nameservers': {'addresses': ['::', '::']}, 'public': {'address': None}}]}]}, {'mac': '00:11:22:33:44:55', 'name': 'My Switch 2', 'network': {'id': 'L_24329156'}, 'productType': 'switch', 'serial': '{serial2}', 'tags': ['example', 'switch'], 'uplinks': [{'interface': 'man1', 'addresses': [{'protocol': 'ipv4', 'address': '10.0.1.3', 'gateway': '10.0.1.1', 'assignmentMode': 'dynamic', 'nameservers': {'addresses': ['208.67.222.222', '208.67.220.220']}, 'public': {'address': '78.11.19.49'}}, {'protocol': 'ipv6', 'address': '2600:1700:ae0:f84c::9c2f', 'gateway': 'fe80::aa46::202a', 'assignmentMode': 'dynamic', 'nameservers': {'addresses': ['::', '::']}, 'public': {'address': None}}]}]}]
 ```
-Perfect! Here's the fully enhanced version of the task including:
 
-- The **explicit GET request formats** for single and multiple devices
-- **Example `curl` commands**
-- **Example Python SDK code**
-- **Example API responses**
 
 Formatted in **Task Information Type** as per your guidelines:
 
@@ -352,8 +347,8 @@ Use this task to view the public and private uplink addresses for devices using 
 - Ensure you have your **Meraki API key** ready.
 
 Follow these steps to get uplink addresses for specific devices:
-1. Send a GET request to the `/organizations/:organizationId/devices/uplinks/addresses/byDevice` endpoint to retrieve uplink information.
-2. Use the following formats for GET requests:
+1. Send a GET request to the `/organizations/:organizationId/devices/uplinks/addresses/byDevice` endpoint to retrieve uplink information. For more information, see [Get organization devices uplink addresses by device](##!get-organization-devices-uplinks-addresses-by-device)
+2. Include serials[] query parameters for the devices. Use the following formats for GET requests:
    - For a single device:
      ```
      GET /organizations/:organizationId/devices/uplinks/addresses/byDevice?serials[]={serial}
@@ -371,18 +366,20 @@ Follow these steps to get uplink addresses for specific devices:
    - For multiple devices:
      ```bash
      curl https://api.meraki.com/api/v1/organizations/:organizationId/devices/uplinks/addresses/byDevice?serials[]={serial1}&serials[]={serial2} \
-       -L -H 'Authorization: Bearer {MERAKI-API-KEY}'
+  -L -H 'Authorization: Bearer {MERAKI-API-KEY}'
      ```
 4. Alternatively, use the Meraki Python SDK to perform the request:
    - For one device:
      ```python
-     import meraki
-     dashboard = meraki.DashboardAPI(API_KEY)
-     response = dashboard.organizations.getOrganizationDevicesUplinksAddressesByDevice(organizationId, serials=["{serial}"])
+import meraki
+dashboard = meraki.DashboardAPI(API_KEY)
+response = dashboard.organizations.getOrganizationDevicesUplinksAddressesByDevice({organizationId}, serials=["{serial}"])
      ```
    - For two devices:
      ```python
-     response = dashboard.organizations.getOrganizationDevicesUplinksAddressesByDevice(organizationId, serials=["{serial1}", "{serial2}"])
+     import meraki
+     dashboard = meraki.DashboardAPI(API_KEY)
+     response = dashboard.organizations.getOrganizationDevicesUplinksAddressesByDevice({organizationId}, serials=["{serial1}", "{serial2}"])
      ```
 5. Review the JSON response to find each device’s uplink address under the `uplinks` field, including:
    - Interface name
