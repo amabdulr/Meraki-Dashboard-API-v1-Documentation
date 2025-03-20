@@ -1,85 +1,143 @@
 # Getting started with Meraki dashboard API
 
-The Meraki Dashboard API is a programming interface that allows users to interact with and manage their Meraki networks programmatically. It provides access to various operations such as retrieving organizations, networks, devices, and device uplink addresses. 
+A Meraki dashboard API is a programming interface that
+- enables users to interact with and manage Meraki networks programmatically,
+- provides access to operations such as retrieving organizations, networks, devices, and device uplink addresses, and
+- supports multiple authentication methods, including bearer tokens, for secure access.
 
-The API supports multiple authentication methods, including bearer tokens, and offers flexibility in accessing data related to network configurations and status.
+**Examples of operations available through the API:**
+- Listing all organizations and networks
+- Viewing device details and uplink addresses
 
-# Authorization using bearer token 
-The Meraki Dashboard API requires authorization using a Bearer token (or BEARER_TOKEN), which can be
-- the Meraki API Key, or
-- the OAuth access token.
+**Definitions:**
+- **Bearer token**: A secure access key used to authorize requests to the Meraki Dashboard API. It can be a Meraki API key or an OAuth access token.
 
-Ensure your request header includes:
 
-```JSON
-{
- "Authorization": "Bearer <BEARER_TOKEN>"
-}
-```
+## Authorize API requests using a bearer token
 
-```curl
-curl https://api.meraki.com/api/v1/organizations \
-  -H 'Authorization: Bearer {BEARER_TOKEN}'
-```
+Use this task to setup secure access to the Meraki Dashboard API by authorizing requests using a Bearer token.
 
-```Python
-import meraki
-dashboard = meraki.DashboardAPI(BEARER_TOKEN)
-```
+All API requests to the Meraki Dashboard require an authorization header with a valid Bearer token. This token can be either:
+- a **Meraki API key**, or
+- an **OAuth access token**.
 
-For more information, see [Authorization](#!authorization).
+**Before you begin**:
+- Obtain a valid **Bearer token** (Meraki API key or OAuth token).
+
+Follow these steps to authorize your API requests:
+1. Include the `Authorization` header in your API request with the format:
+   ```json
+   {
+     "Authorization": "Bearer <BEARER_TOKEN>"
+   }
+   ```
+
+2. Use `curl` to send an authorized request:
+   ```bash
+   curl https://api.meraki.com/api/v1/organizations \
+     -H 'Authorization: Bearer {BEARER_TOKEN}'
+   ```
+
+3. Alternatively, use the Meraki Python SDK and provide the token during initialization:
+   ```python
+   import meraki
+   dashboard = meraki.DashboardAPI(BEARER_TOKEN)
+   ```
+
+**Additional information**:
+- All endpoints require this authorization header for access.
+- For more information, see [Authorization](#!authorization).
 
 # Using Postman for Meraki API 
 
-Use Postman to explore and interact with the Meraki API.  
+Use this task to interact with the Meraki Dashboard API using the Postman interface.
 
-**Before you begin**: Ensure you have installed Postman and have your Bearer token ready. 
+Postman is a powerful tool that allows you to send API requests, inspect responses, and test endpoints without writing code.
+
+**Before you begin**:
+- Ensure **Postman** is installed on your system.
+- Ensure you have your **Meraki API key** (Bearer Token) ready.
+
 Follow these steps to use Postman:
 
-- **Step 1:** Go to [Postman and our Postman collection](https://documenter.getpostman.com/view/897512/SzYXYfmJ).
-- **Step 2:** Import the collection by clicking the 'Run in Postman' button.
-- **Step 3:** Use your Bearer token for authorization. (comment: add link to the authorization section)
-- **Step 4:** Explore the endpoints available in the collection.
+1. Go to [Postman and our Postman collection](https://documenter.getpostman.com/view/897512/SzYXYfmJ).
+2. Import the collection by clicking the **Run in Postman** button.
+3. Set up your **Bearer token** for authorization.
+   - For guidance, refer to the **Authorization** section in Postman. (comment for Amel: add link to the authorization section)
+4. Explore and test the endpoints available in the collection.
+
+**Additional information**:
+- You can send requests for any API endpoint directly from Postman and visualize the responses instantly.
+- Use environment variables in Postman to store your API key, organization ID, or network ID for convenience. 
 
 **Result:** You can now interact with Meraki networks using Postman. 
 
 # Using Python library for Meraki API 
 
-Use the Meraki Python library to interact with the API programmatically.  
+Use this task to interact with the Meraki Dashboard API programmatically using the official Meraki Python library.
 
-**Before you begin**: Ensure Python and pip are installed on your system.  
+The Meraki Python SDK simplifies the process of sending requests and handling responses when working with the Meraki Dashboard API.
+
+**Before you begin**:
+- Ensure **Python** and **pip** are installed on your system.
+- Ensure you have your **Meraki API key** (Bearer Token) ready.
 
 Follow these steps to use the Python library:
+1. Install the Meraki library using pip:
+   ```bash
+   pip install meraki
+   ```
 
-- **Step 1:** Install the library using the command `pip install meraki`.
-- **Step 2:** Import the library in your Python script with `import meraki`.
-- **Step 3:** Initialize the Dashboard API with `dashboard = meraki.DashboardAPI(BEARER_TOKEN)`.
+2. Import the Meraki library in your Python script:
+   ```python
+   import meraki
+   ```
 
-**Result:** You can now perform API operations within your Python scripts.
+3. Initialize the Meraki Dashboard API client:
+   ```python
+   dashboard = meraki.DashboardAPI(BEARER_TOKEN)
+   ```
+
+**Additional information**:
+- You can now use the `dashboard` object to access and invoke any available API endpoint in your scripts.
+- For example, to get a list of organizations:
+  ```python
+  response = dashboard.organizations.getOrganizations()
+  print(response)
+  ```
+
+**Result**: You are now ready to perform Meraki API operations directly within your Python scripts using a simple, structured, and reusable codebase.
 
 
 # Finding organization ID 
 
-Retrieve your organization ID to perform further operations.  
+Many Meraki API operations require the organization ID as a path or query parameter. Use this task to find your organization ID if you don’t already know it.
+
+**Before you begin**:
+- Ensure you have your **Meraki API key** (Bearer Token) ready.
 
 Follow these steps to get your organization ID:
 
-- **Step 1:** List the organizations you have access to. Send a GET request to the `/organizations` endpoint. For more information, see [Get Organization](##!get-organizations) API.
+1. Send a GET request to the `/organizations` endpoint to list all organizations you have access to. For more information, see [Get Organization](##!get-organizations) API.
+   ```
+   GET /organizations
+   ```
+2. Use `curl` to send the API request:
+   ```cURL
+   curl https://api.meraki.com/api/v1/organizations \
+     -L -H 'Authorization: Bearer {MERAKI-API-KEY}'
+   ```
+3. Alternatively, use the Meraki Python SDK to send the request:
+   ```Python
+   import meraki
+   dashboard = meraki.DashboardAPI(API_KEY)
+   response = dashboard.organizations.getOrganizations()
+   ```
+4. Retrieve the value of the `id` field from the response. This is your **organization identifier**.
 
-### Example Request:
+**Additional information**:
+- The organization ID is required for most API endpoints and must be noted before you proceed with any organization- or network-level operations.
 
-```cURL
-curl https://api.meraki.com/api/v1/organizations \
-  -L -H 'Authorization: Bearer {MERAKI-API-KEY}'
-```
-
-```Python
-import meraki
-dashboard = meraki.DashboardAPI(API_KEY)
-response = dashboard.organizations.getOrganizations()
-```
-
-- **Step 2:** Retrieve the `id` from the response. This `id` is organization’s identifier.
 
 ### Example Response:  
 
@@ -92,6 +150,7 @@ Successful HTTP Status: 200
   }
 ]
 ```
+### Example Python output:
 
 ```Python
 >>> print(response)
@@ -99,36 +158,39 @@ Successful HTTP Status: 200
 ```
 **Note:** Irrelevant response attributes are omitted from the examples for brevity.
 
-**Result:** You have your organization ID for subsequent API requests. 
+**Result**: You will obtain the organization ID needed to perform API operations such as listing devices, networks, or uplink addresses.
 
-**Post-requisite:** Note the organization ID for subsequent API requests.  
+**Post-requisites**: Note the organization ID and keep it handy for all subsequent API requests that require it as a path or query parameter.
 
 # Finding network ID 
-List the networks of your organization using the organization ID.
 
-**Before You Begin:** Ensure you have the organization ID. 
+Use this task to list all networks under your organization so you can use a specific network ID in subsequent API requests.
+
+**Before you begin**:
+- Ensure you have the **organization ID**.
+- Ensure you have your **Meraki API key** (Bearer Token) ready.
 
 Follow these steps to get your network ID:
+1. Send a GET request to the `/organizations/:organizationId/networks` endpoint to retrieve network information. For more information, see [Get Organization Networks](##!get-organization-networks).
+2. Include your organization ID and Bearer Token in the request headers.
+     ```
+       `GET /organizations/:organizationId/networks`
+     ```
+3. Use `curl` to send the API request: 
+    ```cURL
+       curl https://api.meraki.com/api/v1/organizations/{organizationId}/networks \
+         -L -H 'Authorization: Bearer {MERAKI-API-KEY}'
+    ```
+4. Alternatively, use the Meraki Python SDK to send the request:
+    ```Python
+       import meraki
+       dashboard = meraki.DashboardAPI(API_KEY)
+       response = dashboard.organizations.getOrganizationNetworks(org_id)
+    ```
+5. Copy the value of the `id` field from the response. This is the **network identifier**.
+   
+**Result**: You obtain the network identifier (network ID) needed for network-specific operations in future API requests.
 
-- **Step 1:** Send a GET request to the /organizations/:organizationId/networks endpoint. For more information, see [Get Organization Networks](##!get-organization-networks).
-- **Step 2:** Provide your organization ID and Bearer Token in the request.
-
-### Example Request: 
-
-`GET /organizations/:organizationId/networks`
-
-```cURL
-curl https://api.meraki.com/api/v1/organizations/{organizationId}/networks \
-  -L -H 'Authorization: Bearer {MERAKI-API-KEY}'
-```
-
-```Python
-import meraki
-dashboard = meraki.DashboardAPI(API_KEY)
-response = dashboard.organizations.getOrganizationNetworks(org_id)
-```
-
-- **Step 3:** Copy the `id  from the response. This is the network identifier. 
 
 ### Example Response:
 
@@ -150,46 +212,44 @@ Successful HTTP Status: 200
 >>> print(response)
 [{'id': 'L_646829496481105433', 'organizationId': '549236', 'name': 'DevNet Sandbox Always on READ ONLY', 'timeZone': 'America/Los_Angeles', 'tags': None, 'productTypes': ['appliance', 'switch', 'wireless'], 'type': 'combined', 'disableMyMerakiCom': False, 'disableRemoteStatusPage': True}]
 ```
-**Result:** You obtain the network identifier for network-specific operations.
+**Additional information**:
+- The network ID is required for various API endpoints that operate at the network level.
+- You can use this identifier to filter devices or perform configuration operations on a specific network.
 
-**Post-requisite:** Note the network identifier for subsequent API requests.
+**Post-requisites**: Note the network ID for use in any follow-up tasks that require it as a path or query parameter.
+  
+## Find devices and their serial numbers 
 
-# Finding devices and serials 
-List the devices in your organization to obtain their serial numbers.
+Use this task to list all devices in your organization and extract their serial numbers for further API operations.
 
-**Before you begin:** 
-Ensure you have
-- the organization ID, and the
-- (optional) the network identifier. This parameter helps you narrow down the devices to a specific network in your organization. 
+**Before you begin**:
+- Ensure you have the **organization ID**.
+- Optionally, obtain the **network identifier** to filter devices by a specific network.
+- Ensure you have your **Meraki API key** (Bearer Token) ready.
 
-Follow these steps to find devices and their serials:
+Follow these steps to find devices and their serial numbers:
 
-
-1. Send a GET request to the /organizations/:organizationId/devices endpoint.
-2. Include your organization identifier and API key in the request.
-   
-    ### Example request:
-    
+1. Send a GET request to the `/organizations/:organizationId/devices` endpoint.
+2. Include your organization identifier and API key in the request headers.   
+     ```
     `GET /organizations/:organizationId/devices`
-    
+     ```
+3. Use `curl` to send the API request:
     ```cURL
     curl https://api.meraki.com/api/v1/organizations/{organizationId}/devices \
       -L -H 'Authorization: Bearer {BEARER_TOKEN}'
     ```
-    
+4. Alternatively, use the Meraki Python SDK to send the request:
     ```Python
     import meraki
     dashboard = meraki.DashboardAPI(BEARER_TOKEN)
     response = dashboard.organizations.getOrganizationDevices({organizationId})
     ```
-**Note:** This example does not use the network identifier parameter.
+5. Examine the response and note the value of the `serial` field for each device.
 
-3. Note the value of the `serial` field of each device from the response.
-   
+**Result**: You will obtain the serial numbers and detailed metadata of each device in your organization or specific network.
 
 ### Example response:
-
-
 ```JSON
 Successful HTTP Status: 200
 [
@@ -210,15 +270,17 @@ Successful HTTP Status: 200
     }
 ]
 ```
-
+### Example Python output:
 ```Python
 >>> print(response)
 [{ 'name': 'My AP', 'lat': 37.4180951010362, 'lng': -122.098531723022, 'address': '1600 Pennsylvania Ave', 'notes': 'My AP note', 'tags': [ 'recently-added' ], 'networkId': 'N_24329156', 'serial': 'Q234-ABCD-5678', 'model': 'MR34', 'mac': '00:11:22:33:44:55', 'lanIp': '1.2.3.4', 'firmware': 'wireless-25-14', 'productType': 'wireless'}]
 ```
 
-**Result**: You have the serial numbers of each device in your organization or your network. 
+**Post-requisites**: Use the serial number field in future requests requiring a device serial as a query or path parameter. If you have multiple devices, record the serial numbers of each one accordingly.
 
-**Post-requisite:** Note the value of the `serial` field. You can use this value in requests requiring a serial number as a path or query parameter. If you have two devices in your organization or network, note the values of both devices.
+**Additional information**:
+- You can optionally filter by a network identifier if you want to narrow the results to a specific network.
+- This example does not use the network identifier parameter.
 
 # Retrieve uplink addresses for specific devices 
 
@@ -227,12 +289,12 @@ Use this task to view the public and private uplink addresses for devices using 
 **Before You Begin:** 
 - Ensure you have **the organization ID**
 - Optionally, have the **serial numbers** of devices whose uplink addresses you want to retrieve..
-- Ensure you have your **Meraki API key** ready.
+- Ensure you have your **Meraki API key** (Bearer Token) ready.
  
 
 Follow these steps to get uplink addresses for specific devices:
 
-1. Send a GET request to the /organizations/:organizationId/devices/uplinks/addresses/byDevice endpoint. For more information, see [Get organization devices uplink addresses by device](##!get-organization-devices-uplinks-addresses-by-device)
+1. Send a GET request to the `/organizations/:organizationId/devices/uplinks/addresses/byDevice` endpoint. For more information, see [Get organization devices uplink addresses by device](##!get-organization-devices-uplinks-addresses-by-device)
 2. Include serials[] query parameters for the devices. Use the following formats for GET requests:
    - For a single device:
      ```
