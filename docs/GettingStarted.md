@@ -366,20 +366,18 @@ Follow these steps to get uplink addresses for specific devices:
    - For multiple devices:
      ```bash
      curl https://api.meraki.com/api/v1/organizations/:organizationId/devices/uplinks/addresses/byDevice?serials[]={serial1}&serials[]={serial2} \
-  -L -H 'Authorization: Bearer {MERAKI-API-KEY}'
+       -L -H 'Authorization: Bearer {MERAKI-API-KEY}'
      ```
 4. Alternatively, use the Meraki Python SDK to perform the request:
    - For one device:
      ```python
-import meraki
-dashboard = meraki.DashboardAPI(API_KEY)
-response = dashboard.organizations.getOrganizationDevicesUplinksAddressesByDevice({organizationId}, serials=["{serial}"])
+     import meraki
+     dashboard = meraki.DashboardAPI(API_KEY)
+     response = dashboard.organizations.getOrganizationDevicesUplinksAddressesByDevice(organizationId, serials=["{serial}"])
      ```
    - For two devices:
      ```python
-     import meraki
-     dashboard = meraki.DashboardAPI(API_KEY)
-     response = dashboard.organizations.getOrganizationDevicesUplinksAddressesByDevice({organizationId}, serials=["{serial1}", "{serial2}"])
+     response = dashboard.organizations.getOrganizationDevicesUplinksAddressesByDevice(organizationId, serials=["{serial1}", "{serial2}"])
      ```
 5. Review the JSON response to find each device’s uplink address under the `uplinks` field, including:
    - Interface name
