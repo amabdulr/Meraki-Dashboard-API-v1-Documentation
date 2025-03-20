@@ -235,9 +235,13 @@ Follow these steps to get uplink addresses for specific devices:
 1. Send a GET request to the /organizations/:organizationId/devices/uplinks/addresses/byDevice endpoint. For more information, see [Get organization devices uplink addresses by device](##!get-organization-devices-uplinks-addresses-by-device)
 2. Include serials[] query parameters for the devices. Use the following formats for GET requests:
    - For a single device:
-        `GET /organizations/:organizationId/devices/uplinks/addresses/byDevice?serials[]={serial}`
+     ```
+     GET /organizations/:organizationId/devices/uplinks/addresses/byDevice?serials[]={serial}
+     ```
    - For multiple devices:
-        `GET /organizations/:organizationId/devices/uplinks/addresses/byDevice?serials[]={serial1}&serials[]={serial1}&serials[]={serial2}`
+     ```
+     GET /organizations/:organizationId/devices/uplinks/addresses/byDevice?serials[]={serial1}&serials[]={serial1}&serials[]={serial2}
+     ```
 3. Use `curl` to send the API request:
    - For a single device:
         ```cURL
@@ -261,11 +265,7 @@ Follow these steps to get uplink addresses for specific devices:
         dashboard = meraki.DashboardAPI(API_KEY)
         response = dashboard.organizations.getOrganizationDevicesUplinksAddressesByDevice({organizationId}, serials=["{serial1}", "{serial2}"])
         ```
-
-
 **Result**: You will obtain the uplink IP addresses (both public and private), gateways, assignment modes, and DNS configuration details for all specified devices.
-
-**Post-requisites**: Use the obtained data for documentation, performance monitoring, troubleshooting, or network configuration tasks.
 
 ### Example response for one device:
 
