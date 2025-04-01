@@ -81,13 +81,13 @@ The Meraki Python SDK simplifies the process of sending requests and handling re
 **Before you begin**:
 - Ensure **Python** and **pip** are installed on your system.
 - Ensure you have your **Meraki API key** (Bearer Token) ready.
+- For any setup troubleshooting issues, see [Python Library](https://developer.cisco.com/meraki/api-v1/python/#documentation).
 
 Follow these steps to use the Python library:
 1. Install the Meraki library using pip:
    ```bash
    pip install meraki
    ```
-
 2. Import the Meraki library in your Python script:
    ```python
    import meraki
@@ -118,7 +118,7 @@ Many Meraki API operations require the organization ID as a path or query parame
 
 Follow these steps to get your organization ID:
 
-1. Send a GET request to the `/organizations` endpoint to list all organizations you have access to. For more information, see [Get Organization](##!get-organizations) API.
+1. Send a GET request to the `/organizations` endpoint to list all organizations you have access to. For more information, see [Get Organization](https://developer.cisco.com/meraki/api-v1/get-organizations/) API.
    ```
    GET /organizations
    ```
@@ -171,7 +171,7 @@ Use this task to list all networks under your organization so you can use a spec
 - Ensure you have your **Meraki API key** (Bearer Token) ready.
 
 Follow these steps to get your network ID:
-1. Send a GET request to the `/organizations/:organizationId/networks` endpoint to retrieve network information. For more information, see [Get Organization Networks](##!get-organization-networks).
+1. Send a GET request to the `/organizations/:organizationId/networks` endpoint to retrieve network information. For more information, see [Get Organization Networks](https://developer.cisco.com/meraki/api-v1/get-organization-networks).
 2. Include your organization ID and Bearer Token in the request headers.
      ```
        `GET /organizations/:organizationId/networks`
