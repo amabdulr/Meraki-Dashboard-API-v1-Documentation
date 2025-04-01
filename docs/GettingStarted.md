@@ -171,10 +171,10 @@ Use this task to list all networks under your organization so you can use a spec
 - Ensure you have your **bearer Token** ready.
 
 Follow these steps to get your network ID:
-1. Send a GET request to the `/organizations/:organizationId/networks` endpoint to retrieve network information. For more information, see [Get Organization Networks](https://developer.cisco.com/meraki/api-v1/get-organization-networks).
+1. Send a GET request to the `/organizations/{organizationId}/networks` endpoint to retrieve network information. For more information, see [Get Organization Networks](https://developer.cisco.com/meraki/api-v1/get-organization-networks).
 2. Include your organization ID and Bearer Token in the request headers.
      ```
-       `GET /organizations/:organizationId/networks`
+       `GET /organizations/{organizationId}/networks`
      ```
 3. Use `curl` to send the API request: 
     ```cURL
@@ -185,7 +185,7 @@ Follow these steps to get your network ID:
     ```Python
        import meraki
        dashboard = meraki.DashboardAPI(BEARER_TOKEN)
-       response = dashboard.organizations.getOrganizationNetworks(org_id)
+       response = dashboard.organizations.getOrganizationNetworks(organizationId)
     ```
 5. Copy the value of the `id` field from the response. This is the **network identifier**.
    
@@ -229,10 +229,10 @@ Use this task to list all devices in your organization and extract their serial 
 
 Follow these steps to find devices and their serial numbers:
 
-1. Send a GET request to the `/organizations/:organizationId/devices` endpoint. For more information, see [Get Organization Devices](https://developer.cisco.com/meraki/api-v1/get-organization-devices/)
+1. Send a GET request to the `/organizations/{organizationId}/devices` endpoint. For more information, see [Get Organization Devices](https://developer.cisco.com/meraki/api-v1/get-organization-devices/)
 2. Include your organization identifier and API key in the request headers.   
      ```
-    `GET /organizations/:organizationId/devices`
+    `GET /organizations/{organizationId}/devices`
      ```
 3. Use `curl` to send the API request:
     ```cURL
@@ -294,25 +294,25 @@ Use this task to view the public and private uplink addresses for devices using 
 
 Follow these steps to get uplink addresses for specific devices:
 
-1. Send a GET request to the `/organizations/:organizationId/devices/uplinks/addresses/byDevice` endpoint. For more information, see [Get organization devices uplink addresses by device](https://developer.cisco.com/meraki/api-v1/get-organization-devices-uplinks-addresses-by-device).
+1. Send a GET request to the `/organizations/{organizationId}/devices/uplinks/addresses/byDevice` endpoint. For more information, see [Get organization devices uplink addresses by device](https://developer.cisco.com/meraki/api-v1/get-organization-devices-uplinks-addresses-by-device).
 2. Include serials[] query parameters for the devices. Use the following formats for GET requests:
    - For a single device:
      ```
-     GET /organizations/:organizationId/devices/uplinks/addresses/byDevice?serials[]={serial}
+     GET /organizations/{organizationId}/devices/uplinks/addresses/byDevice?serials[]={serial}
      ```
    - For multiple devices:
      ```
-     GET /organizations/:organizationId/devices/uplinks/addresses/byDevice?serials[]={serial1}&serials[]={serial1}&serials[]={serial2}
+     GET /organizations/{organizationId}/devices/uplinks/addresses/byDevice?serials[]={serial1}&serials[]={serial1}&serials[]={serial2}
      ```
 3. Use `curl` to send the API request:
    - For single devices:
         ```cURL
-        curl https://api.meraki.com/api/v1/organizations/:organizationId/devices/uplinks/addresses/byDevice?serials[]={serial} \
+        curl https://api.meraki.com/api/v1/organizations/{organizationId}/devices/uplinks/addresses/byDevice?serials[]={serial} \
           -L -H 'Authorization: Bearer {BEARER_TOKEN}'
         ```   
    - For a multiple device:
         ```cURL
-        curl https://api.meraki.com/api/v1/organizations/:organizationId/devices/uplinks/addresses/byDevice?serials[]={serial1}&serials[]={serial2} \
+        curl https://api.meraki.com/api/v1/organizations/{organizationId}/devices/uplinks/addresses/byDevice?serials[]={serial1}&serials[]={serial2} \
           -L -H 'Authorization: Bearer {BEARER_TOKEN}'
         ```
 5. Alternatively, use the Meraki Python SDK to perform the request:
