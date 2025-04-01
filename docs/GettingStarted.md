@@ -17,7 +17,7 @@ A Meraki dashboard API is a programming interface that
 
 Use this task to setup secure access to the Meraki Dashboard API by authorizing requests using a Bearer token.
 
-All API requests to the Meraki Dashboard require an authorization header with a valid Bearer token. This token can be either:
+All API requests to the Meraki Dashboard require an authorization header with a valid bearer token. This token can be either:
 - a **Meraki API key**, or
 - an **OAuth access token**.
 
@@ -56,14 +56,14 @@ Postman is a powerful tool that allows you to send API requests, inspect respons
 
 **Before you begin**:
 - Ensure **Postman** is installed on your system.
-- Ensure you have your **Meraki API key** (Bearer Token) ready.
+- Ensure you have your bearer token ready.
 
 Follow these steps to use Postman:
 
 1. Go to [Postman and our Postman collection](https://documenter.getpostman.com/view/897512/SzYXYfmJ).
 2. Import the collection by clicking the **Run in Postman** button.
 3. Set up your **Bearer token** for authorization.
-   - For guidance, refer to the **Authorization** section in Postman. (comment for Amel: add link to the authorization section)
+   - For guidance, refer to the **Authorization** section in Postman. For more information, see [Authorization](https://developer.cisco.com/meraki/api-v1/authorization/).
 4. Explore and test the endpoints available in the collection.
 
 **Additional information**:
