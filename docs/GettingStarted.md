@@ -320,7 +320,8 @@ Follow these steps to get uplink addresses for specific devices:
         ```Python
         import meraki
         dashboard = meraki.DashboardAPI(BEARER_TOKEN)
-        response = dashboard.organizations.getOrganizationDevicesUplinksAddressesByDevice({organizationId}, serials=["{serial}"])        ```
+        response = dashboard.organizations.getOrganizationDevicesUplinksAddressesByDevice({organizationId}, serials=["{serial}"])
+        ```
    - For multiple devices:
         ```Python
         import meraki
