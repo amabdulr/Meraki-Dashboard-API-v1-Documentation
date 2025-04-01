@@ -15,7 +15,7 @@ A Meraki dashboard API is a programming interface that
 
 ## Authorize API requests using a bearer token
 
-Use this task to setup secure access to the Meraki Dashboard API by authorizing requests using a Bearer token.
+Use this task to setup secure access to the Meraki Dashboard API by authorizing requests using a bearer token.
 
 All API requests to the Meraki Dashboard require an authorization header with a valid bearer token. This token can be either:
 - a **Meraki API key**, or
@@ -80,7 +80,7 @@ The Meraki Python SDK simplifies the process of sending requests and handling re
 
 **Before you begin**:
 - Ensure **Python** and **pip** are installed on your system.
-- Ensure you have your **Meraki API key** (Bearer Token) ready.
+- Ensure you have your Bearer token ready.
 - For any setup troubleshooting issues, see [Python Library](https://developer.cisco.com/meraki/api-v1/python/#documentation).
 
 Follow these steps to use the Python library:
@@ -114,7 +114,7 @@ Follow these steps to use the Python library:
 Many Meraki API operations require the organization ID as a path or query parameter. Use this task to find your organization ID if you don’t already know it.
 
 **Before you begin**:
-- Ensure you have your **Meraki API key** (Bearer Token) ready.
+- Ensure you have your **bearer token** ready.
 
 Follow these steps to get your organization ID:
 
@@ -125,12 +125,12 @@ Follow these steps to get your organization ID:
 2. Use `curl` to send the API request:
    ```cURL
    curl https://api.meraki.com/api/v1/organizations \
-     -L -H 'Authorization: Bearer {MERAKI-API-KEY}'
+     -L -H 'Authorization: Bearer {BEARER_TOKEN}'
    ```
 3. Alternatively, use the Meraki Python SDK to send the request:
    ```Python
    import meraki
-   dashboard = meraki.DashboardAPI(API_KEY)
+   dashboard = meraki.DashboardAPI(BEARER_TOKEN)
    response = dashboard.organizations.getOrganizations()
    ```
 4. Retrieve the value of the `id` field from the response. This is your **organization identifier**.
@@ -168,7 +168,7 @@ Use this task to list all networks under your organization so you can use a spec
 
 **Before you begin**:
 - Ensure you have the **organization ID**.
-- Ensure you have your **Meraki API key** (Bearer Token) ready.
+- Ensure you have your **bearer Token** ready.
 
 Follow these steps to get your network ID:
 1. Send a GET request to the `/organizations/:organizationId/networks` endpoint to retrieve network information. For more information, see [Get Organization Networks](https://developer.cisco.com/meraki/api-v1/get-organization-networks).
@@ -179,12 +179,12 @@ Follow these steps to get your network ID:
 3. Use `curl` to send the API request: 
     ```cURL
        curl https://api.meraki.com/api/v1/organizations/{organizationId}/networks \
-         -L -H 'Authorization: Bearer {MERAKI-API-KEY}'
+         -L -H 'Authorization: Bearer {BEARER_TOKEN}'
     ```
 4. Alternatively, use the Meraki Python SDK to send the request:
     ```Python
        import meraki
-       dashboard = meraki.DashboardAPI(API_KEY)
+       dashboard = meraki.DashboardAPI(BEARER_TOKEN)
        response = dashboard.organizations.getOrganizationNetworks(org_id)
     ```
 5. Copy the value of the `id` field from the response. This is the **network identifier**.
@@ -225,7 +225,7 @@ Use this task to list all devices in your organization and extract their serial 
 **Before you begin**:
 - Ensure you have the **organization ID**.
 - Optionally, obtain the **network identifier** to filter devices by a specific network.
-- Ensure you have your **Meraki API key** (Bearer Token) ready.
+- Ensure you have your **bearer token** ready.
 
 Follow these steps to find devices and their serial numbers:
 
@@ -289,7 +289,7 @@ Use this task to view the public and private uplink addresses for devices using 
 **Before You Begin:** 
 - Ensure you have **the organization ID**
 - Optionally, have the **serial numbers** of devices whose uplink addresses you want to retrieve..
-- Ensure you have your **Meraki API key** (Bearer Token) ready.
+- Ensure you have your **bearer token** ready.
  
 
 Follow these steps to get uplink addresses for specific devices:
@@ -308,23 +308,23 @@ Follow these steps to get uplink addresses for specific devices:
    - For a single device:
         ```cURL
         curl https://api.meraki.com/api/v1/organizations/:organizationId/devices/uplinks/addresses/byDevice?serials[]={serial1}&serials[]={serial2} \
-          -L -H 'Authorization: Bearer {MERAKI-API-KEY}'
+          -L -H 'Authorization: Bearer {BEARER_TOKEN}'
         ```
    - For multiple devices:
         ```cURL
         curl https://api.meraki.com/api/v1/organizations/:organizationId/devices/uplinks/addresses/byDevice?serials[]={serial} \
-          -L -H 'Authorization: Bearer {MERAKI-API-KEY}'
+          -L -H 'Authorization: Bearer {BEARER_TOKEN}'
         ```
 4. Alternatively, use the Meraki Python SDK to perform the request:
    - For a single device:
         ```Python
         import meraki
-        dashboard = meraki.DashboardAPI(API_KEY)
+        dashboard = meraki.DashboardAPI(BEARER_TOKEN)
         response = dashboard.organizations.getOrganizationDevicesUplinksAddressesByDevice({organizationId}, serials=["{serial}"])        ```
    - For multiple devices:
         ```Python
         import meraki
-        dashboard = meraki.DashboardAPI(API_KEY)
+        dashboard = meraki.DashboardAPI(BEARER_TOKEN)
         response = dashboard.organizations.getOrganizationDevicesUplinksAddressesByDevice({organizationId}, serials=["{serial1}", "{serial2}"])
         ```
 **Result**: You will obtain the uplink IP addresses (both public and private), gateways, assignment modes, and DNS configuration details for all specified devices.
