@@ -138,7 +138,12 @@ Follow these steps to get your organization ID:
 **Additional information**:
 - The organization ID is required for most API endpoints and must be noted before you proceed with any organization- or network-level operations.
 
+### Example CURL Request:  
 
+```cURL
+   curl https://api.meraki.com/api/v1/organizations \
+     -L -H 'Authorization: Bearer 75dd5334bef4d2bc96f26138c163c0a3fa0b5ca6'
+```
 ### Example Response:  
 
 ```JSON
