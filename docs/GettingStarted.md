@@ -294,7 +294,7 @@ Use this task to view the public and private uplink addresses for devices using 
 
 Follow these steps to get uplink addresses for specific devices:
 
-1. Send a GET request to the `/organizations/:organizationId/devices/uplinks/addresses/byDevice` endpoint. For more information, see [Get organization devices uplink addresses by device](https://developer.cisco.com/meraki/api-v1/get-organization-devices-uplinks-addresses-by-device)
+1. Send a GET request to the `/organizations/:organizationId/devices/uplinks/addresses/byDevice` endpoint. For more information, see [Get organization devices uplink addresses by device](https://developer.cisco.com/meraki/api-v1/get-organization-devices-uplinks-addresses-by-device).
 2. Include serials[] query parameters for the devices. Use the following formats for GET requests:
    - For a single device:
      ```
