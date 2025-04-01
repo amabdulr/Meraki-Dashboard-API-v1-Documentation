@@ -305,17 +305,17 @@ Follow these steps to get uplink addresses for specific devices:
      GET /organizations/:organizationId/devices/uplinks/addresses/byDevice?serials[]={serial1}&serials[]={serial1}&serials[]={serial2}
      ```
 3. Use `curl` to send the API request:
-   - For a single device:
+   - For single devices:
+        ```cURL
+        curl https://api.meraki.com/api/v1/organizations/:organizationId/devices/uplinks/addresses/byDevice?serials[]={serial} \
+          -L -H 'Authorization: Bearer {BEARER_TOKEN}'
+        ```   
+   - For a multiple device:
         ```cURL
         curl https://api.meraki.com/api/v1/organizations/:organizationId/devices/uplinks/addresses/byDevice?serials[]={serial1}&serials[]={serial2} \
           -L -H 'Authorization: Bearer {BEARER_TOKEN}'
         ```
-   - For multiple devices:
-        ```cURL
-        curl https://api.meraki.com/api/v1/organizations/:organizationId/devices/uplinks/addresses/byDevice?serials[]={serial} \
-          -L -H 'Authorization: Bearer {BEARER_TOKEN}'
-        ```
-4. Alternatively, use the Meraki Python SDK to perform the request:
+5. Alternatively, use the Meraki Python SDK to perform the request:
    - For a single device:
         ```Python
         import meraki
