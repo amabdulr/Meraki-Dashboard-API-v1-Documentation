@@ -18,8 +18,13 @@ A Meraki dashboard API is a programming interface that
 Use this task to setup secure access to the Meraki Dashboard API by authorizing requests using a bearer token.
 
 All API requests to the Meraki Dashboard require an authorization header with a valid bearer token. This token can be either:
-- a **Meraki API key**, or
-- an **OAuth access token**.
+   - a **Meraki API key**, or
+   - an **OAuth access token**.
+
+### Substituting Placeholder
+
+   - Remove curly brackets that are around variables. CURL and Python requests in this document repreasent variables in curly brackets. Always ensure that you replace this within with relevant values, and remove the curly brackets. For instance, {BEARER_TOKEN} or {organizationId} must be replaced with a value such as 75dd5334bef4d2bc96f26138c163c0a3fa0b5ca6.
+   - 
 
 **Before you begin**:
 - Obtain a valid **Bearer token** (Meraki API key or OAuth token).
