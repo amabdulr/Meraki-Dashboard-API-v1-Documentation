@@ -312,9 +312,11 @@ Follow these steps to get uplink addresses for specific devices:
 3. Use `curl` to send the API request:
    - For single devices:
         ```cURL
-        curl https://api.meraki.com/api/v1/organizations/{organizationId}/devices/uplinks/addresses/byDevice?serials[]={serial} \
-          -L -H 'Authorization: Bearer {BEARER_TOKEN}'
-        ```   
+        curl --location --globoff 'https://api.meraki.com/api/v1/organizations/{organizationId}/devices/uplinks/addresses/byDevice?serials[]={serial}' --header 'Accept: application/json' --header 'Authorization: Bearer {BEARER_TOKEN}'
+        
+        ```
+
+
    - For a multiple device:
         ```cURL
         curl https://api.meraki.com/api/v1/organizations/{organizationId}/devices/uplinks/addresses/byDevice?serials[]={serial1}&serials[]={serial2} \
