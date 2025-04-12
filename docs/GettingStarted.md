@@ -343,6 +343,11 @@ Follow these steps to get uplink addresses for specific devices:
         ```
 **Result**: You will obtain the uplink IP addresses (both public and private), gateways, assignment modes, and DNS configuration details for all specified devices.
 
+### Example CURL Request:  
+
+```
+curl --location --globoff 'https://api.meraki.com/api/v1/organizations/1215707/devices/uplinks/addresses/byDevice?serials[]=QBSA-AY83-4RUF' --header 'Accept: application/json' --header 'Authorization: Bearer 75dd5334bef4d2bc96f26138c163c0a3fa0b5ca6'
+```
 ### Example response for one device:
 
 ```JSON
