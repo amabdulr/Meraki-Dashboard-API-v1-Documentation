@@ -13,7 +13,9 @@ A Meraki dashboard API is a programming interface that
 - **Bearer token**: A secure access key used to authorize requests to the Meraki Dashboard API. It can be a Meraki API key or an OAuth access token.
 
 ### Substituting Placeholder Values
-Remove curly brackets that are around variables. CURL and Python requests in this document represent variables in curly brackets. Always ensure that you replace these variable within with relevant values. Additionally, do not forget to remove the curly brackets. 
+Remove curly brackets that are around variables. 
+
+CURL and Python requests in this document represent variables in curly brackets. Always ensure that you replace these variable within with relevant values. Additionally, do not forget to remove the curly brackets. 
 
 For example, {BEARER_TOKEN} must be replaced with a value such as 75dd5334bef4d2bc96f26138c163c0a3fa0b5ca6. {organizationId} becomes 1234567.
 
@@ -316,17 +318,14 @@ Follow these steps to get uplink addresses for specific devices:
      GET /organizations/{organizationId}/devices/uplinks/addresses/byDevice?serials[]={serial1}&serials[]={serial1}&serials[]={serial2}
      ```
 3. Use `curl` to send the API request:
-   - For single devices:
+   - For a single device:
         ```cURL
         curl --location --globoff 'https://api.meraki.com/api/v1/organizations/{organizationId}/devices/uplinks/addresses/byDevice?serials[]={serial}' --header 'Accept: application/json' --header 'Authorization: Bearer {BEARER_TOKEN}'
         
         ```
-
-
-   - For a multiple device:
+   - For multiple devices:
         ```cURL
-        curl https://api.meraki.com/api/v1/organizations/{organizationId}/devices/uplinks/addresses/byDevice?serials[]={serial1}&serials[]={serial2} \
-          -L -H 'Authorization: Bearer {BEARER_TOKEN}'
+        curl --location --globoff 'https://api.meraki.com/api/v1/organizations/{organizationId}/devices/uplinks/addresses/byDevice?serials[]={serial}&serials[]={serial2}' --header 'Accept: application/json' --header 'Authorization: Bearer {BEARER_TOKEN}'
         ```
 5. Alternatively, use the Meraki Python SDK to perform the request:
    - For a single device:
@@ -343,11 +342,18 @@ Follow these steps to get uplink addresses for specific devices:
         ```
 **Result**: You will obtain the uplink IP addresses (both public and private), gateways, assignment modes, and DNS configuration details for all specified devices.
 
-### Example CURL Request:  
+### Example CURL Request for one device:  
 
 ```
 curl --location --globoff 'https://api.meraki.com/api/v1/organizations/1215707/devices/uplinks/addresses/byDevice?serials[]=QBSA-AY83-4RUF' --header 'Accept: application/json' --header 'Authorization: Bearer 75dd5334bef4d2bc96f26138c163c0a3fa0b5ca6'
 ```
+
+### Example CURL Request for multple device:  
+
+```
+curl --location --globoff 'https://api.meraki.com/api/v1/organizations/1215707/devices/uplinks/addresses/byDevice?serials[]=QBSA-AY83-4RUF&serials[]=QBSA-4NYF-M67T' --header 'Accept: application/json' --header 'Authorization: Bearer 75dd5334bef4d2bc96f26138c163c0a3fa0b5ca6'
+```
+
 ### Example response for one device:
 
 ```JSON
