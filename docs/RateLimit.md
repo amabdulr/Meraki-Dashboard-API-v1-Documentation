@@ -15,7 +15,7 @@ This article
 - provides the **rate limits** at an organization level and source-IP address level.
 - shows you **how to detect** when these rate limits are breached using the `429` status code.
 - show you **how to recover gracefully** to keep your application running.
-- provides **best practices** to ensure that API calls are within rate limits.
+- provides **best practices** for provisioning and monitoring a network that avoids a rate limit breach.
 - provides **troubleshooting tips** to pinpoint and resolve the root causes of a rate-limit breach.
 
 
@@ -55,7 +55,8 @@ This limit is shared across all API applications in the organization using [API 
 | **Burst allowance**     | +10 requests in the first second (max 30 requests in 2s)   |
 | **Scope**               | Shared across all API applications using the organization’s API key  |
 
-To check whether your API budget is being consumed by multiple applications, use the [organization's API activity overview](https://developer.cisco.com/meraki/api-v1/get-organization-api-requests-overview-response-codes-by-interval/). 
+To check whether your API budget is being consumed by multiple applications, on the Meraki dashboard, as an organization administrator you can view this information by navigating to **Organization > Configure > API & Webhooks** > **API Analytics**. You can also use an API to get the [organization's API activity overview](https://developer.cisco.com/meraki/api-v1/get-organization-api-requests-overview-response-codes-by-interval/). 
+
 
 ## Rate limits per source IP address
 Each source IP address can make upto 100 requests per second, regardless of the number of API clients working from that IP address.
@@ -110,16 +111,18 @@ Follow these steps to manage rate limit exceedance:
 
 **Result**: Your application handles rate limit breaches gracefully, minimizing downtime and errors.
 
-## Best practice for optimizing API usage 
+## Best practices for optimizing API usage 
 
- To ensure efficient Meraki API usage, follow these best practices to reduce unnecessary API calls and prevent rate limit breach:
-  
+Follow these best practices during provisioning and monitoring to ensure that your network performs efficiently. The overall API calls are reduced. Rate limits are not breached.
+
+### Best Practices for Provisioning 
 - **Use action batches** to group multiple POST, PUT, DELETE calls into a single request. This reduces overhead and speeds up execution.
 - **Avoid repolling for configuration changes** 
     - The most common cause of `429` responses is unnecessarily frequent polling of information after day one of a network deployment, such as for the list of [networks](https://developer.cisco.com/meraki/api-v1/get-organization-networks/) or [policy objects](https://developer.cisco.com/meraki/api-v1/get-organization-policy-objects/) in an organization. These values rarely change after initial deployment. A better strategy is to use [getOrganizationConfigurationChanges](https://developer.cisco.com/meraki/api-v1/get-organization-configuration-changes/) to retrieve a snapshot of all configuration changes. 
 - **Use configuration templates**
     - Consolidate multiple network-specific requests into a single template update.
     - Allow the Meraki backend to propagate changes to all bound networks automatically, reducing the volume of API calls.
+### Best Practices for Monitoring  
 - **Replace an inefficient API operation with an efficient one**
    - Develop your application using the most efficient API calls available for your use case. This is particularly relevant if your application includes monitoring features.
 
@@ -131,8 +134,6 @@ Follow these steps to manage rate limit exceedance:
 | Retrieving Device Hardware Details         | Network-wide operation [getNetworkDevices](https://developer.cisco.com/meraki/api-v1/get-network-devices/) | Organization-wide [getOrganizationDevices](https://developer.cisco.com/meraki/api-v1/get-organization-devices/) provides information for hundreds of devices at a time in a paginated list          |
 | Monitoring Device Availability (Status)    | Re-polling all device statuses                                                               | Organization-wide [getOrganizationDevicesAvailabilitiesChangeHistory](https://developer.cisco.com/meraki/api-v1/get-organization-devices-availabilities-change-history/) catches up on device availability (status) changes since your last org-wide poll instead of re-polling the information for all devices. |
 | Retrieving Network Clients                 | Single-device API operation [getDeviceClients](https://developer.cisco.com/meraki/api-v1/get-device-clients/) | Network-wide [getNetworkClients](https://developer.cisco.com/meraki/api-v1/get-network-clients/)                          |
-
-**Result**: Your application performs network configurations, retreives configuration information and monitors your network more efficiently. The overall API calls are reduced. Rate limits are not breached.
 
 # Troubleshoot rate limit breach
 
@@ -148,7 +149,7 @@ Follow these steps to troubleshoot rate limit issues:
 
 1. **Verify adherence to best practices** by reviewing the “Best practices and tips for managing call budgets” section. If you are using an ecosystem partner application, contact the developer to discuss partner application behavior or budget consumption. 
 2. **Check recent API activity** on the Meraki dashboard. See [Checking recent API activity](https://developer.cisco.com/meraki/api-v1/get-organization-api-requests-overview-response-codes-by-interval/)
-3. **Audit your scripts** that run with little to no maintenance. These can degrade performance and unnecessarily consume your call budget. See [Audit your organization's API consumption](https://developer.cisco.com/meraki/api-v1/search/api%20requests/).
+3. **Audit your scripts** that run with little to no maintenance. These can degrade performance and unnecessarily consume your call budget. See [Audit your organization's API consumption](https://developer.cisco.com/meraki/api-v1/get-organization-api-requests/).
 
 **Result**: You identify the root cause of the rate-limit breach.
 
