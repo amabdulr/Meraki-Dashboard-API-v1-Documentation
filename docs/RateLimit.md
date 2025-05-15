@@ -1,4 +1,4 @@
-# API call budgets
+# API Call Budgets
 
 An API call budget is a limit that 
 - defines the number of API calls an API client can make in a given amount of time.
