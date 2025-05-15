@@ -89,7 +89,7 @@ The response body generally includes an error message structured as:
 - Review the rate limit policies listed above.
 - Understand how to interpret HTTP status codes, especially status code `429`.
 
-Follow these steps to manage rate limit exceedance:
+Follow these steps to manage a rate-limit breach:
 1. Monitor the HTTP response code of each API calls.
 2. If you receive a `429` status code, retrieve the `Retry-After` header to determine the wait duration.
 3. Implement a backoff mechanism:
