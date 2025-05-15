@@ -1,4 +1,4 @@
-# API Call Budgets
+# API call budgets
 
 An API call budget is a limit that 
 - defines the number of API calls an API client can make in a given amount of time.
@@ -11,11 +11,11 @@ Key attributes of an API call budget include
 - mechanisms to handle excess calls.
 
 This article 
-- explains **a few concepts** that are needed to understand the article such as action batches and configuration templates.
-- provides the **rate limits** at an organization level and source-IP address level.
+- explains **important concepts**, such as action batches and configuration templates, that are needed to understand the article.
+- lists the **rate limits** for organizations and IP addresses.
 - shows you **how to detect** when these rate limits are breached using the `429` status code.
-- show you **how to recover gracefully** to keep your application running.
-- provides **best practices** for provisioning and monitoring a network that avoids a rate limit breach.
+- shows you **how to recover gracefully** to keep your application running.
+- provides **best practices** for provisioning and monitoring a network and avoid a rate-limit breach.
 - provides **troubleshooting tips** to pinpoint and resolve the root causes of a rate-limit breach.
 
 
@@ -47,7 +47,7 @@ Each Meraki organization has a rate limit of 10 requests per second per organiza
 
 To accommodate short bursts of activity, an additional ten requests are allowed in the first second, enabling a maximum of 30 requests in the first two seconds. 
 
-This limit is shared across all API applications in the organization using [API authentication](https://developer.cisco.com/meraki/api-v1/authorization/), making it esssential to coordinate API usage across systems. Monitoring your organization’s request patterns helps avoid hitting the cap and ensures stable integrations.
+This limit is shared across all API applications in the organization using [API authentication](https://developer.cisco.com/meraki/api-v1/authorization/), making it esssential to coordinate API usage across systems. Monitoring your organization’s request patterns is one way to avoid breaching the rate limit.
 
 | Metric               | Value                                        |
 |-------------------------|-------------------------------------------------------------|
@@ -55,11 +55,11 @@ This limit is shared across all API applications in the organization using [API 
 | **Burst allowance**     | +10 requests in the first second (max 30 requests in 2s)   |
 | **Scope**               | Shared across all API applications using the organization’s API key  |
 
-To check whether your API budget is being consumed by multiple applications, on the Meraki dashboard, as an organization administrator you can view this information by navigating to **Organization > Configure > API & Webhooks** > **API Analytics**. You can also use an API to get the [organization's API activity overview](https://developer.cisco.com/meraki/api-v1/get-organization-api-requests-overview-response-codes-by-interval/). 
+You, as an organization administrator of the Meraki dashboard, can check whether your API budget is being consumed by multiple applications by navigating to **Organization > Configure > API & Webhooks** > **API Analytics**. You can also use an API to get the [organization's API activity overview](https://developer.cisco.com/meraki/api-v1/get-organization-api-requests-overview-response-codes-by-interval/). 
 
 
 ## Rate limits per source IP address
-Each source IP address can make upto 100 requests per second, regardless of the number of API clients working from that IP address.
+Each source IP address can make up to 100 requests per second, regardless of the number of API clients working from that IP address.
 | Metric                  | Value                                      |
 |-------------------------|-------------------------------------------------------------|
 | **Quota**               | 100 requests per second per source IP                                      |
@@ -81,7 +81,7 @@ The response body generally includes an error message structured as:
 ```
 
 ## Handle rate limit breach
-**Purpose**: Ensure your application continues to function smoothly when the API rate limits are breached.
+**Purpose**: Ensure your application functions smoothly even after your application breaches API rate limits.
 
 **Context**: APIs often enforce rate limits to protect resources and ensure fair usage. Exceeding these limits results in a `429` response, which must be handled programmatically to avoid application failures.
 
@@ -147,11 +147,11 @@ Follow these best practices during provisioning and monitoring to ensure that yo
 
 Follow these steps to troubleshoot rate limit issues:
 
-1. **Verify adherence to best practices** by reviewing the “Best practices and tips for managing call budgets” section. If you are using an ecosystem partner application, contact the developer to discuss partner application behavior or budget consumption. 
+1. **Verify adherence to best practices** by reviewing the “Best practices for optimizing API usage” section. If you are using a [partner application](https://marketplace.cisco.com/en-US/home), contact the developer to discuss the application behavior or budget consumption. 
 2. **Check recent API activity** on the Meraki dashboard. See [Checking recent API activity](https://developer.cisco.com/meraki/api-v1/get-organization-api-requests-overview-response-codes-by-interval/)
 3. **Audit your scripts** that run with little to no maintenance. These can degrade performance and unnecessarily consume your call budget. See [Audit your organization's API consumption](https://developer.cisco.com/meraki/api-v1/get-organization-api-requests/).
 
-**Result**: You identify the root cause of the rate-limit breach.
+**Result**: You will identify the root cause of the rate-limit breach.
 
 # References
 - For more information about call budgets and rate limits, see the [our developer community](https://community.meraki.com/t5/Developers-APIs/bd-p/api).
