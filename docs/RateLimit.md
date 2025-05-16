@@ -52,7 +52,7 @@ This limit is shared across all API applications that use [API authentication](h
 | **Burst allowance**     | +10 requests in the first second (max 30 requests in 2s)   |
 | **Scope**               | Shared across all API applications using the organization’s API key  |
 
-As an organization administrator, check whether multiple applications are using your API budget. Navigate to **Organization > Configure > API & Webhooks** and choose **API Analytics**. 
+As an organization administrator, check whether multiple applications are using your API budget. Navigate to **Organization > Configure > API & Webhooks** and choose **API Analytics**. For more information, see the [API Analytics Overview](https://documentation.meraki.com/General_Administration/Other_Topics/Cisco_Meraki_Dashboard_API#API_Analytics_Overview)
 You can also use an API to get [an overview of the organization's API activity](https://developer.cisco.com/meraki/api-v1/get-organization-api-requests-overview-response-codes-by-interval/). 
 
 ## Rate limits per source IP address
@@ -78,7 +78,7 @@ The response body generally includes an error message structured as:
 ```
 
 ## Handle exceeded rate limits
-**Purpose**: Helps you keep your application running smoothly even when your application exceeds the API rate limits.
+**Purpose**: Helps keep your application running smoothly even when your application exceeds the API rate limits.
 
 **Context**: Rate limits protect resources and ensure fair API usage. If your application exceeds these limits, you receive a `429` response. Handle this response in code to prevent application failures.
 
