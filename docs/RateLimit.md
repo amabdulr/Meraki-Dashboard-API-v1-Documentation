@@ -1,6 +1,6 @@
 # API Call Budgets
 
-Your API call budget
+Your API call budget:
 - limits how many API calls you can make within a specific time.
 - safeguards your network against runaway applications and malicious behavior.
 - helps you manage huge API call volumes.
@@ -24,7 +24,7 @@ In this article, you will:
 An action batch is a tool that:
 - bundles multiple configuration requests into a single transaction,  
 - supports bulk POST, PUT, and DELETE operations synchronously or asynchronously, and  
-- reduces individual API calls to optimize budgets
+- reduces individual API calls to optimize budgets.
 
 For more information, visit these resources:
 - [Action Batches](https://developer.cisco.com/meraki/api-v1/action-batches-overview/#action-batches)
@@ -33,7 +33,7 @@ For more information, visit these resources:
   
 ## Configuration templates
 
-Use a configuration template to define a standard set of network settings. Apply the template across multiple networks to manage your network consistently and at scale
+Use a configuration template to define a standard set of network settings. Apply the template across multiple networks to manage your network consistently and at scale.
 
 Use configuration templates to set up VLAN settings, firewall rules, and Software-Defined Wide Area Network (SD-WAN) policies from the Meraki dashboard.
 
@@ -110,7 +110,7 @@ Follow these steps when your application exceeds the rate-limit:
 
 ## Best practices for optimizing API usage 
 
-Follow these best practices during provisioning and monitoring to ensure that your network performs efficiently. The overall API calls are reduced. Rate limits are not exceeded.
+Follow these best practices during provisioning and monitoring to ensure that your network performs efficiently. The overall API calls are reduced, and rate limits are not exceeded.
 
 ### Best Practices for Provisioning 
 - **Use action batches** to group multiple POST, PUT, and DELETE calls into a single request. This reduces overhead and speeds up execution.
@@ -141,7 +141,7 @@ Follow these best practices during provisioning and monitoring to ensure that yo
 
 **Before you begin**:  
     - Understand the organization- and IP-level call budgets.  
-    - Implemented basic `429` handling using the `Retry-After` header.  
+    - Implement basic `429` handling using the `Retry-After` header.  
 
 Follow these steps to troubleshoot rate limit issues:
 
