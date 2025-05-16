@@ -1,7 +1,7 @@
 # API Call Budgets
 
 Your API call budget
-- limits how many API calls you can make within a specific time."
+- limits how many API calls you can make within a specific time.
 - safeguards your network against runaway applications and malicious behavior.
 - helps you manage huge API call volumes.
 
@@ -11,17 +11,17 @@ Key attributes of an API call budget include:
 - mechanisms to handle excess calls.
 
 In this article, you will:
-- learn **key concepts**, such as action batches and configuration templates. 
-- find **rate limits** for organizations and IP addresses.
-- learn **how to detect** an exceeded rate limit.
-- learn **how to recover gracefully** and keep your application running.
-- discover **best practices** to provision and monitor your network and avoid exceeding the rate limit.
-- get **troubleshooting tips** to pinpoint and resolve the root causes of an exceeded rate limit.
+- Learn **key concepts**, such as action batches and configuration templates. 
+- Find **rate limits** for organizations and IP addresses.
+- Learn **how to detect** an exceeded rate limit.
+- Learn **how to recover gracefully** and keep your application running.
+- Discover **best practices** to provision and monitor your network and avoid exceeding the rate limit.
+- Get **troubleshooting tips** to pinpoint and resolve the root causes of an exceeded rate limit.
 
 
 ## Action batches 
 
-An action batch is a tool that  
+An action batch is a tool that:
 - bundles multiple configuration requests into a single transaction,  
 - supports bulk POST, PUT, and DELETE operations synchronously or asynchronously, and  
 - reduces individual API calls to optimize budgets
@@ -106,7 +106,7 @@ Follow these steps when your application exceeds the rate-limit:
         # Handle other response codes
     ```
 
-**Result**: Your application handles exceeded rate limits gracefully and minimizes downtime and errors
+**Result**: Your application handles exceeded rate limits gracefully and minimizes downtime and errors.
 
 ## Best practices for optimizing API usage 
 
