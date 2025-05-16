@@ -1,9 +1,9 @@
 # API Call Budgets
 
-Your API call budget is a limit that 
+Your API call budget
 - limits how many API calls you can make within a specific time."
 - safeguards your network against runaway applications and malicious behavior.
-- helps you manage call consumption.
+- helps you manage huge API call volumes.
 
 Key attributes of an API call budget include:
 - defined number of requests per second,
@@ -26,25 +26,25 @@ An action batch is a tool that
 - supports bulk POST, PUT, and DELETE operations synchronously or asynchronously, and  
 - reduces individual API calls to optimize budgets
 
-For more information, see the following:
+For more information, visit these resources:
 - [Action Batches](https://developer.cisco.com/meraki/api-v1/action-batches-overview/#action-batches)
 - [The GitHub Demo](https://developer.cisco.com/codeexchange/github/repo/shiyuechengineer/action-batches/)
 - [The Meraki Blog](https://meraki.cisco.com/blog/2019/06/action-batches-a-recipe-for-success/)
   
 ## Configuration templates
 
-Use a configuration template to define a standard set of network settings and apply them across multiple networks, helping you manage your network consistently and at scale
+Use a configuration template to define a standard set of network settings. Apply the template across multiple networks to manage your network consistently and at scale
 
-Configuration templates support various settings, including VLAN settings, firewall rules, and SD-WAN policies. These templates can be created and managed through the Meraki Dashboard.
+Use configuration templates to set up VLAN settings, firewall rules, and Software-Defined Wide Area Network (SD-WAN) policies from the Meraki dashboard.
 
 For more information, see [Meraki configuration templates](https://documentation.meraki.com/General_Administration/Templates_and_Config_Sync/Managing_Multiple_Networks_with_Configuration_Templates).
 
 ## Rate limits per organization
-You can make upto 10 requests per second per organization, regardless of the number of applications interacting with that organization.
+You can make up to 10 requests per second per organization, regardless of the number of applications interacting with that organization.
 
-To accommodate short bursts of activity, you can send an extra 10 requests in the first second, for a total of 30 requests in two seconds.
+To accommodate short bursts of activity, you can send an extra 10 requests in the first second. As a result, you can send a total of 30 requests in two seconds.
 
-This limit is shared across all API applications in the organization using [API authentication](https://developer.cisco.com/meraki/api-v1/authorization/), making it essential to coordinate API usage across systems. Monitor your organization’s request patterns to stay within rate limits.
+This limit is shared across all API applications that use [API authentication](https://developer.cisco.com/meraki/api-v1/authorization/) in the organization. Coordinate API usage across systems and monitor your organization’s request patterns to stay within rate limits.
 
 | Metric               | Value                                        |
 |-------------------------|-------------------------------------------------------------|
@@ -52,20 +52,20 @@ This limit is shared across all API applications in the organization using [API 
 | **Burst allowance**     | +10 requests in the first second (max 30 requests in 2s)   |
 | **Scope**               | Shared across all API applications using the organization’s API key  |
 
-As an organization administrator, check whether multiple applications are using your API budget. Navigate to **Organization > Configure > API & Webhooks**, and choose **API Analytics**. 
-You can also use an API to get the [organization's API activity overview](https://developer.cisco.com/meraki/api-v1/get-organization-api-requests-overview-response-codes-by-interval/). 
+As an organization administrator, check whether multiple applications are using your API budget. Navigate to **Organization > Configure > API & Webhooks** and choose **API Analytics**. 
+You can also use an API to get [an overview of the organization's API activity](https://developer.cisco.com/meraki/api-v1/get-organization-api-requests-overview-response-codes-by-interval/). 
 
 ## Rate limits per source IP address
-You can send up to 100 requests per second from each source IP address, regardless of the number of API clients working from that address.
+You can send up to 100 requests per second from each source IP address, regardless of the number of API clients using that address.
 | Metric                  | Value                                      |
 |-------------------------|-------------------------------------------------------------|
 | **Quota**               | 100 requests per second per source IP                                      |
 | **Scope**               | Shared by all clients using that IP  |
 
 ## Response codes for exceeding rate limit
-When the rate limit is exceeded, the API returns a `429` status code. 
+If your application exceeds the rate limit, the API returns a 429 status code.
 
-The response includes a `Retry-After` header, which tells you how long to wait before sending the next request.
+The response includes a `Retry-After` header that tells you how long to wait before sending the next request.
 
 The response body generally includes an error message structured as:
 
@@ -78,22 +78,22 @@ The response body generally includes an error message structured as:
 ```
 
 ## Handle exceeded rate limits
-**Purpose**: Helps you keep your application running smoothly, even if your application exceeds the API rate limits.
+**Purpose**: Helps you keep your application running smoothly even when your application exceeds the API rate limits.
 
-**Context**: Rate limits protect resources and ensure fair API usage. If your application exceeds these limits, you receive a `429` response. You must handle this response in code to prevent application failures.
+**Context**: Rate limits protect resources and ensure fair API usage. If your application exceeds these limits, you receive a `429` response. Handle this response in code to prevent application failures.
 
 **Before you begin**: 
 - Review the rate limit policies listed above.
 - Understand how to interpret HTTP status codes, especially status code `429`.
 
 Follow these steps when your application exceeds the rate-limit:
-1. Monitor the HTTP response code of each API calls.
+1. Monitor the HTTP response code of each API call.
 2. If you receive a `429` status code, retrieve the `Retry-After` header to determine the wait duration.
 3. Implement a backoff mechanism:
-   - Pause for one or two seconds before making subsequent API calls.
-   - Increase the wait duration if request volume is high.
+   - Pause for one or two seconds before making the next API call.
+   - Increase the wait time when API call volumes are high.
 4. For Python applications:
-   - Try [the official Meraki Python library](https://github.com/meraki/dashboard-api-python), which includes automatic retry and backoff handling. Here is an example implementation:
+   - Use [the official Meraki Python library](https://github.com/meraki/dashboard-api-python), which includes automatic retry and backoff handling. Here is an example implementation:
 
     ```Python
     response = requests.request("GET", url, headers=headers)
@@ -106,7 +106,7 @@ Follow these steps when your application exceeds the rate-limit:
         # Handle other response codes
     ```
 
-**Result**: Your application handles the exceeded rate limit gracefully, minimizing downtime and errors.
+**Result**: Your application handles exceeded rate limits gracefully and minimizes downtime and errors
 
 ## Best practices for optimizing API usage 
 
@@ -115,13 +115,13 @@ Follow these best practices during provisioning and monitoring to ensure that yo
 ### Best Practices for Provisioning 
 - **Use action batches** to group multiple POST, PUT, and DELETE calls into a single request. This reduces overhead and speeds up execution.
 - **Retrieve configuration changes efficiently**
-    - Most 429 errors happen when you poll information too often after the first day of network deployment, such as for the list of [networks](https://developer.cisco.com/meraki/api-v1/get-organization-networks/) or [policy objects](https://developer.cisco.com/meraki/api-v1/get-organization-policy-objects/) in an organization. These values rarely change after initial deployment. A better strategy is to use [getOrganizationConfigurationChanges](https://developer.cisco.com/meraki/api-v1/get-organization-configuration-changes/) to retrieve a snapshot of all configuration changes. 
+    - Most 429 errors happen when you poll information too often after the first day of network deployment. For example, requesting a list of [networks](https://developer.cisco.com/meraki/api-v1/get-organization-networks/) or [policy objects](https://developer.cisco.com/meraki/api-v1/get-organization-policy-objects/) in an organization. These values rarely change after initial deployment. A better strategy is to use [getOrganizationConfigurationChanges](https://developer.cisco.com/meraki/api-v1/get-organization-configuration-changes/) to retrieve a snapshot of all configuration changes. 
 - **Use configuration templates**
     - Combine multiple network-specific requests into a single template update.
     - Let Meraki handle updates to all bound networks for you, reducing your API calls.
 ### Best Practices for Monitoring  
 - **Replace an inefficient API operation with an efficient one**
-   - Use the most efficient API calls available for your needs, especically if your application includes monitoring features.
+   - Use the most efficient API calls available for your needs, especially if your application includes monitoring features.
 
 | **Use Case**                                  | **Less Efficient Operation**                                                                 | **More Efficient Operation**                                                                                             |
 |--------------------------------------------|----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
@@ -132,9 +132,10 @@ Follow these best practices during provisioning and monitoring to ensure that yo
 | Monitoring Device Availability (Status)    | Re-polling all device statuses                                                               | Organization-wide [getOrganizationDevicesAvailabilitiesChangeHistory](https://developer.cisco.com/meraki/api-v1/get-organization-devices-availabilities-change-history/) catches up on device availability (status) changes since your last org-wide poll instead of re-polling the information for all devices. |
 | Retrieving Network Clients                 | Single-device API operation [getDeviceClients](https://developer.cisco.com/meraki/api-v1/get-device-clients/) | Network-wide [getNetworkClients](https://developer.cisco.com/meraki/api-v1/get-network-clients/)                          |
 
+
 # Troubleshoot rate limit issues
 
-**Purpose**: Find and resolve exceedec rate limits to restore uninterrupted API operation.  
+**Purpose**: Find and resolve exceeded rate limits so you can restore uninterrupted API operation.
 
 **Context**: When your application (or another application sharing your organization or IP) receives `429` errors despite backoff strategies.  
 
@@ -145,12 +146,12 @@ Follow these best practices during provisioning and monitoring to ensure that yo
 Follow these steps to troubleshoot rate limit issues:
 
 1. **Verify adherence to best practices** by reviewing the “Best practices for optimizing API usage” section. If you use a [partner application](https://marketplace.cisco.com/en-US/home), contact the developer to discuss the application behavior or budget consumption. 
-2. **Check recent API activity** on the Meraki dashboard. See [Checking recent API activity](https://developer.cisco.com/meraki/api-v1/get-organization-api-requests-overview-response-codes-by-interval/)
-3. **Audit your scripts** that run with little to no maintenance. These can degrade performance and unnecessarily consume your call budget. See [Audit your organization's API consumption](https://developer.cisco.com/meraki/api-v1/get-organization-api-requests/).
+2. **Check recent API activity** on the Meraki dashboard using this [guide](https://developer.cisco.com/meraki/api-v1/get-organization-api-requests-overview-response-codes-by-interval/)
+3. **Audit your scripts** that run without regular maintenance. Such scripts can degrade performance and consume your call budget. To monitor usage, [audit your organization's API consumption](https://developer.cisco.com/meraki/api-v1/get-organization-api-requests/).
 
-**Result**: You will identify what caused the exceeded rate limits.
+**Result**: You can identify the cause of the exceeded rate limits.
 
 # References
-- For more information about call budgets and rate limits, see the [our developer community](https://community.meraki.com/t5/Developers-APIs/bd-p/api).
+- For more information about call budgets and rate limits, visit the [Meraki developer community](https://community.meraki.com/t5/Developers-APIs/bd-p/api).
 - Meraki uses the [token bucket model](https://en.wikipedia.org/wiki/Token_bucket) to implement this rate-limiting mechanism.
 
