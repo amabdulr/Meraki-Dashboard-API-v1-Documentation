@@ -47,7 +47,7 @@ Each Meraki organization has a rate limit of 10 requests per second per organiza
 
 To accommodate short bursts of activity, an additional ten requests are allowed in the first second, enabling a maximum of 30 requests in the first two seconds. 
 
-This limit is shared across all API applications in the organization using [API authentication](https://developer.cisco.com/meraki/api-v1/authorization/), making it esssential to coordinate API usage across systems. Monitoring your organization’s request patterns is one way to avoid breaching the rate limit.
+This limit is shared across all API applications in the organization using [API authentication](https://developer.cisco.com/meraki/api-v1/authorization/), making it essential to coordinate API usage across systems. Monitoring your organization’s request patterns is one way to avoid breaching the rate limit.
 
 | Metric               | Value                                        |
 |-------------------------|-------------------------------------------------------------|
