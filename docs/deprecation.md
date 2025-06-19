@@ -2,39 +2,43 @@
 
 ## Overview
 
-As necessary, Meraki may deprecate API versions or operations over time. After an announced deprecation period, the versions or operations marked as deprecated will be sunset.
+Cisco Meraki provides newer, more performant APIs over time to help developer use cases currently addressed by existing operations and API versions. When introducing these alternatives, Meraki:
 
-This means that Meraki may offer newer, more performant alternatives over time to satisfy developer use cases currently met in whole or in part by existing operations and/or versions. When this happens, Meraki will:
+1. Marks the deprecated operation or version as deprecated in the OAS.
+2. Documents the alternatives to the operation or version.
 
-1. Mark the deprecated operation or version as deprecated in the OAS.
-2. Provide documented alternatives to the operation or version.
+Cisco Meraki may occasionally phase out API versions or operations. After a designated deprecation period, the deprecated versions or operations are discontinued.
 
-We encourage developers to take advantage of the improvements and migrate their applications to the latest offerings. In any case, it is the developer's responsibility to migrate their applications to non-deprecated offerings prior to the sunset date for that offering.
+We encourage developers to leverage the improvements and migrate their applications to the latest offerings. Developers are expected to migrate their applications to non-deprecated offerings before the sunset date for those offerings.
 
 ## Definitions
 
 ### Version vs. revision
 
-An API version, also known as a _major_ version, identifies a grouped set of API resources and operations. At Meraki, we use simple integers for versions, e.g. "v1". Today, these are released infrequently, and Meraki only has "v1".
+An API version, or _major_ version, groups a set of API resources and operations. Cisco Meraki uses simple integers for versions, such as "v1." Cisco Meraki releases these versions infrequently and currently only uses "v1."
 
-An API revision, also known as a _minor_ version, identifies non-breaking improvements to an API, such as the addition of new attributes or capabilities to extend existing operations within a major version. In most if not all cases, changes between revisions within a single version are additive and otherwise transparent to clients built on older revisions of that version. Today, Meraki names a new revision every month, summarizing all the changes that have been released since the last named revision. A Meraki API revision name takes the format of "1.50.0", where "1" is the version, "50" is the ID of the "minor version", and "0" is the patch version. Note that the terms 'major' and 'minor' versions are commonly used in the industry in the context of semantic versioning; for our purposes, this guide will refer to major versions as versions and minor versions as revisions.
+An API revision, or _minor_ version, introduces non-breaking improvements to an API, such as adding attributes or capabilities to extend existing operations within a major version. However, revisions within a single version are usually additive and transparent to clients built on the previous version.
+
+Cisco Meraki releases a new API revision every month, summarizing all changes released since the last revision. Cisco Meraki API revision names follow the format "1.50.0," where "1" is the version, "50" represents the minor version ID, and "0" signifies the patch version.
+
+> NB: While the industry refers to major and minor versions in semantic versioning, this guide uses "versions" for major versions and "revisions" for minor versions.
 
 ### Deprecation vs. sunsetting
 
 #### Deprecation
 
-Deprecation is a standard step in an API’s lifecycle. It can apply to an entire API version or a part of it, like a single operation. Deprecation signals a better alternative is available, such as a newer version or operation. Deprecation is _not_ a breaking change.
+Deprecation marks a standard step in an API’s lifecycle. It applies to an entire API version or a part of it, such as a single operation, and indicates the availability of a better alternative, like a newer version or operation. 
 
-When an API version is deprecated, a sunset announcement with timelines will follow when appropriate. Migration efforts can vary, so start planning a switch to a replacement as soon as possible. Using a deprecated API version is against best practice; it’s advisable to review your needs and consider available replacements.
+> NB: Deprecation does not cause a breaking change. The Cisco Meraki Dashboard API currently uses version 1, which remains active and is not deprecated.
 
-> NB: Meraki dashboard API only has version 1, which is not deprecated.
+When Cisco Meraki deprecates an API version, it indicates that a superior operation is available and follows up with a sunset announcement and timelines when appropriate. Migrating to new operations is beneficial, particularly for large settings or specific use cases. 
 
-When an API operation is deprecated, indicating superior operations are available, it will be sunset with its API version. Migrating to new operations is advantageous, especially for large environments or specific use cases. Using a deprecated API operation is against best practice and discouraged. It’s advisable to review your needs and consider available replacements, even without a sunset date.
+Using a deprecated API version is not recommended. Developers should review their needs and explore available replacements, even if there is no sunset date.
 
 #### Sunsetting
 
-Sunsetting is the act of removing support for a single API operation or a whole version, after the deprecation period has elapsed. An operation or version is sunset after the deprecation period has elapsed. Sunsetting _is_ a breaking change.
+Sunsetting refers to the process of discontinuing support for either a specific API operation or an entire version after the deprecation period has ended. An operation or version is considered sunset once this period has concluded. It is important to note that sunsetting is a breaking change.
 
 ## Deprecated operations
 
-Beyond the OAS, deprecated operations are documented [here](deprecated-operations.md).
+In addition to the OAS, deprecated operations are documented in detail [here](deprecated-operations.md).
