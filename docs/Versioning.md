@@ -1,14 +1,11 @@
-The [Meraki OpenAPI spec](https://github.com/meraki/openapi), is THE SOURCE OF TRUTH, defining the publicly supported state of the Dashboard API.
+The [Cisco Meraki Dashboard API - OpenAPI Specification (OAS)](https://github.com/meraki/openapi) serves as the definitive guide for understanding the officially supported functionalities of the Cisco Meraki Dashboard API. It establishes a consistent framework that ensures clarity and reliability for developers interacting with the API.
 
-Once a major API version is released, we will make only backwards-compatible (minor) changes to it. 
+After an API version is released, only backward-compatible changes are implemented. Here are the backward-compatible revisions:
 
-These changes include:
-
-* Adding new API resources
-* Adding new optional request parameters to existing API methods
-* Adding new properties to existing API responses
-* Changing the order of properties in existing API responses
-
+* new API resources
+* new optional request parameters to existing API methods
+* new properties to existing API responses
+* Change the order of properties in existing API responses
 
 ### V1 Release Schedule
 
@@ -21,7 +18,4 @@ These changes include:
 |Month 3    |1.2.0   |   |   |   |
 |  |1.2.0-beta   |1.2.0-beta.1   |1.2.0-beta.2   |1.2.0-beta.3   |
 
-Any API changes will be described in detail via the [Changelog](https://developer.cisco.com/meraki/whats-new/)
-
-
-
+Any updates related to the Cisco Meraki Dashboard API are available in the [Release Notes](https://developer.cisco.com/meraki/whats-new/).
