@@ -1,29 +1,30 @@
 # Deprecation
 
-## Overview
+Cisco Meraki provides newer, more performant APIs over time to help developer use cases currently addressed by existing operations and API versions.
+Cisco Meraki may deprecate API versions or API Operations as needed. After an announced deprecation period, the versions or operations marked as deprecated will be removed.
 
-Cisco Meraki provides newer, more performant APIs over time to help developer use cases currently addressed by existing operations and API versions. When introducing these alternatives, Meraki:
+Cisco Meraki may offer newer, more performant alternatives over time to address developer use cases currently met in whole or in part by existing operations and/or versions.
+
+When this happens, Cisco Meraki will:
 
 1. Marks the deprecated operation or version as deprecated in the OAS.
-2. Documents the alternatives to the operation or version.
+2. Provide documented alternatives to the operation or version.
 
 Cisco Meraki may occasionally phase out API versions or operations. After a designated deprecation period, the deprecated versions or operations are discontinued.
 
 We encourage developers to leverage the improvements and migrate their applications to the latest offerings. Developers are expected to migrate their applications to non-deprecated offerings before the sunset date for those offerings.
 
-## Definitions
+## Version and Revision
 
-### Version vs. revision
+**API Version**: An API version, or _major_ version, groups a set of API resources and operations. Cisco Meraki uses simple integers for versions, such as "v1." Cisco Meraki releases these versions infrequently and currently only uses "v1."
 
-An API version, or _major_ version, groups a set of API resources and operations. Cisco Meraki uses simple integers for versions, such as "v1." Cisco Meraki releases these versions infrequently and currently only uses "v1."
-
-An API revision, or _minor_ version, introduces non-breaking improvements to an API, such as adding attributes or capabilities to extend existing operations within a major version. However, revisions within a single version are usually additive and transparent to clients built on the previous version.
+**API Revision**: An API revision, or _minor_ version, introduces non-breaking improvements to an API, such as adding attributes or capabilities to extend existing operations within a major version. However, revisions within a single version are usually additive and transparent to clients built on the previous version.
 
 Cisco Meraki releases a new API revision every month, summarizing all changes released since the last revision. Cisco Meraki API revision names follow the format "1.50.0," where "1" is the version, "50" represents the minor version ID, and "0" signifies the patch version.
 
 > NB: While the industry refers to major and minor versions in semantic versioning, this guide uses "versions" for major versions and "revisions" for minor versions.
 
-### Deprecation vs. sunsetting
+## Deprecation and Sunsetting
 
 #### Deprecation
 
