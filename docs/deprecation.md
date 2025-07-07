@@ -26,7 +26,7 @@ Cisco Meraki releases a new API revision every month, summarizing all changes re
 
 ## Deprecation and Sunsetting
 
-#### Deprecation
+### Deprecation
 
 Deprecation marks a standard step in an API’s lifecycle. It applies to an entire API version or a part of it, such as a single operation, and indicates the availability of a better alternative, like a newer version or operation. 
 
@@ -36,9 +36,13 @@ When Cisco Meraki deprecates an API version, it indicates that a superior operat
 
 Using a deprecated API version is not recommended. Developers should review their needs and explore available replacements, even if there is no sunset date.
 
-#### Sunsetting
+### Sunsetting
 
 Sunsetting refers to the process of discontinuing support for either a specific API operation or an entire version after the deprecation period has ended. An operation or version is considered sunset once this period has concluded. It is important to note that sunsetting is a breaking change.
+
+### Beta
+
+Unsupported and experimental. Released to gather feedback from early adopters. Functionality is not guaranteed, and the design is not final. This operation is sometimes referred to as an Enterprise Field Trial (EFT) API operation.
 
 ## Deprecated operations
 
