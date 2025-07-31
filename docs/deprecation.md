@@ -40,9 +40,9 @@ Using a deprecated API version is not recommended. Developers should review thei
 
 Sunsetting refers to the process of discontinuing support for either a specific API operation or an entire version after the deprecation period has ended. An operation or version is considered sunset once this period has concluded. It is important to note that sunsetting is a breaking change.
 
-### Beta
+### Early Access
 
-Unsupported and experimental. Released to gather feedback from early adopters. Functionality is not guaranteed, and the design is not final. This operation is sometimes referred to as an Enterprise Field Trial (EFT) API operation.
+Unsupported and experimental. Released to gather feedback from early adopters. Functionality is not guaranteed, and the design is not final. This operation is sometimes referred to as an Early Access API operation.
 
 ## Deprecated operations
 
