@@ -1,4 +1,17 @@
-# Action Batches
+# Action Batches and API Operations
+
+Action Batches enable API clients to group multiple configuration requests into a single synchronous or asynchronous transaction. This document explains the concepts, usage patterns, API options, error handling, and example automation using Python.
+
+## Action batches
+
+An action batch is an API mechanism that
+- allows clients to group multiple write actions into a single request
+- ensures atomicity by applying all or none of the actions, and
+- enables bulk configuration across devices or networks.
+
+Action batches help avoid API rate limits and simplify repetitive or large-scale changes across a network. They support resource operations such as `create`, `update`, and `destroy`.
+
+Content
 
 Action Batches are a special type of Dashboard API mechanism for submitting batched configuration requests in a single synchronous or asynchronous transaction. Action Batches are ideal for bulk configuration, either in the initial provisioning process, or for rolling out wide-scale configuration changes. For example, add a switch to a network, configure all 48 ports, and set the switch’s management interface in a single POST.
 
