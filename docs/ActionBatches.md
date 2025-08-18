@@ -11,7 +11,7 @@ An action batch is an API mechanism that
 
 Action batches help avoid API rate limits and simplify repetitive or large-scale changes across a network. They support resource operations such as `create`, `update`, and `destroy`.
 
-Content
+# Original Content from here
 
 Action Batches are a special type of Dashboard API mechanism for submitting batched configuration requests in a single synchronous or asynchronous transaction. Action Batches are ideal for bulk configuration, either in the initial provisioning process, or for rolling out wide-scale configuration changes. For example, add a switch to a network, configure all 48 ports, and set the switch’s management interface in a single POST.
 
