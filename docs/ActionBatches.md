@@ -4,7 +4,7 @@ An action batch is a configuration mechanism that
 * executes all actions atomically (all or nothing, no partial success), and
 * supports synchronous or asynchronous processing.
 
-Action batches are ideal for applying changes across multiple devices or networks. They ensure consistent configuration by processing the entire batch as a single unit—either all changes apply or none do. This mechanism also helps reduce API rate-limit concerns. For example, with a single POST operation, you can add a switch to a network, configure all 48 ports, and set the switch’s management interface.
+Action batches are ideal for applying changes across multiple devices or networks. They ensure consistent configuration by processing the entire batch as a single unit—either all changes apply or none do. This mechanism helps you avoid exceeding the API rate limit. For example, with a single POST operation, you can add a switch to a network, configure all 48 ports, and set the switch’s management interface at the same time.
 
 ## Synchronous and asynchronous execution modes
 Action batches can run in either **synchronous** or **asynchronous** mode, depending on the number of actions and the desired execution behavior.
@@ -16,36 +16,36 @@ Action batches can run in either **synchronous** or **asynchronous** mode, depen
 ### Key differences
 - **Synchronous** batches are suitable for smaller updates that need immediate feedback.
 - **Asynchronous** batches allow larger operations to be queued and processed by the system.
-- Only **5 concurrent** batches (regardless of mode) may run at any given time.
+- Only **five concurrent** batches (regardless of mode) may run at any given time.
 
 Synchronous batches provide a faster feedback loop, while asynchronous batches allow for greater scale and deferred processing.
 
 ### Other key points
 - Different types of resources and operations can be combined in a batch.
-- The actions in a batch will be executed in the same order they are defined.
+- The actions in a batch are executed in the order that they are defined.
 
 ### Restrictions
 - An action batch must be explicitly confirmed before execution by setting the confirmed property. Once confirmed, it cannot be deleted. If a batch is defined but not confirmed, it is automatically deleted after one week. This mechanism helps prevent accidental or stale configuration updates.
 
 ## How action batches work 
 The key components involved in the process are:
-* **Action batch**: A container of multiple API actions.
-* **API client**: The external system or user submitting the batch.
-* **Execution mode**: Defines whether a batch runs synchronously or asynchronously.
+* **Action batch**: is the container of multiple API actions.
+* **API client**: is the external system or user submitting the batch.
+* **Execution mode**: defines whether a batch runs synchronously or asynchronously.
 
-The process involves the following stages:
+The process involves these stages:
 * **Batch creation**: The client defines a list of actions to be executed and sets configuration flags such as `confirmed` and `synchronous`.
-* **Batch submission**: The batch is submitted via a POST request to the API.
+* **Batch submission**: The batch is submitted through a POST request to the API.
 * **Confirmation**: The batch must be marked as `confirmed` to execute. If not, it is stored temporarily and deleted after one week.
 * **Execution**: The system executes the batch in the order defined. All actions must succeed, or the batch fails.
 * **Result handling**: A status object returns completion, failure, or error details. For synchronous batches, this occurs immediately. For asynchronous, the client must poll for completion.
 
 **Result**:
-This mechanism ensures that batches of configuration requests are executed together, either fully succeeding or fully failing.
+This mechanism ensures that batches of configuration requests are executed together. They either fully succeed or fail.
 
-## Create an action batch (Task)
+## Create an action batch
 **Purpose**: Submit multiple configuration changes in a single transaction.  
-Follow these steps to create an action batch:
+
 1. Send a `POST` request to `/organizations/{organizationId}/actionBatches`.  
 2. Use the following parameters:  
    * `confirmed`: Set to `true` for immediate execution, or `false` to preview before executing.  
@@ -60,7 +60,7 @@ Follow these steps to create an action batch:
 **Result**:  
 If successful, the response returns a batch ID, confirmation setting, and a status object with details such as whether the batch completed, failed, and any errors.  
 **Monitoring**:  
-Use the Dashboard API operations (GET, PUT, DELETE) to return a list of action batches, retrieve a specific batch, update it, or delete it.  
+Use the Dashboard API operations (GET, PUT, and DELETE) to return a list of action batches, retrieve a specific batch, update it, or delete it.  
 
 ## API operations for action batches
 These API operations are available to manage action batches:
