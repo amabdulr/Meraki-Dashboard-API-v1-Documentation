@@ -1,6 +1,6 @@
 ## Action batches
 An action batch is a configuration mechanism that
-* groups multiple write actions (create, update, destroy) into a single batch,
+* groups multiple write actions (create, update, destroy) into a single batch
 * executes all actions atomically (all or nothing, no partial success), and
 * supports synchronous or asynchronous processing.
 
