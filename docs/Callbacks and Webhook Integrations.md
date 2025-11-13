@@ -14,6 +14,8 @@ A callback is a notification mechanism that
 
 Callbacks let you receive results from operations like Live Tools or Action Batches without needing to poll for updates. This approach improves efficiency and scalability in network management.
 
+Note: The Callback implementation aligns with the OpenAPI v3 specification for standardized asynchronous operations.
+
 ---
 
 ## Webhooks
