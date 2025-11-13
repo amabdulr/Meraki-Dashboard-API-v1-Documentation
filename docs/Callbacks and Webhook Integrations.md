@@ -26,7 +26,7 @@ A webhook is an outbound API request that
 * transmits structured data (such as callback or alert payloads), and
 * supports templating for customizing message formats.
 
-Meraki supports both static webhook receivers and dynamic callback URLs. Templates enhance compatibility with downstream systems by enabling fine control over payload structure and headers.
+Callbacks leverage the Meraki webhook system, supporting both pre-configured receivers and dynamic URLs. In addition, webhook templates can format the HTTP message body and headers for customized integrations.
 
 [Meraki Webhooks Guide](https://meraki.io/webhooks)
 
@@ -118,8 +118,13 @@ These are the fields that are returned from the `/callbacks/statuses` endpoint.
 * `callbackId`: Unique ID for the callback.
 * `status`: Current status of the callback.
 * `errors`: List of error messages, if any.
-* `createdBy`: Information about the user/admin who triggered the callback.
-* `webhook`: Details about the webhook, including URL, HTTP server, payload template, and timestamp (`sentAt`).
+* `createdBy`: Information about the user or admin who triggered the callback.
+* `webhook`: Details about the webhook used for the callback, including:
+	* `url`: The receiver URL for the callback results.
+ 	* `httpServer`: Information about the HTTP server that receives the callback data.
+  	* `payloadTemplate`: Details about the payload template used for the callback.
+  	* `sentAt`: Timestamp indicating when the callback was dispatched to the webhook receiver.
+
 
 #### Status values
 This table lists the possible `status` values.
