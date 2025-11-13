@@ -1,10 +1,10 @@
-# Callbacks and Webhook Integrations in the Meraki Dashboard API 
+# Callbacks and Webhook Integrations
 
 This chapter explains how callbacks and webhooks operate within the Meraki Dashboard API, highlighting when and why to use them, the differences between callbacks and alerts, and the structure and purpose of callback responses.
 
 ---
 
-## Callbacks (Concept)
+## Callbacks
 
 A callback is a notification mechanism that
 
@@ -30,7 +30,7 @@ Meraki supports both static webhook receivers and dynamic callback URLs. Templat
 
 ---
 
-## Differences between alerts and callbacks (Concept)
+## Differences between alerts and callbacks
 
 Alerts and callbacks are webhook-driven notifications that differ in purpose and schema:
 
@@ -48,7 +48,7 @@ Alerts and callbacks are webhook-driven notifications that differ in purpose and
 | Typical use case | Device goes offline | Action batch completes             |
 
 ---
-### Example Webhook for Callbacks
+### Example webhook for callbacks
 
 ```json
 {
@@ -64,7 +64,7 @@ Alerts and callbacks are webhook-driven notifications that differ in purpose and
   }
 }
 ```
-### Example Webhook for Alerts
+### Example webhook for alerts
 
 ```json
 {
@@ -81,7 +81,7 @@ Alerts and callbacks are webhook-driven notifications that differ in purpose and
 }
 ```
 
-## Use cases for callbacks (Concept)
+## Use cases for callbacks 
 
 Callbacks are suitable for workflows where operations require time to process and immediate API responses are not essential. However, timely notification upon completion is critical. When you use callbacks, you optimize resource usage, reduce the need for continuous polling, and streamline workflows
 
@@ -109,7 +109,7 @@ The callback status endpoint provides detailed information about an operation in
 [API Docs](https://developer.cisco.com/meraki/api-v1/get-organization-webhooks-callbacks-status/)
 
 
-### Response Schema
+### Response schema
 
 These are the fields that are returned from the `/callbacks/statuses` endpoint.
 
@@ -129,7 +129,7 @@ This table lists the possible `status` values.
 | `running`   | The operation is still in progress.   
 
 ---
-##### Example Response
+##### Example response
 
 An example JSON response from the `/callbacks/statuses` endpoint:
 
@@ -153,13 +153,16 @@ An example JSON response from the `/callbacks/statuses` endpoint:
   }
 }
 ```
-### Handling in Webhook Service
 
-Differentiate between alerts and callbacks in your service, possibly using tailored webhook templates for each.
+### Differentiate alerts and callbacks using tailored webhook templates 
 
-#### Liquid Template Example
+Webhook payloads can represent either alerts or callbacks, distinguished by the type of event and identifying fields within the payload.
 
-Here's an example Liquid template to handle the difference in webhook payload types:
+- Alert payloads include an `alertId` field. They indicate an event notification, such as a triggered rule.
+- Callback payloads include a `callbackId` field. They represent responses to asynchronous operations or requests.
+- If neither field is present, the payload type may be unknown or unsupported.
+
+#### Liquid template for distinguishing payload types
 
 ```liquid
 {% if callbackId %}
@@ -173,6 +176,6 @@ Here's an example Liquid template to handle the difference in webhook payload ty
 {% endif %}
 ```
 
-Learn more about customizing the shape and security of your callback webhooks. 
+To customize the structure and security of your callback webhooks, refer to the official documentation:
 
 [Webhook Payload Templates Guide](https://developer.cisco.com/meraki/webhooks/payload-templates-overview/)
